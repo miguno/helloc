@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: CI Workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Debug
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest]
+    name: build
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can update matrix.platform if you need cross-platform coverage.
+    # https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ${{ matrix.platform }}
+    env:
+      VCPKG_ROOT: ${{github.workspace}}/vcpkg
+    steps:
+      - uses: actions/checkout@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # https://github.com/extractions/setup-just
+      - uses: extractions/setup-just@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up C toolchain (Linux)
+        run: sudo apt-get install -y clang clang-tidy cmake libcriterion-dev lldb ninja-build
+        if: matrix.platform == 'ubuntu-latest'
+
+      - name: Set up C toolchain (macOS)
+        run: brew install cmake llvm criterion ninja
+        if: matrix.platform == 'macos-latest'
+
+      - name: Set up vcpkg
+        run: git clone https://github.com/microsoft/vcpkg $VCPKG_ROOT
+
+      - name: Configure
+        # Or: cmake -B ${{github.workspace}}/build -S . -G "Ninja Multi-Config"
+        run: just configure
+
+      - name: Build
+        # Or: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target all
+        run: just build
+
+      - name: Test
+        run: just test
+#     - name: Test with ctest
+#       working-directory: ${{github.workspace}}/build
+#       # Execute tests defined by the CMake configuration.
+#       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+#       run: ctest -C ${{env.BUILD_TYPE}}

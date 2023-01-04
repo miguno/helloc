@@ -1,0 +1,17 @@
+{
+  "cmake.configureSettings": {
+    "CMAKE_TOOLCHAIN_FILE": "${env:VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+  },
+  // You must restart vscode after changing `cmake.generator` setting.
+  "cmake.generator": "Ninja Multi-Config",
+  "clang-tidy.buildPath": "build/",
+  "files.associations": {
+    "*.script": "lua",
+    "*.lua": "lua",
+    "greatest.h": "c",
+    "criterion.h": "c",
+    "assert.h": "c",
+    "stb_ds.h": "c",
+    "miguno.h": "c"
+  }
+}

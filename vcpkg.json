@@ -1,0 +1,11 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+    "name": "helloc",
+    "version-semver": "0.1.0",
+    "description": "A template project for the C programming language.",
+    "license": "MIT",
+    "dependencies": [
+        "stb"
+    ],
+    "builtin-baseline": "0f719b3fdfc36f8dd45229370a0df180fdbf68f6"
+}
