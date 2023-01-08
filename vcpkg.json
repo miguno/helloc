@@ -1,6 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
     "name": "helloc",
+    "homepage": "https://github.com/miguno/helloc",
     "version-semver": "0.1.0",
     "description": "A template project for the C programming language.",
     "license": "MIT",
