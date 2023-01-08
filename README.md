@@ -9,17 +9,17 @@ Maybe you find this useful, too. Enjoy!
 ## Features
 
 * Works on macOS, Debian/Ubuntu, and Windows 11 with Ubuntu in WSL.
-* Works with [neovim](https://neovim.io/) ![](https://img.shields.io/github/stars/neovim/neovim) and
-  [Visual Studio Code](https://code.visualstudio.com/) ![](https://img.shields.io/github/stars/microsoft/vscode)
+* Works with [neovim](https://neovim.io/) and
+  [Visual Studio Code](https://code.visualstudio.com/)
   as code editors, and likely with others, too.
 * This project implements a [main.c](src/main.c) application that uses our toy
   library [miguno.h](src/miguno.h), implemented in [miguno.c](src/miguno.c).
 * C language standard is C17, see `CMAKE_C_STANDARD` in
   [CMakeLists.txt](CMakeLists.txt).
-* Uses [clang](https://clang.llvm.org/) ![](https://img.shields.io/github/stars/llvm/llvm-project)
+* Uses [clang](https://clang.llvm.org/)
   as the compiler, along with tools such as clang-format and clang-tidy.
 * Build and dependency management:
-  [cmake](https://github.com/Kitware/CMake) ![](https://img.shields.io/github/stars/Kitware/CMake) with
+  [cmake](https://github.com/Kitware/CMake) with
   [vcpkg](https://github.com/microsoft/vcpkg) ![](https://img.shields.io/github/stars/microsoft/vcpkg) and
   [ninja](https://github.com/ninja-build/ninja) ![](https://img.shields.io/github/stars/ninja-build/ninja),
   using a [multi-config generator](https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html)
