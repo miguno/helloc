@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.22)
 # My configuration expects you have already set the VCPKG_ROOT environment
 # variable in your shell environment.  Alternatively, you can set it here with:
 #
-#       set(VCPKG_ROOT "vcpkg")
+#       set(VCPKG_ROOT "/path/to/my/vcpkg")
 #
 # Other useful variables:
 # * CMAKE_CURRENT_SOURCE_DIR (e.g., `set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR} ...`)
