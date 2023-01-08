@@ -4,6 +4,10 @@
  * Installed in this project by manually copying a Unity release (C and header
  * files) to the top-level `external/` folder.
  */
+
+// Allows us to use shortened names of functions in miguno.h in addition to
+// their long, prefixed names.
+#define MIGUNO_SHORT_NAMES
 #include "miguno.h"
 #include "unity.h"
 
@@ -30,6 +34,8 @@ void pointer_equality(void) {
 void verify_sum(void) {
   int a = 2;
   int b = 2;
+  // Because we defined the macro MIGUNO_SHORT_NAMES before including miguno.h,
+  // we can now use the shortened name of `mgn_sum()`.
   TEST_ASSERT_EQUAL(4, mgn_sum(a, b));
 }
 
