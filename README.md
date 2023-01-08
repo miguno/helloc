@@ -88,8 +88,9 @@ Where possible, vcpkg is used to manage dependencies.
 
 [Baselines](https://github.com/microsoft/vcpkg/blob/master/docs/users/versioning.md#baselines)
 define a global version floor for what versions will be considered. This
-enables top-level manifests to keep the entire graph of dependencies up-to-date
-without needing to individually specify direct `version>=` constraints.
+enables top-level manifests ([vcpkg.json](vcpkg.json)) to keep the entire graph
+of dependencies up-to-date without needing to individually specify direct
+`version>=` constraints.
 
 Create the initial
 [baseline](https://github.com/microsoft/vcpkg/blob/master/docs/commands/update-baseline.md),
