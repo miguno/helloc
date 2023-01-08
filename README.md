@@ -19,7 +19,7 @@ Maybe you find this useful, too. Enjoy!
 * Uses [clang](https://clang.llvm.org/) ![](https://img.shields.io/github/stars/llvm/llvm-project)
   as the compiler, along with tools such as clang-format and clang-tidy.
 * Build and dependency management:
-  [cmake](https://cmake.org/cmake/help/latest/) with
+  [cmake](https://github.com/Kitware/CMake) ![](https://img.shields.io/github/stars/Kitware/CMake) with
   [vcpkg](https://github.com/microsoft/vcpkg) ![](https://img.shields.io/github/stars/microsoft/vcpkg) and
   [ninja](https://github.com/ninja-build/ninja) ![](https://img.shields.io/github/stars/ninja-build/ninja),
   using a [multi-config generator](https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html)
