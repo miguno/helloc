@@ -84,7 +84,8 @@ $ just test
 
 ### vcpkg
 
-Where possible, vcpkg is used to manage dependencies.
+Where possible, vcpkg is used to manage dependencies as defined in
+[vcpkg.json](vcpkg.json).
 
 [Baselines](https://github.com/microsoft/vcpkg/blob/master/docs/users/versioning.md#baselines)
 define a global version floor for what versions will be considered. This
