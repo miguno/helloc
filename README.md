@@ -115,7 +115,7 @@ folder.  An example in this project is the
 ### System-managed Dependencies
 
 Some dependencies can also be installed via the operating system, e.g., with
-apt on Debian/Ubunto or homebrew on macOS.  An example in this project is the
+apt on Debian/Ubuntu or homebrew on macOS.  An example in this project is the
 [Criterion](https://github.com/Snaipe/Criterion) test framework.
 
 ## Code Formatting
