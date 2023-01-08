@@ -7,7 +7,7 @@
 #include "stb_ds.h"
 
 int main(void) {
-  printf("Zwei plus zwei ist %d. Immer und überall!\n", mgn_sum(2, 2));
+  printf("Zwei plus zwei ist %d. Immer und überall!\n", miguno_sum(2, 2));
 
   // Play around with stb_ds to showcase that its import worked
   struct {
