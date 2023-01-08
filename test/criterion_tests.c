@@ -17,7 +17,7 @@
 Test(miguno_suite, sum) {
   int a = 2;
   int b = 2;
-  cr_assert(eq(i32, sum(a, b), 4), "2 + 2 should equal 4");
+  cr_assert(eq(i32, mgn_sum(a, b), 4), "2 + 2 should equal 4");
 }
 
 Test(miguno_suite, string_equality) {

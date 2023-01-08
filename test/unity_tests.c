@@ -30,7 +30,7 @@ void pointer_equality(void) {
 void verify_sum(void) {
   int a = 2;
   int b = 2;
-  TEST_ASSERT_EQUAL(4, sum(a, b));
+  TEST_ASSERT_EQUAL(4, mgn_sum(a, b));
 }
 
 // not needed when using generate_test_runner.rb

@@ -3,4 +3,4 @@
 #include "miguno.h"
 
 // TODO(miguno): handle integer overflow
-int sum(int a, int b) { return a + b; }
+int mgn_sum(int a, int b) { return a + b; }

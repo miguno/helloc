@@ -1,3 +1,3 @@
 /* miguno.h */
 
-extern int sum(int a, int b);
+extern int mgn_sum(int a, int b);
