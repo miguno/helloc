@@ -1,3 +1,6 @@
+# Load environment variables from `.env` file.
+set dotenv-load
+
 timestamp := `date +%s`
 semver := "0.1.0-alpha"
 commit := `git show -s --format=%h`
@@ -27,11 +30,13 @@ configure:
     # https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html
     # https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html
     #
+    # The `CC` environment variable is pre-defined in the `.env` file, but you
+    # can override it in the shell environment; e.g., `CC=gcc just configure`.
     # Set compiler with CC to 'clang' to ensure that macOS does not pick up
     # the default XCode clang version, which has a `cc` symlink or hardcopy,
     # which cmake prefers.
     (cd {{project_dir}} && \
-    CC=clang \
+    CC="$CC" \
     cmake -B {{build_dir}} -S . -G "Ninja Multi-Config")
 
 # build for Debug

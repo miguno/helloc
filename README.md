@@ -18,6 +18,8 @@ Maybe you find this useful, too. Enjoy!
   [CMakeLists.txt](CMakeLists.txt).
 * Uses [clang](https://clang.llvm.org/)
   as the compiler, along with tools such as clang-format and clang-tidy.
+    * You can also use [gcc](https://gcc.gnu.org/) as the compiler.  Simply set
+      the environment variable `CC` accordingly, e.g. `CC=gcc` or `CC=gcc-12`.
 * Build and dependency management:
   [cmake](https://github.com/Kitware/CMake) with
   [vcpkg](https://github.com/microsoft/vcpkg) ![](https://img.shields.io/github/stars/microsoft/vcpkg) and
