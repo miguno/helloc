@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "coverage",
+            "displayName": "Code coverage (GCC)",
+            "description": "Enable code coverage on GCC-compatible compilers",
+            "binaryDir": "${sourceDir}/build-for-coverage",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_C_FLAGS": "-fprofile-arcs -ftest-coverage"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "coverage",
+            "configurePreset": "coverage",
+            "configuration": "RelWithDebInfo"
+        }
+    ]
+}

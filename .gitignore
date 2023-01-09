@@ -1,3 +1,5 @@
 .cache/
 build/
+build-for-coverage/
+coverage-report/
 vcpkg_installed/

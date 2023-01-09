@@ -16,10 +16,11 @@ Maybe you find this useful, too. Enjoy!
   library [miguno.h](src/miguno.h), implemented in [miguno.c](src/miguno.c).
 * C language standard is C17, see `CMAKE_C_STANDARD` in
   [CMakeLists.txt](CMakeLists.txt).
-* Uses [clang](https://clang.llvm.org/)
-  as the compiler, along with tools such as clang-format and clang-tidy.
+* Uses [clang](https://clang.llvm.org/) as the pre-configured compiler (see
+  [.env](.env)), along with tools such as clang-format and clang-tidy.
     * You can also use [gcc](https://gcc.gnu.org/) as the compiler.  Simply set
-      the environment variable `CC` accordingly, e.g. `CC=gcc` or `CC=gcc-12`.
+      the environment variable `CC` accordingly, e.g. in [.env](.env) or 
+      in the shell environment with `CC=gcc` or `CC=gcc-12`.
 * Build and dependency management:
   [cmake](https://github.com/Kitware/CMake) with
   [vcpkg](https://github.com/microsoft/vcpkg) ![](https://img.shields.io/github/stars/microsoft/vcpkg) and
@@ -40,6 +41,8 @@ Maybe you find this useful, too. Enjoy!
   and is configured in [.clang-format](.clang-format).
 * A [GitHub Actions](https://docs.github.com/en/actions) workflow is defined in
   [ci.yml](.github/workflows/ci.yml).
+* Code coverage reports can be generated locally, see
+  [coverage.sh](coverage.sh) and the section below.
 
 ## Usage
 
@@ -55,6 +58,7 @@ $ just clean configure build
 $ just run main
 $ just test
 ```
+
 ## Requirements
 
 * Install the C toolchain used by this project.
@@ -62,9 +66,11 @@ $ just test
     ```shell
     # macOS
     $ brew install cmake llvm criterion ninja
+    $ brew install gcc lcov # optional, for generating coverage reports
 
     # Debian/Ubuntu
     $ sudo apt-get install -y clang clang-tidy cmake libcriterion-dev lldb ninja-build
+    $ sudo apt-get install -y build-essential lcov # optional, for generating coverage reports
     ```
 
 * [vcpkg](https://github.com/microsoft/vcpkg) must be installed, and an
@@ -140,6 +146,53 @@ Some further interesting settings:
 
     AccessModifierOffset: 0
     IndentAccessModifiers: false # requires clang-format-13 or newer
+
+## Code Coverage Reports with gcov/lcov
+
+You can generate code coverage reports with [coverage.sh](coverage.sh).  Even
+though this project defaults to `clang` as the compiler, generating code
+coverage requires the `gcc` toolchain as well as
+[lcov](https://github.com/linux-test-project/lcov).
+
+Install via:
+
+```shell
+# macOS
+$ brew install gcc lcov
+
+# Debian/Ubuntu
+$ sudo apt-get install -y build-essential lcov
+```
+
+Then run the coverage script with the `CC` environment variable set to your
+GCC installation:
+
+```shell
+$ CC=gcc-12 ./coverage.sh
+```
+
+Example output:
+
+```
+$ ./coverage.sh
+...
+Generating output.
+Processing file src/miguno.c
+Writing directory view page.
+Overall coverage rate:
+  lines......: 100.0% (1 of 1 line)
+  functions..: 100.0% (1 of 1 function)
+Reading tracefile coverage.info
+            |Lines       |Functions  |Branches
+Filename    |Rate     Num|Rate    Num|Rate     Num
+==================================================
+[/home/miguno/git/helloc/src/]
+miguno.c    | 100%      1| 100%     1|    -      0
+==================================================
+      Total:| 100%      1| 100%     1|    -      0
+```
+
+The script also generates a report in HTML format.
 
 ## Visual Studio Code
 
