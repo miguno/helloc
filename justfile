@@ -26,7 +26,13 @@ clean:
 configure:
     # https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html
     # https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html
-    (cd {{project_dir}} && cmake -B {{build_dir}} -S . -G "Ninja Multi-Config")
+    #
+    # Set compiler with CC to 'clang' to ensure that macOS does not pick up
+    # the default XCode clang version, which has a `cc` symlink or hardcopy,
+    # which cmake prefers.
+    (cd {{project_dir}} && \
+    CC=clang \
+    cmake -B {{build_dir}} -S . -G "Ninja Multi-Config")
 
 # build for Debug
 build:

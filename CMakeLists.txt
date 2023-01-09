@@ -11,14 +11,6 @@ cmake_minimum_required(VERSION 3.22)
 # * CMAKE_CURRENT_SOURCE_DIR (e.g., `set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR} ...`)
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 
-# https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER.html
-# Setting to 'clang' ensures that cmake doesn't auto-search for `cc`, which
-# on a default macOS system with XCode alongside homebrew's llvm/clang package
-# will wrongly pick the system clang (which installs a copy of the clang binary
-# at /usr/bin/cc and /Library/Developer/CommandLineTools/usr/bin/cc) rather
-# than homebrew's (which does not install its own `cc` binary).
-set(CMAKE_C_COMPILER clang)
-
 # `-DCMAKE_EXPORT_COMPILE_COMMANDS` generates `build/compile_commands.json`,
 # which is needed for the clangd LSP server.
 # https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
