@@ -119,6 +119,9 @@ genhtml coverage.info --output-directory "$COVERAGE_DIR"
 "$LCOV" --list coverage.info
 
 declare -r COVERAGE_REPORT_INDEX=$(realpath "$COVERAGE_DIR/index.html")
+echo
+echo "Coverage report in HTML format is available at $COVERAGE_REPORT_INDEX"
+
 if [ "$FORCE_OPEN_REPORT_IN_BROWSER" = "yes" ]; then
     # Open HTML in default application (typically, your browser)
     open "$COVERAGE_REPORT_INDEX"
@@ -126,8 +129,6 @@ else
     if [ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/ip') ]; then
         # Script is running in Windows WSL, where we typically don't have access
         # to a GUI with browser
-        echo
-        echo "Coverage report in HTML format is available at $COVERAGE_REPORT_INDEX"
         echo
         echo "If running in WSL on Windows, you can mount the WSL disk as network drive"
         echo "and then access the report in your browser with a URL such as:"
