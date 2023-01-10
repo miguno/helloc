@@ -118,7 +118,7 @@ genhtml coverage.info --output-directory "$COVERAGE_DIR"
 # Print coverage report to the terminal
 "$LCOV" --list coverage.info
 
-declare -r COVERAGE_REPORT_INDEX=$(realpath -e "$COVERAGE_DIR/index.html")
+declare -r COVERAGE_REPORT_INDEX=$(realpath "$COVERAGE_DIR/index.html")
 if [ "$FORCE_OPEN_REPORT_IN_BROWSER" = "yes" ]; then
     # Open HTML in default application (typically, your browser)
     open "$COVERAGE_REPORT_INDEX"
