@@ -1,11 +1,11 @@
 /*
-  Requires https://github.com/Snaipe/Criterion
-
-  Installation examples:
-  * macOS: `brew install criterion`
-  * Debian/Ubunto: `sudo apt-get install libcriterion-dev`
-
-*/
+ * Requires https://github.com/Snaipe/Criterion
+ *
+ * Installation examples:
+ * * macOS: `brew install criterion`
+ * * Debian/Ubunto: `sudo apt-get install libcriterion-dev`
+ *
+ */
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 
