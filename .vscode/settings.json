@@ -4,6 +4,15 @@
   },
   // You must restart vscode after changing `cmake.generator` setting.
   "cmake.generator": "Ninja Multi-Config",
+  // Disable cmake presets in vscode, because this project only uses presets
+  // (see `CMakePresets.json`) for generating code coverage reports.  Everything
+  // else is managed via `CmakeLists.txt`.  Without disabling cmake presets here
+  // vscode will not allow you to use its UI (e.g., bottom bar) to, say, build
+  // the Debug or Release versions of this project.  Unfortunately, one cannot
+  // configure the cmake tools extension as of Jan 2023 to prioritize
+  // CMakeLists.txt over CMakePresets.json.
+  // https://github.com/microsoft/vscode-cmake-tools/blob/HEAD/docs/cmake-presets.md
+  "cmake.useCMakePresets": "never",
   "clang-tidy.buildPath": "build/",
   "files.associations": {
     "*.script": "lua",
