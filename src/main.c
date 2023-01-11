@@ -26,5 +26,7 @@ int main(void) {
   int key = 20;
   printf("%3d => %c\n", key, hmget(hash, key));
 
+  hmfree(hash);
+
   return 0;
 }
