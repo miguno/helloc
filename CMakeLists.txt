@@ -33,12 +33,29 @@ set(CMAKE_C_STANDARD 17)
 # * `-O2` : Optimize code for speed/space efficiency
 # * `-D_FORTIFY_SOURCE=2`: Detect runtime buffer overflows (requires `-O2` or higher)
 #
+# Sanitizer related flags:
+# * `-fsanitize=address`: for ASan https://clang.llvm.org/docs/AddressSanitizer.html
+#                         NOTE: ASan is only compatible with `-O0` it seems.
+#                         NOTE: On macOS, you must explicitly run your binary
+#                         with `ASAN_OPTIONS=detect_leaks=1 main ...` to enable
+#                         leak detection.
+# * `-fsanitize=undefined`: for UBSan https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+# * `-fno-omit-frame-pointer`: nicer stack traces in error messages
+#
+# Valgrind users:
+# 1. Valgrind is incompatible with ASan.  Remove the ASan compiler option
+#    (`-fsanitize=address`) when you want to use valgrind.
+# 2. Valgrind does not properly read DWARF5 as used by clang 14.  Until the bug
+#    is fixed, you must add `-gdwarf-4` to CMAKE_C_FLAGS_* to make its output
+#    compatible with valgrind.
+#    https://bugs.kde.org/show_bug.cgi?id=452758
+#
 # See generated `build/build-Debug.ninja`, `build/CMakeFiles/impl-Debug.ninja`
-set(CMAKE_C_FLAGS_DEBUG   "-Og -g3")
+set(CMAKE_C_FLAGS_DEBUG   "-O0 -g3 -fsanitize=address,undefined -fno-omit-frame-pointer")
 # See generated `build/build-Release.ninja` & `build/CMakeFiles/impl-Release.ninja`
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g -D_FORTIFY_SOURCE=2")
 
-# Common settings used across Debug/Release/... builds are defined here.
+# Compile options used across Debug/Release/... builds are defined here.
 #
 # Explanation:
 # * `-Wall`              : Turn on recommended compiler warnings
@@ -46,8 +63,8 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -g -D_FORTIFY_SOURCE=2")
 #                          standard
 # * `-Werror`            : Turn warnings into errors
 # * `-fPIE -Wl,-pie`     : Needed to enable full ASLR for executables.
-#                          `-fPIE` is for the compiler, whereas `-Wl,...`
-#                          passes the `-pie` option to the linker.
+#                          When `-fPIE` is used for the compiler, you must also
+#                          set `-Wl,-pie` for the linker.
 #
 # When building a shared library:
 # * `-shared -fPIC`      : Disable text relocations for shared libraries
@@ -55,6 +72,12 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -g -D_FORTIFY_SOURCE=2")
 # https://clang.llvm.org/docs/UsersManual.html#command-line-options
 # https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html
 add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-newline-eof -fPIE)
+
+# Linker options used across Debug/Release/... builds are defined here.
+#
+# * `-Wl,-pie`: Passes the `-pie` option to the linker. Required when using
+#               the compile option `-fPIE`.
+#
 add_link_options(-Wl,-pie)
 # Enable color output of unity tests
 add_compile_definitions(UNITY_OUTPUT_COLOR)
