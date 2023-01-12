@@ -83,7 +83,7 @@ test: test-criterion test-unity
 test-criterion: build
     @echo "Running criterion tests ..."
     # `--short-filename` is needed to make the filenames of failed tests Ctrl-clickable in vscode.
-    {{test_dir}}/Debug/criterion_testsuite --short-filename
+    {{test_dir}}/Debug/criterion_testsuite --short-filename --jobs {{num_build_workers}}
 
 # test with unity
 test-unity: build
