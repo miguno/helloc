@@ -64,7 +64,7 @@ run binary=default_binary: build
     # Enabling memory leak checking with Address Sanitizer (ASan) including
     # Leak Sanitizer
     ASAN_OPTIONS=detect_leaks=1 \
-    # Suppress known false positives
+    # Suppress known false positives of ASan
     LSAN_OPTIONS=suppressions=lsan.supp \
     {{src_dir}}/Debug/{{binary}}
 
