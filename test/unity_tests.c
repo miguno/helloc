@@ -36,7 +36,7 @@ void verify_sum(void) {
   int b = 2;
   // Because we defined the macro MIGUNO_SHORT_NAMES before including miguno.h,
   // we can now use the shortened name of `miguno_sum()`.
-  TEST_ASSERT_EQUAL(4, miguno_sum(a, b));
+  TEST_ASSERT_EQUAL(4, sum(a, b));
 }
 
 // not needed when using generate_test_runner.rb
