@@ -61,7 +61,7 @@ do: clean configure build
 
 # run a Debug binary
 run binary=default_binary: build
-    {{src_dir}}/Debug/{{binary}}
+    ASAN_OPTIONS=detect_leaks=1 {{src_dir}}/Debug/{{binary}}
 
 # run a Release binary
 run-release binary=default_binary: release
