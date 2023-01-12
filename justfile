@@ -12,6 +12,11 @@ build_dir := project_dir + "/build"
 src_dir := build_dir + "/src"
 test_dir := build_dir + "/test"
 default_binary := "main"
+
+# `os()` documented at https://just.systems/man/en/chapter_30.html
+gcc := if os() == "macos" { env_var('COVERAGE_GCC_MACOS') } else { env_var('COVERAGE_GCC_LINUX') }
+gcov := if os() == "macos" { env_var('COVERAGE_GCOV_MACOS') } else { env_var('COVERAGE_GCOV_LINUX') }
+
 # You should set the environment variable CMAKE_BUILD_PARALLEL_LEVEL according
 # to the number of available CPU cores on your machine.
 # https://cmake.org/cmake/help/latest/envvar/CMAKE_BUILD_PARALLEL_LEVEL.html
@@ -84,3 +89,17 @@ test-unity: build
 ctest: build
     @echo "Running tests via ctest ..."
     (cd build && ninja test)
+
+# generate code coverage report
+coverage:
+    @echo "Generating code coverage report ..."
+    @echo "gcc is {{gcc}}"
+    (cd {{project_dir}} && \
+    CC={{gcc}} GCOV={{gcov}} \
+    ./coverage.sh)
+
+# print system information such as OS and architecture
+system-info:
+  @echo "architecture: {{arch()}}"
+  @echo "os: {{os()}}"
+  @echo "os family: {{os_family()}}"
