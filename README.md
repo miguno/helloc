@@ -149,6 +149,9 @@ Some further interesting settings:
 
 ## Code Coverage Reports with gcov/lcov
 
+> Try `just coverage` first before manually running [coverage.sh](coverage.sh).
+> Most likely, it will work out-of-the-box for you.
+
 You can generate code coverage reports with [coverage.sh](coverage.sh).  Even
 though this project defaults to `clang` as the compiler, generating code
 coverage requires the `gcc` toolchain as well as
