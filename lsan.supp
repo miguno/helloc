@@ -1,0 +1,21 @@
+# File: lsan.supp
+# For ASan (AddressSanitizer) configuration.
+#
+# Suppress memory leaks if the supplied pattern matches matches any function
+# name, source file name, or library name in the symbolized stack trace of the
+# leak report.
+# https://clang.llvm.org/docs/AddressSanitizer.html#suppressing-memory-leaks
+#
+# `realizeClassWithoutSwift`: added to prevent false positives on macOS caused
+#                             by `realizeClassWithoutSwift()`, see
+#                             https://github.com/google/sanitizers/issues/1501
+#
+# Example false positive:
+#
+#     Direct leak of 160 byte(s) in 5 object(s) allocated from:
+#        #0 0x1030c7a2c in wrap_calloc+0x94 (libclang_rt.asan_osx_dynamic.dylib:arm64+0x3fa2c)
+#        #1 0x19a4be484 in realizeClassWithoutSwift(objc_class*, objc_class*)+0x8c (libobjc.A.dylib:arm64+0x5484)
+#        #2 0xa15f80019a4be5f0  (<unknown module>)
+#        ...
+#
+leak:realizeClassWithoutSwift
