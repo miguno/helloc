@@ -14,12 +14,6 @@
 // NOLINTBEGIN(readability-isolate-declaration)
 // Prevent clang-tidy from tiggering on `cr_assert(eq(...))`.
 // Details about NOLINT at https://clang.llvm.org/extra/clang-tidy/
-Test(miguno_suite, sum) {
-  int a = 2;
-  int b = 2;
-  cr_assert(eq(i32, miguno_sum(a, b), 4), "2 + 2 should equal 4");
-}
-
 Test(miguno_suite, string_equality) {
   char *actual = "Hello";
   cr_assert(eq(str, actual, "Hello"));
@@ -30,5 +24,11 @@ Test(miguno_suite, pointer_equality) {
   int *expected = &x;
   int *actual = &x;
   cr_assert(eq(ptr, expected, actual));
+}
+
+Test(miguno_suite, verify_sum) {
+  int a = 2;
+  int b = 2;
+  cr_assert(eq(i32, miguno_sum(a, b), 4), "2 + 2 should equal 4");
 }
 // NOLINTEND(readability-isolate-declaration)
