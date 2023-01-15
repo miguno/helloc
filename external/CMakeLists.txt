@@ -1,5 +1,5 @@
 ### Unity {{{
-add_library(unity "")
+add_library(unity STATIC "")
 
 target_sources(unity
     PRIVATE
