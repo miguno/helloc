@@ -22,10 +22,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 # https://ninja-build.org/manual.html
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo" CACHE STRING "" FORCE)
 
-project(helloc C)
+# We need C++ ("CXX") for implementing unit tests with doctest
+project(helloc C CXX)
 
 # https://cmake.org/cmake/help/latest/prop_tgt/C_STANDARD.html
 set(CMAKE_C_STANDARD 17)
+# https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD.html
+# We need C++ for implementing unit tests with doctest
+set(CMAKE_CXX_STANDARD 20)
 
 # Compiler options for different builds, e.g. Debug vs. Release
 # https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_FLAGS_CONFIG.html
@@ -52,6 +56,10 @@ set(CMAKE_C_STANDARD 17)
 #
 # See generated `build/build-Debug.ninja`, `build/CMakeFiles/impl-Debug.ninja`
 set(CMAKE_C_FLAGS_DEBUG   "-O0 -g3 -fsanitize=address,undefined -fno-omit-frame-pointer")
+# NOTE: The C++ flags must match (or at least be compatible with) the C flags.
+# For example, if the C flags enable ASan, then the C++ flags must enable ASan,
+# too.
+set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3 -fsanitize=address,undefined -fno-omit-frame-pointer")
 # See generated `build/build-Release.ninja` & `build/CMakeFiles/impl-Release.ninja`
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g -D_FORTIFY_SOURCE=2")
 
