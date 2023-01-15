@@ -15,25 +15,6 @@ target_link_libraries (criterion_testsuite ${CRITERION_LIBRARIES} Miguno)
 add_test(criterion_testsuite criterion_testsuite)
 ### }}} Criterion
 
-### doctest {{{
-add_executable(doctest_testsuite doctest_tests.cpp)
-set_target_properties(doctest_testsuite PROPERTIES LINKER_LANGUAGE CXX)
-
-target_include_directories(doctest_testsuite
-    PRIVATE
-        "${CMAKE_SOURCE_DIR}/src" # to find `miguno.h`; alternatively, "../src"
-        "${CMAKE_SOURCE_DIR}/external" # to find `doctest.h`; alternatively, "../external"
-)
-
-target_link_libraries(doctest_testsuite Miguno)
-
-add_test(
-  NAME
-    doctest_testsuite
-  COMMAND
-    $<TARGET_FILE:doctest_testsuite>
-)
-### }}} doctest
 
 ### Unity {{{
 add_executable(unity_testsuite unity_tests.c)
