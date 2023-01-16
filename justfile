@@ -11,7 +11,6 @@ project_dir := justfile_directory()
 build_dir := project_dir + "/build"
 src_dir := build_dir + "/src"
 test_dir := build_dir + "/test"
-default_binary := "main"
 
 # `os()` documented at https://just.systems/man/en/chapter_30.html
 gcc := if os() == "macos" { env_var('COVERAGE_GCC_MACOS') } else { env_var('COVERAGE_GCC_LINUX') }
@@ -60,17 +59,17 @@ release:
 do: clean configure build
 
 # run a Debug binary
-run binary=default_binary: build
+run binary *args: build
     # Enabling memory leak checking with Address Sanitizer (ASan) including
     # Leak Sanitizer
     ASAN_OPTIONS=detect_leaks=1 \
     # Suppress known false positives of ASan
     LSAN_OPTIONS=suppressions=lsan.supp \
-    {{src_dir}}/Debug/{{binary}}
+    {{src_dir}}/Debug/{{binary}} {{args}}
 
 # run a Release binary
-run-release binary=default_binary: release
-    {{src_dir}}/Release/{{binary}}
+run-release binary *args: release
+    {{src_dir}}/Release/{{binary}} {{args}}
 
 # clang-tidy (see .clang-tidy)
 tidy:
