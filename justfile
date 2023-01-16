@@ -80,20 +80,20 @@ tidy:
 test: test-criterion test-unity
 
 # test with criterion
-test-criterion: build
+test-criterion *args: build
     @echo "Running criterion tests ..."
     # `--short-filename` is needed to make the filenames of failed tests Ctrl-clickable in vscode.
-    {{test_dir}}/Debug/criterion_testsuite --short-filename --jobs {{num_build_workers}}
+    {{test_dir}}/Debug/criterion_testsuite --short-filename --jobs {{num_build_workers}} {{args}}
 
 # test with unity
-test-unity: build
+test-unity *args: build
     @echo "Running unity tests ..."
-    {{test_dir}}/Debug/unity_testsuite
+    {{test_dir}}/Debug/unity_testsuite {{args}}
 
 # test with ctest (requires adding tests via `add_test()` in CMakeLists.txt)
-ctest: build
+ctest *args: build
     @echo "Running tests via ctest ..."
-    (cd build && ninja test)
+    (cd build && ninja test {{args}})
 
 # generate code coverage report
 coverage:
