@@ -7,6 +7,9 @@ target_include_directories(criterion_testsuite
     # SYSTEM is required here to prevent clang-tidy to check the included headers
     SYSTEM PRIVATE
         ${CRITERION_INCLUDE_DIRS}
+)
+target_include_directories(criterion_testsuite
+    PRIVATE
         "${CMAKE_SOURCE_DIR}/src" # to find `miguno.h`; alternatively, "../src"
 )
 target_link_libraries (criterion_testsuite ${CRITERION_LIBRARIES} Miguno)
@@ -23,7 +26,6 @@ target_include_directories(unity_testsuite
     PRIVATE
         "${CMAKE_SOURCE_DIR}/src" # to find `miguno.h`; alternatively, "../src"
 )
-
 target_link_libraries(unity_testsuite unity Miguno)
 
 add_test(
