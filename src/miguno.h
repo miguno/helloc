@@ -14,4 +14,4 @@ extern int miguno_sum(int a, int b);
 // NOLINTEND(readability-identifier-naming)
 #endif
 
-#endif
+#endif  // MIGUNO_H_UUID48A2FAFB_0125_4503_9F32_2956F0350946
