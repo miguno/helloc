@@ -6,6 +6,7 @@
  * * Debian/Ubunto: `sudo apt-get install libcriterion-dev`
  *
  */
+#include <assert.h>
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 
@@ -32,4 +33,10 @@ Test(miguno_suite, verify_sum) {
   int b = 2;
   cr_assert(eq(i32, miguno_sum(a, b), 4), "2 + 2 should equal 4");
 }
+
+Test(miguno_suite, c_weirdness) {
+  // Example: unintuitive effects of implicit integer casts and promotion
+  static_assert(-1 > 0U, "");
+}
+
 // NOLINTEND(readability-isolate-declaration)
