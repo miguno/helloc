@@ -12,8 +12,9 @@
 #include "miguno.h"
 
 // NOLINTBEGIN(readability-isolate-declaration)
-// Prevent clang-tidy from tiggering on `cr_assert(eq(...))`.
+// The previous line prevents clang-tidy from tiggering on `cr_assert(eq(...))`.
 // Details about NOLINT at https://clang.llvm.org/extra/clang-tidy/
+
 Test(miguno_suite, string_equality) {
   char *actual = "Hello";
   cr_assert(eq(str, actual, "Hello"));
