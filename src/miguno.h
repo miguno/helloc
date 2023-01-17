@@ -1,8 +1,8 @@
 /* miguno.h */
 
 // Inclusion guard
-#ifndef MIGUNO_H
-#define MIGUNO_H
+#ifndef MIGUNO_H_UUID48A2FAFB_0125_4503_9F32_2956F0350946
+#define MIGUNO_H_UUID48A2FAFB_0125_4503_9F32_2956F0350946
 
 // Long, prefixed names for the library API
 extern int miguno_sum(int a, int b);
