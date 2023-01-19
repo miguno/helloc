@@ -44,8 +44,8 @@ RUN build/test/Debug/unity_testsuite
 RUN CMAKE_BUILD_PARALLEL_LEVEL="$NUM_BUILD_WORKERS" \
     cmake --build build/ --config Release --target "$TARGET"
 
-# Stage 2 (to create a downsized "container executable")
-# ======================================================
+# Stage 2 (to create a downsized "container executable", ~9MB)
+# ============================================================
 #
 # NOTE: We cannot easily use `FROM scratch` because it is quite involved to
 # (and often ill-advised) to build a completely static binary with C.

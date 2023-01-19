@@ -43,6 +43,10 @@ Maybe you find this useful, too. Enjoy!
   [ci.yml](.github/workflows/ci.yml).
 * Code coverage reports can be generated locally, see
   [coverage.sh](coverage.sh) and the section below.
+* Create and run Docker images for your C app.
+  The [Docker build](Dockerfile) uses a
+  [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
+  to minimize the size of the generated Docker image, which is 9M.
 
 ## Usage
 
