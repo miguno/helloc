@@ -205,6 +205,33 @@ miguno.c    | 100%      1| 100%     1|    -      0
 
 The script also generates a report in HTML format.
 
+## Docker
+
+See [Dockerfile](Dockerfile) for details.
+Requires [Docker](https://www.docker.com/) to be installed locally.
+
+**Step 1:** Create the Docker image.
+
+```shell
+# Alternatively, run `./create_image.sh`.
+$ just docker-image
+```
+
+Optionally, you can check the size of the generated Docker image:
+
+```shell
+$ docker images miguno/helloc
+REPOSITORY      TAG       IMAGE ID       CREATED          SIZE
+miguno/helloc   latest    0e55e8877994   31 minutes ago   8.45MB
+```
+
+**Step 2:** Run a container for the image.
+
+```shell
+# Alternatively, run `./start_container.sh`.
+$ just docker-run
+```
+
 ## Visual Studio Code
 
 * Configure the project: From the command palette in VS Code
