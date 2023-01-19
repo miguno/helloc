@@ -36,6 +36,10 @@ Test(miguno_suite, verify_sum) {
 
 Test(miguno_suite, c_weirdness) {
   // Example: unintuitive effects of implicit integer casts and promotion
+  //
+  // NOTE: gcc catches this mistake!
+  // error: comparison of integer expressions of different signedness:
+  // 'int' and 'unsigned int' [-Werror=sign-compare]
   static_assert(-1 > 0U, "");
 }
 
