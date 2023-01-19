@@ -49,7 +49,7 @@ Maybe you find this useful, too. Enjoy!
 * Create and run Docker images for your C app.
   The [Docker build](Dockerfile) uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
-  to minimize the size of the generated Docker image, which is 9M.
+  to minimize the size of the generated Docker image, which is only 9MB.
 
 ## Usage
 
