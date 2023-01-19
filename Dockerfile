@@ -59,7 +59,6 @@ FROM alpine:3.17.1
 # `gcompat`: adds shared libraries needed for running our non-static binary;
 #            without it, running our binary will fail with the misleading error
 #            message: "exec /usr/local/bin/main: no such file or directory"
-#
 RUN apk --no-cache add ca-certificates gcompat
 WORKDIR /root/
 COPY --from=builder /app/build/src/Release/main /usr/local/bin/main
