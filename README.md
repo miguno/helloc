@@ -1,4 +1,5 @@
-# helloc [![CI workflow status](https://github.com/miguno/helloc/actions/workflows/ci.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/ci.yml)
+# helloc
+[![CI workflow status](https://github.com/miguno/helloc/actions/workflows/ci.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/ci.yml)
 
 My template project for writing in the C programming language in 2023.
 
@@ -39,8 +40,8 @@ Maybe you find this useful, too. Enjoy!
   to demonstrate importing libraries via vcpkg.
 * Code style guide uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
   and is configured in [.clang-format](.clang-format).
-* A [GitHub Actions](https://docs.github.com/en/actions) workflow is defined in
-  [ci.yml](.github/workflows/ci.yml).
+* [GitHub Action workflows](https://github.com/miguno/helloc/actions)
+  for CI/CD support.
 * Code coverage reports can be generated locally, see
   [coverage.sh](coverage.sh) and the section below.
 * Create and run Docker images for your C app.
