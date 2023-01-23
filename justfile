@@ -24,6 +24,12 @@ num_build_workers := env_var_or_default("CMAKE_BUILD_PARALLEL_LEVEL", "12")
 default:
     @just --list --justfile {{justfile()}}
 
+# print system information such as OS and architecture
+system-info:
+  @echo "architecture: {{arch()}}"
+  @echo "os: {{os()}}"
+  @echo "os family: {{os_family()}}"
+
 # clean
 clean:
     rm -rf {{build_dir}}
@@ -100,12 +106,6 @@ coverage:
     (cd {{project_dir}} && \
     CC={{gcc}} GCOV={{gcov}} \
     ./coverage.sh)
-
-# print system information such as OS and architecture
-system-info:
-  @echo "architecture: {{arch()}}"
-  @echo "os: {{os()}}"
-  @echo "os family: {{os_family()}}"
 
 # create a docker image (requires Docker)
 docker-image-create:
