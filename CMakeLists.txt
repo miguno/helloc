@@ -51,7 +51,7 @@ set(CMAKE_C_STANDARD 17)
 #    https://bugs.kde.org/show_bug.cgi?id=452758
 #
 # See generated `build/build-Debug.ninja`, `build/CMakeFiles/impl-Debug.ninja`
-set(CMAKE_C_FLAGS_DEBUG   "-O0 -g3 -fsanitize=address,undefined -fno-omit-frame-pointer")
+set(CMAKE_C_FLAGS_DEBUG   "-O0 -g3 -fsanitize=address,undefined,float-divide-by-zero,integer,implicit-conversion,local-bounds,nullability -fno-omit-frame-pointer")
 # See generated `build/build-Release.ninja` & `build/CMakeFiles/impl-Release.ninja`
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g -D_FORTIFY_SOURCE=2")
 
