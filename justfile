@@ -117,6 +117,6 @@ docker-image-size:
     docker images $DOCKER_IMAGE_NAME
 
 # run the docker image (requires Docker)
-docker-run:
+docker-image-run:
     @echo "Running container from docker image ..."
     ./start_container.sh

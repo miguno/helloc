@@ -192,7 +192,7 @@ miguno/helloc   latest    0e55e8877994   31 minutes ago   8.45MB
 
 ```shell
 # Alternatively, run `./start_container.sh`.
-$ just docker-run
+$ just docker-image-run
 ```
 
 ## Visual Studio Code
