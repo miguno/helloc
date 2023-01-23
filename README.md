@@ -87,7 +87,7 @@ $ just test
     ```shell
     $ export VCPKG_ROOT="$HOME/vcpkg" # add to your shell configuration
     $ git clone https://github.com/microsoft/vcpkg $VCPKG_ROOT
-    $ $VCPKG_ROOT/vcpkg/bootstrap-vcpkg.sh
+    $ $VCPKG_ROOT/bootstrap-vcpkg.sh
     ```
 
 * [Criterion](https://github.com/Snaipe/Criterion) must be installed
