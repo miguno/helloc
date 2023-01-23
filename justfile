@@ -4,7 +4,6 @@ set dotenv-load
 timestamp := `date +%s`
 semver := "0.1.0-alpha"
 commit := `git show -s --format=%h`
-# Must match version setting in vcpkg.json
 version := semver + "+" + commit
 
 project_dir := justfile_directory()

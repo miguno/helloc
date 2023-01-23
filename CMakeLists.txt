@@ -1,16 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
 
-# Setup vcpkg script with CMake. Should be placed before project() call.
-#
-# My configuration expects you have already set the VCPKG_ROOT environment
-# variable in your shell environment.  Alternatively, you can set it here with:
-#
-#       set(VCPKG_ROOT "/path/to/my/vcpkg")
-#
-# Other useful variables:
-# * CMAKE_CURRENT_SOURCE_DIR (e.g., `set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR} ...`)
-set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
-
 # `-DCMAKE_EXPORT_COMPILE_COMMANDS` generates `build/compile_commands.json`,
 # which is needed for the clangd LSP server.
 # https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
@@ -87,10 +76,7 @@ add_compile_definitions(UNITY_OUTPUT_COLOR)
 # https://github.com/Snaipe/Criterion/blob/bleeding/dev/cmake/CMakeLists.txt
 list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# vcpkg dependencies, see vcpkg.json
-find_path(UTF8H_INCLUDE_DIRS "utf8h/utf8.h")
-
-# External, non-vcpkg-managed libraries we will link to (e.g., Unity)
+# External libraries we will link to (e.g., Unity)
 add_subdirectory(external)
 
 # Location of our source files

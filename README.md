@@ -26,7 +26,6 @@ Maybe you find this useful, too. Enjoy!
       in the shell environment with `CC=gcc` or `CC=gcc-12`.
 * Build and dependency management:
   [cmake](https://github.com/Kitware/CMake) with
-  [vcpkg](https://github.com/microsoft/vcpkg) ![](https://img.shields.io/github/stars/microsoft/vcpkg) and
   [ninja](https://github.com/ninja-build/ninja) ![](https://img.shields.io/github/stars/ninja-build/ninja),
   using a [multi-config generator](https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html)
   setup [for ninja](https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html).
@@ -38,8 +37,6 @@ Maybe you find this useful, too. Enjoy!
       [Unity](https://github.com/ThrowTheSwitch/Unity) ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity)
 * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
   for running common commands conveniently, see [justfile](justfile).
-* Uses [utf8h](https://github.com/sheredom/utf8.h) ![](https://img.shields.io/github/stars/sheredom/utf8.h)
-  to demonstrate importing libraries via vcpkg.
 * Code style guide uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
   and is configured in [.clang-format](.clang-format).
 * [GitHub Action workflows](https://github.com/miguno/helloc/actions)
@@ -80,16 +77,6 @@ $ just test
     $ sudo apt-get install -y build-essential lcov # optional, for generating coverage reports
     ```
 
-* [vcpkg](https://github.com/microsoft/vcpkg) must be installed, and an
-  environment variable `VCPKG_ROOT` must exist and point to the install
-  location.
-
-    ```shell
-    $ export VCPKG_ROOT="$HOME/vcpkg" # add to your shell configuration
-    $ git clone https://github.com/microsoft/vcpkg $VCPKG_ROOT
-    $ $VCPKG_ROOT/bootstrap-vcpkg.sh
-    ```
-
 * [Criterion](https://github.com/Snaipe/Criterion) must be installed
   system-wide.
     * Debian/Ubuntu: `sudo apt-get install libcriterion-dev`
@@ -97,31 +84,6 @@ $ just test
 
 
 ## Dependency management
-
-### vcpkg
-
-Where possible, vcpkg is used to manage dependencies as defined in
-[vcpkg.json](vcpkg.json).
-
-[Baselines](https://github.com/microsoft/vcpkg/blob/master/docs/users/versioning.md#baselines)
-define a global version floor for what versions will be considered. This
-enables top-level manifests ([vcpkg.json](vcpkg.json)) to keep the entire graph
-of dependencies up-to-date without needing to individually specify direct
-`version>=` constraints.
-
-Create the initial
-[baseline](https://github.com/microsoft/vcpkg/blob/master/docs/commands/update-baseline.md),
-if needed:
-
-    $ vcpkg x-update-baseline --add-initial-baseline
-
-Update an existing baseline:
-
-    $ vcpkg x-update-baseline
-
-See the [versioning
-documentation](https://github.com/microsoft/vcpkg/blob/master/docs/users/versioning.md#baselines)
-for more information about baselines.
 
 ### Manually-managed Dependencies
 

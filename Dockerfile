@@ -12,23 +12,13 @@ COPY . .
 # Configuration settings
 ARG NUM_BUILD_WORKERS="4"
 ARG TARGET="all"
-ARG VCPKG_ROOT="/app/vcpkg"
 
 ENV CC="clang"
-# Required on 'arm' architectures such as macOS
-ENV VCPKG_FORCE_SYSTEM_BINARIES=1
-# VCPKG_ROOT environment variable is required for cmake setup
-ENV VCPKG_ROOT="$VCPKG_ROOT"
 
 # Prepare OS
 RUN apt-get update && apt-get upgrade -y
 # Install C toolchain
-RUN apt-get install -y clang clang-tidy cmake libcriterion-dev lldb ninja-build zip \
-                       curl git zip # required to install vcpkg
-
-# Install vcpkg
-RUN git clone https://github.com/microsoft/vcpkg "$VCPKG_ROOT" && \
-    "$VCPKG_ROOT"/bootstrap-vcpkg.sh
+RUN apt-get install -y clang clang-tidy cmake libcriterion-dev lldb ninja-build zip
 
 # Clean
 RUN rm -rf build/ && mkdir -p build/

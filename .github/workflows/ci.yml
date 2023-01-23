@@ -21,8 +21,6 @@ jobs:
     # You can update matrix.platform if you need cross-platform coverage.
     # https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ${{ matrix.platform }}
-    env:
-      VCPKG_ROOT: ${{github.workspace}}/vcpkg
     steps:
       - uses: actions/checkout@v3
         env:
@@ -40,9 +38,6 @@ jobs:
       - name: Set up C toolchain (macOS)
         run: brew install cmake llvm criterion ninja
         if: matrix.platform == 'macos-latest'
-
-      - name: Set up vcpkg
-        run: git clone https://github.com/microsoft/vcpkg $VCPKG_ROOT
 
       - name: Configure
         # Or: cmake -B ${{github.workspace}}/build -S . -G "Ninja Multi-Config"
