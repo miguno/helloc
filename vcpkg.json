@@ -6,7 +6,7 @@
     "description": "A template project for the C programming language.",
     "license": "MIT",
     "dependencies": [
-        "stb"
+        "utf8h"
     ],
     "builtin-baseline": "0f719b3fdfc36f8dd45229370a0df180fdbf68f6"
 }

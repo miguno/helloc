@@ -88,7 +88,7 @@ add_compile_definitions(UNITY_OUTPUT_COLOR)
 list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # vcpkg dependencies, see vcpkg.json
-find_path(STB_INCLUDE_DIRS "stb_ds.h")
+find_path(UTF8H_INCLUDE_DIRS "utf8h/utf8.h")
 
 # External, non-vcpkg-managed libraries we will link to (e.g., Unity)
 add_subdirectory(external)

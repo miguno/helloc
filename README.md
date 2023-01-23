@@ -38,7 +38,7 @@ Maybe you find this useful, too. Enjoy!
       [Unity](https://github.com/ThrowTheSwitch/Unity) ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity)
 * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
   for running common commands conveniently, see [justfile](justfile).
-* Uses [stb](https://github.com/nothings/stb) ![](https://img.shields.io/github/stars/nothings/stb)
+* Uses [utf8h](https://github.com/sheredom/utf8.h) ![](https://img.shields.io/github/stars/sheredom/utf8.h)
   to demonstrate importing libraries via vcpkg.
 * Code style guide uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
   and is configured in [.clang-format](.clang-format).
