@@ -11,7 +11,7 @@ declare -r IMAGE_TAG="latest"
 echo "Building image '$IMAGE_NAME:$IMAGE_TAG'..."
 # TIP: Add `--progress=plain` to see the full docker output when you are
 # troubleshooting the build setup of your image.
-declare -r DOCKER_OPTIONS="--progress=plain"
+declare -r DOCKER_OPTIONS=""
 # Use BuildKit, i.e. `buildx build` instead of just `build`
 # https://docs.docker.com/build/
 docker buildx build $DOCKER_OPTIONS -t "$IMAGE_NAME":"$IMAGE_TAG" .
