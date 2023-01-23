@@ -5,9 +5,9 @@
 # `-o pipefail`: Prevent errors in a pipeline (`|`) from being masked
 set -uo pipefail
 
-declare -r IMAGE_NAME="miguno/helloc"
-declare -r IMAGE_TAG="latest"
+# Import environment variables from .env
+set -o allexport && source .env && set +o allexport
 
-echo "Starting container for image '$IMAGE_NAME:$IMAGE_TAG'"
-docker run "$IMAGE_NAME":"$IMAGE_TAG"
+echo "Starting container for image '$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG'"
+docker run "$DOCKER_IMAGE_NAME":"$DOCKER_IMAGE_TAG"
 

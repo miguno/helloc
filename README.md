@@ -214,13 +214,14 @@ Requires [Docker](https://www.docker.com/) to be installed locally.
 
 ```shell
 # Alternatively, run `./create_image.sh`.
-$ just docker-image
+$ just docker-image-create
 ```
 
 Optionally, you can check the size of the generated Docker image:
 
 ```shell
-$ docker images miguno/helloc
+# Alternatively, run `docker images miguno/helloc`.
+$ just docker-image-size
 REPOSITORY      TAG       IMAGE ID       CREATED          SIZE
 miguno/helloc   latest    0e55e8877994   31 minutes ago   8.45MB
 ```
