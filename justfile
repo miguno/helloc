@@ -24,6 +24,10 @@ num_build_workers := env_var_or_default("CMAKE_BUILD_PARALLEL_LEVEL", "12")
 default:
     @just --list --justfile {{justfile()}}
 
+# evaluate and print all just variables
+evaluate:
+    @just --evaluate
+
 # print system information such as OS and architecture
 system-info:
   @echo "architecture: {{arch()}}"
