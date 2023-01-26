@@ -34,6 +34,14 @@ system-info:
   @echo "os: {{os()}}"
   @echo "os family: {{os_family()}}"
 
+# print clang details, including environment and architecture
+clang-details:
+    clang -E -x c - -v < /dev/null
+
+# run a clangd check on a single file
+clangd-check filename:
+    clangd --check={{filename}} --log=verbose 2>&1
+
 # clean
 clean:
     rm -rf {{build_dir}}
