@@ -2,7 +2,7 @@
  * Requires https://github.com/ThrowTheSwitch/Unity
  *
  * Installed in this project by manually copying a Unity release (C and header
- * files) to the top-level `external/` folder.
+ * files) into the top-level `external/` folder.
  */
 
 // Allows us to use shortened names of functions in miguno.h in addition to
