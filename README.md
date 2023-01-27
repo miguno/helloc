@@ -36,7 +36,8 @@ Maybe you find this useful, too. Enjoy!
     * [unity_tests.c](test/unity_tests.c) via
       [Unity](https://github.com/ThrowTheSwitch/Unity) ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity)
 * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
-  for running common commands conveniently, see [justfile](justfile).
+  for running common commands conveniently, see [justfile](justfile). Think:
+  a modern version of `make`, written in Rust.
 * Code style guide uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
   and is configured in [.clang-format](.clang-format).
 * [GitHub Action workflows](https://github.com/miguno/helloc/actions)
