@@ -41,6 +41,8 @@ Maybe you find this useful, too. Enjoy!
   and is configured in [.clang-format](.clang-format).
 * [GitHub Action workflows](https://github.com/miguno/helloc/actions)
   for CI/CD support.
+* Uses [Doxygen](https://www.doxygen.nl/) for code documentation, see
+  [Doxyfile](Doxyfile).
 * Code coverage reports can be generated locally, see
   [coverage.sh](coverage.sh) and the section below.
 * Create and run Docker images for your C app.
@@ -71,10 +73,12 @@ $ just test
     # macOS
     $ brew install cmake llvm criterion ninja
     $ brew install gcc lcov # optional, for generating coverage reports
+    $ brew install doxygen # optional, for generating documentation
 
     # Debian/Ubuntu
     $ sudo apt-get install -y clang clang-tidy cmake libcriterion-dev lldb ninja-build
     $ sudo apt-get install -y build-essential lcov # optional, for generating coverage reports
+    $ sudo apt-get -y install doxygen # optional, for generating documentation
     ```
 
 * [Criterion](https://github.com/Snaipe/Criterion) must be installed
@@ -166,6 +170,21 @@ miguno.c    | 100%      1| 100%     1|    -      0
 ```
 
 The script also generates a report in HTML format.
+
+## Code Documentation with Doxygen
+
+Generate the documentation as per [Doxyfile](Doxyfile):
+
+```shell
+$ just docs
+```
+Then browse the documentation under `generated-docs/`.
+
+Man pages can be displayed with:
+
+```shell
+$ man generated-docs/man/man3/miguno.h.3
+```
 
 ## Docker
 

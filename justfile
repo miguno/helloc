@@ -10,6 +10,7 @@ project_dir := justfile_directory()
 build_dir := project_dir + "/build"
 src_dir := build_dir + "/src"
 test_dir := build_dir + "/test"
+docs_dir := project_dir + "/generated-docs"
 
 # `os()` documented at https://just.systems/man/en/chapter_30.html
 gcc := if os() == "macos" { env_var('COVERAGE_GCC_MACOS') } else { env_var('COVERAGE_GCC_LINUX') }
@@ -118,6 +119,10 @@ coverage:
     (cd {{project_dir}} && \
     CC={{gcc}} GCOV={{gcov}} \
     ./coverage.sh)
+
+# generated documentation (requires Doxygen)
+docs:
+    rm -rf {{docs_dir}} && doxygen Doxyfile
 
 # create a docker image (requires Docker)
 docker-image-create:
