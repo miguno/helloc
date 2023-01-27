@@ -83,8 +83,8 @@ $ just test
 
 * [Criterion](https://github.com/Snaipe/Criterion) must be installed
   system-wide.
-    * Debian/Ubuntu: `sudo apt-get install libcriterion-dev`
     * macOS: `brew install criterion`
+    * Debian/Ubuntu: `sudo apt-get install libcriterion-dev`
 
 
 ## Dependency management
