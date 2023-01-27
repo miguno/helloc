@@ -122,7 +122,11 @@ coverage:
 
 # generated documentation (requires Doxygen)
 docs:
-    rm -rf {{docs_dir}} && doxygen Doxyfile
+    rm -rf {{docs_dir}} && \
+    doxygen Doxyfile && \
+    echo "---------------------------------------------------------------" && \
+    echo "HTML docs are at {{docs_dir}}/html/index.html" && \
+    echo "---------------------------------------------------------------"
 
 # create a docker image (requires Docker)
 docker-image-create:
