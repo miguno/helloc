@@ -925,6 +925,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
+# IMPORTANT: If you set a file in USE_MDFILE_AS_MAINPAGE, this must be the
+# first entry of INPUT.
 INPUT                  = README.md \
                          src \
                          test \
@@ -1141,6 +1143,8 @@ FILTER_SOURCE_PATTERNS =
 # is part of the input, its contents will be placed on the main page
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
+#
+# IMPORTANT: The file defined here must be set as the first entry of INPUT.
 
 USE_MDFILE_AS_MAINPAGE = README.md
 
