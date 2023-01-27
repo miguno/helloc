@@ -56,15 +56,20 @@ PROJECT_NUMBER         =
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
+#
+# NOTE: When using https://github.com/jothepro/doxygen-awesome-css, you will
+# run into https://github.com/jothepro/doxygen-awesome-css/issues/100
+# (Sidebar-only theme: search bar gets pushed out of view by longer PROJECT_BRIEF)
+# if the PROJECT_BRIEF value is too long.
 
-PROJECT_BRIEF          = "Template project for writing in the C programming language"
+PROJECT_BRIEF          = "My template project for C"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           =
+PROJECT_LOGO           = doxygen-awesome-css/logo.drawio.svg
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -1293,7 +1298,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            =
+HTML_HEADER            = doxygen/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1333,7 +1338,9 @@ HTML_STYLESHEET        =
 # documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  =
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
+                         doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1343,7 +1350,10 @@ HTML_EXTRA_STYLESHEET  =
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       =
+HTML_EXTRA_FILES       = doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+                         doxygen-awesome-css/doxygen-awesome-interactive-toc.js
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
@@ -1355,8 +1365,11 @@ HTML_EXTRA_FILES       =
 # light and dark mode via a button.
 # The default value is: AUTO_LIGHT.
 # This tag requires that the tag GENERATE_HTML is set to YES.
+#
+# NOTE: Default value is AUTO_LIGHT.
+# Changed to TOGGLE because https://github.com/jothepro/doxygen-awesome-css/issues/105
 
-HTML_COLORSTYLE        = AUTO_LIGHT
+HTML_COLORSTYLE        = TOGGLE
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
@@ -1638,6 +1651,8 @@ ECLIPSE_DOC_ID         = org.doxygen.Project
 # tree, you can set this option to YES if you also set GENERATE_TREEVIEW to YES.
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
+#
+# NOTE: Must be set to 'NO' when using https://jothepro.github.io/doxygen-awesome-css/
 
 DISABLE_INDEX          = NO
 
@@ -1655,8 +1670,10 @@ DISABLE_INDEX          = NO
 # consider setting DISABLE_INDEX to YES when enabling this option.
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
+#
+# NOTE: Must be set to 'YES' when using https://jothepro.github.io/doxygen-awesome-css/
 
-GENERATE_TREEVIEW      = NO
+GENERATE_TREEVIEW      = YES
 
 # When both GENERATE_TREEVIEW and DISABLE_INDEX are set to YES, then the
 # FULL_SIDEBAR option determines if the side bar is limited to only the treeview
@@ -1667,6 +1684,8 @@ GENERATE_TREEVIEW      = NO
 # DISABLE_INDEX is set to NO, this option has no effect.
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
+#
+# NOTE: Must be set to 'NO' when using https://jothepro.github.io/doxygen-awesome-css/
 
 FULL_SIDEBAR           = NO
 
