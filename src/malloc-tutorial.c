@@ -65,7 +65,7 @@ struct block_meta *find_free_block(struct block_meta **last, size_t size) {
 struct block_meta *request_space(struct block_meta *last, size_t size) {
   struct block_meta *block;
   block = sbrk(0);
-  void *request = sbrk(size + META_BLOCK_SIZE);
+  void *request = sbrk((int)(size + META_BLOCK_SIZE));
   assert((void *)block == request);  // not thread-safe
   if (request == (void *)-1) {
     return NULL;  // sbrk failed
@@ -189,7 +189,7 @@ int main(void) {
     printf("===============================================================\n");
     printf("ptr1 data:\n");
     printf("---------------------------------------------------------------\n");
-    int beyond_elements = 10;
+    size_t beyond_elements = 10;
     for (size_t i = 0; i < n1 + beyond_elements; i++) {
       char *s = i < n1 ? "" : " <== beyond what was malloc'd for ptr1";
       printf("ptr1[%2zu]: %10d [%p]%s\n", i, *(ptr1 + i), (void *)(ptr1 + i),

@@ -12,6 +12,9 @@ target_include_directories(criterion_testsuite
     PRIVATE
         "${CMAKE_SOURCE_DIR}/src" # to find `miguno.h`; alternatively, "../src"
 )
+target_compile_options(criterion_testsuite PRIVATE
+    -Wno-conversion
+)
 target_link_libraries (criterion_testsuite ${CRITERION_LIBRARIES} Miguno)
 
 # To let us run tests via `cd build && ninja test`

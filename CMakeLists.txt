@@ -60,7 +60,39 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -g -D_FORTIFY_SOURCE=2")
 #
 # https://clang.llvm.org/docs/UsersManual.html#command-line-options
 # https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html
-add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-newline-eof -fPIE)
+# https://airbus-seclab.github.io/c-compiler-security/clang_compilation.html
+add_compile_options( # shared by all compilers supported by this project
+    -Wall
+    -Wextra
+    -pedantic
+    -Werror
+    -Wconversion
+    -Warray-bounds
+    -Wimplicit-fallthrough
+    -Wswitch-enum
+    -Wbad-function-cast
+    -Wfloat-equal
+    -Wpointer-arith
+    -fPIE
+)
+# For customizing gcc, use `MATCHES "GNU"` or `STREQUAL "GNU"`.
+if ("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
+add_compile_options(
+    # Notably, we set additional compiler flags that are not supported by gcc.
+    -Warray-bounds-pointer-arithmetic
+    -Wconditional-uninitialized
+    -Wloop-analysis
+    -Wshift-sign-overflow
+    -Wcomma
+    -Wassign-enum
+    -Wformat-type-confusion
+    -Widiomatic-parentheses
+    -Wunreachable-code-aggressive
+    -Wthread-safety
+    -Wthread-safety-beta
+    -Wno-newline-eof
+)
+endif()
 
 # Linker options used across Debug/Release/... builds are defined here.
 #

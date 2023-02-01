@@ -224,3 +224,9 @@ $ just docker-image-run
   (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>),
   run the `CMake: Build` command, press the keyboard shortcut <kbd>F7</kbd>,
   or select the `Build` button in the status bar at the bottom.
+
+## References
+
+* [Getting the maximum of your C compiler, for
+  security](https://airbus-seclab.github.io/c-compiler-security/clang_compilation.html)
+  — security-related flags and options for C compilers
