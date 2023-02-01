@@ -125,7 +125,7 @@ void *my_malloc(size_t size) {
         return NULL;
       }
     } else {  // found free block
-      // TODO: consider splitting block here.
+      // TODO(miguno): consider splitting block here.
       block->free = 0;
       block->magic = 0x77777777;
     }
@@ -142,7 +142,7 @@ void my_free(void *ptr) {
     return;
   }
 
-  // TODO: consider merging blocks once splitting blocks is implemented.
+  // TODO(miguno): consider merging blocks once splitting blocks is implemented.
   struct block_meta *block_ptr = get_block_ptr(ptr);
   assert(block_ptr->free == 0);
   assert(block_ptr->magic == 0x77777777 || block_ptr->magic == 0x12345678);
