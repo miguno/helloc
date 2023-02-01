@@ -14,6 +14,9 @@
  * educational purposes.  Heavily inspired by
  * https://danluu.com/malloc-tutorial/
  *
+ * WARNING:
+ * This code is for educational purposes only.  DO NOT use it in production!
+ *
  * ## Requirements
  *
  * * `-Wno-deprecated-declarations` compiler option to allow the use of
