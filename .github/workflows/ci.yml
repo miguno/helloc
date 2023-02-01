@@ -65,11 +65,12 @@ jobs:
 
       - name: Test
         run: just test
-      #- name: Test with ctest
-      #  working-directory: ${{github.workspace}}/build
-      #  # Execute tests defined by the CMake configuration.
-      #  # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      #  run: ctest -C ${{env.BUILD_TYPE}}
+
+      - name: Test with ctest
+        working-directory: ${{github.workspace}}/build
+        # Execute tests defined by the CMake configuration.
+        # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+        run: ctest -C ${{env.BUILD_TYPE}}
 
       - name: Generate test coverage report
         run: just coverage
