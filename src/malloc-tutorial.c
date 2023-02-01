@@ -70,8 +70,8 @@ struct block_meta *request_space(struct block_meta *last, size_t size) {
   block = sbrk(0);
   void *request = sbrk((int)(size + META_BLOCK_SIZE));
   assert((void *)block == request);  // not thread-safe
-  if (request == (void *)-1) {
-    return NULL;  // sbrk failed
+  if (request == (void *)-1) {       // NOLINT(performance-no-int-to-ptr)
+    return NULL;                     // sbrk failed
   }
 
   if (last) {  // NULL on first request
