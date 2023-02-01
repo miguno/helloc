@@ -126,7 +126,11 @@ if [ "$FORCE_OPEN_REPORT_IN_BROWSER" = "yes" ]; then
     # Open HTML in default application (typically, your browser)
     open "$COVERAGE_REPORT_INDEX"
 else
-    if [ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/ip') ]; then
+    # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+    declare -r EXECUTED_WITHIN_CI="${CI:-false}"
+    if [ "$EXECUTED_WITHIN_CI" = "true" ]; then
+        echo "Running inside GitHub Actions, skipping browsing of coverage report"
+    elif [ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/ip') ]; then
         # Script is running in Windows WSL, where we typically don't have access
         # to a GUI with browser
         echo
