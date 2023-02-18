@@ -1,4 +1,5 @@
 # helloc
+[![helloc GitHub repository](https://img.shields.io/github/stars/miguno/helloc)](https://github.com/miguno/helloc)
 [![CI workflow status](https://github.com/miguno/helloc/actions/workflows/ci.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/ci.yml)
 [![Docker workflow status](https://github.com/miguno/helloc/actions/workflows/docker-image.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/docker-image.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
