@@ -154,7 +154,7 @@ int main(void) {
   printf("===============================================================\n");
   printf("System-dependent settings:\n");
   printf("---------------------------------------------------------------\n");
-  printf("CHAR_BIT: %2d bits\n", CHAR_BIT);
+  printf("CHAR_BIT: %2d bits (number of bits in a byte)\n", CHAR_BIT);
   printf("word size (best guess): %2zu bits\n", kWordSizeBits);
   printf("boundary for alignment: %zu bytes\n", kAlignmentBoundaryBytes);
   printf("sizeof(size_t): %zu bytes\n", sizeof(size_t));
