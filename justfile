@@ -9,6 +9,7 @@ version := semver + "+" + commit
 project_dir := justfile_directory()
 build_dir := project_dir + "/build"
 src_dir := build_dir + "/src"
+examples_dir := build_dir + "/examples"
 test_dir := build_dir + "/test"
 docs_dir := project_dir + "/generated-docs"
 
@@ -88,6 +89,19 @@ run binary *args: build
 # run a Release binary
 run-release binary *args: release
     {{src_dir}}/Release/{{binary}} {{args}}
+
+# run a Debug binary from the examples
+examples-run binary *args: build
+    # Enabling memory leak checking with Address Sanitizer (ASan) including
+    # Leak Sanitizer
+    ASAN_OPTIONS=detect_leaks=1 \
+    # Suppress known false positives of ASan
+    LSAN_OPTIONS=suppressions=lsan.supp \
+    {{examples_dir}}/Debug/{{binary}} {{args}}
+
+# run a Release binary from the examples
+examples-run-release binary *args: release
+    {{examples_dir}}/Release/{{binary}} {{args}}
 
 # clang-tidy (see .clang-tidy)
 tidy:
