@@ -8,6 +8,9 @@
 /**
  * Compute the sum of two ints.
  *
+ * Integer overflows result in a return value of INT_MAX.
+ * Integer underflows result in a return value of INT_MIN.
+ *
  * @param a The first int
  * @param b The second int
  */

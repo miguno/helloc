@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
+#include <limits.h>
 
 #include "miguno.h"
 
@@ -32,6 +33,18 @@ Test(miguno_suite, verify_sum) {
   int a = 2;
   int b = 2;
   cr_assert(eq(i32, miguno_sum(a, b), 4), "2 + 2 should equal 4");
+
+  // Verify overflow scenarios
+  cr_assert(eq(i32, miguno_sum(INT_MAX, 1), INT_MAX),
+            "INT_MAX + 1 should equal INT_MAX");
+  cr_assert(eq(i32, miguno_sum(INT_MAX, INT_MAX), INT_MAX),
+            "INT_MAX + INT_MAX should equal INT_MAX");
+
+  // Verify underflow scenarios
+  cr_assert(eq(i32, miguno_sum(INT_MIN, -1), INT_MIN),
+            "INT_MIN + (-1) should equal INT_MIN");
+  cr_assert(eq(i32, miguno_sum(INT_MIN, INT_MIN), INT_MIN),
+            "INT_MIN + INT_MIN should equal INT_MIN");
 }
 
 // NOLINTEND(readability-isolate-declaration)

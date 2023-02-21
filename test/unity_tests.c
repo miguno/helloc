@@ -5,6 +5,8 @@
  * files) into the top-level `external/` folder.
  */
 
+#include <limits.h>
+
 // Allows us to use shortened names of functions in miguno.h in addition to
 // their long, prefixed names.
 #define MIGUNO_SHORT_NAMES
@@ -37,6 +39,14 @@ void verify_sum(void) {
   // Because we defined the macro MIGUNO_SHORT_NAMES before including miguno.h,
   // we can now use the shortened name of `miguno_sum()`.
   TEST_ASSERT_EQUAL(4, sum(a, b));
+
+  // Verify overflow scenarios
+  TEST_ASSERT_EQUAL(INT_MAX, sum(INT_MAX, 1));
+  TEST_ASSERT_EQUAL(INT_MAX, sum(INT_MAX, INT_MAX));
+
+  // Verify underflow scenarios
+  TEST_ASSERT_EQUAL(INT_MIN, sum(INT_MIN, -1));
+  TEST_ASSERT_EQUAL(INT_MIN, sum(INT_MIN, INT_MIN));
 }
 
 // not needed when using generate_test_runner.rb
