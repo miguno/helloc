@@ -180,14 +180,14 @@ int main(void) {
     // overwrite the block_meta struct of the second allocated memory with the
     // statements below:
     //
-    //  block->size: ptr[4-5]
-    //  block->next: ptr[6-7]
-    //  block->free: ptr[8]
-    //  block->magic: ptr[9]
+    //  block->size: ptr1[4-5]
+    //  block->next: ptr1[6-7]
+    //  block->free: ptr1[8]
+    //  block->magic: ptr1[9]
     //
     // Examples:
-    //  ptr[4] = 12345;
-    //  ptr[8] = 67890;
+    //  ptr1[4] = 12345;
+    //  ptr1[8] = 67890;
 
     printf("===============================================================\n");
     printf("ptr1 data:\n");
