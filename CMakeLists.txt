@@ -109,6 +109,7 @@ add_subdirectory(external)
 # Location of our source files
 add_subdirectory(src)
 add_subdirectory(examples)
+add_subdirectory(games)
 
 # Location of our test files
 enable_testing()

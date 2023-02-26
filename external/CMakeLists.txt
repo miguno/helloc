@@ -9,3 +9,5 @@ target_compile_options(unity PRIVATE
 )
 target_include_directories(unity PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 ### }}} Unity
+
+add_subdirectory(raylib)
