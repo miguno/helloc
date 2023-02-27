@@ -45,7 +45,9 @@ struct block_meta {        // 24 bytes total
 };
 #define META_BLOCK_SIZE sizeof(struct block_meta)
 
+// NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 void *global_base = NULL;
+// NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 
 void block_to_string(struct block_meta *block, char **s) {
   int result = asprintf(s, "address=%p { size=%zu, free=%d, magic=%d, next=%p }", (void *)block, block->size,
