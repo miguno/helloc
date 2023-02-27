@@ -1,0 +1,6 @@
+---
+# This file is in YAML format.
+
+# Disable all checks in this folder.
+Checks: >
+  -*
