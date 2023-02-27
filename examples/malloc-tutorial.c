@@ -66,9 +66,10 @@ struct block_meta *find_free_block(struct block_meta **last, size_t size) {
   return current;
 }
 
+enum { kMagicBlockCreated = 0x12345678, kMagicBlockReused = 0x12345678, kMagicBlockFreed = 0x55555555 };
+
 struct block_meta *request_space(struct block_meta *last, size_t size) {
-  struct block_meta *block;
-  block = sbrk(0);
+  struct block_meta *block = sbrk(0);
   void *request = sbrk((int)(size + META_BLOCK_SIZE));
   assert((void *)block == request); // not thread-safe
   if (request == (void *)-1) {      // NOLINT(performance-no-int-to-ptr)
@@ -81,7 +82,7 @@ struct block_meta *request_space(struct block_meta *last, size_t size) {
   block->size = size;
   block->next = NULL;
   block->free = 0;
-  block->magic = 0x12345678;
+  block->magic = kMagicBlockCreated;
   return block;
 }
 
@@ -110,7 +111,7 @@ void *my_malloc(size_t size) {
   // Memory must be aligned, e.g. to 8-byte boundaries on most 64-bit systems
   size_t aligned_size = get_aligned_size(size);
 
-  struct block_meta *block;
+  struct block_meta *block = NULL;
   if (!global_base) { // first call
     block = request_space(NULL, aligned_size);
     if (!block) {
@@ -128,7 +129,7 @@ void *my_malloc(size_t size) {
     } else { // found free block
       // TODO(miguno): consider splitting block here.
       block->free = 0;
-      block->magic = 0x77777777;
+      block->magic = kMagicBlockReused;
     }
   }
   return (block + 1);
@@ -146,14 +147,15 @@ void my_free(void *ptr) {
   assert(block_ptr->free == 0);
   assert(block_ptr->magic == 0x77777777 || block_ptr->magic == 0x12345678);
   block_ptr->free = 1;
-  block_ptr->magic = 0x55555555;
+  block_ptr->magic = kMagicBlockFreed;
 }
 
+// NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers)
 int main(void) {
   printf("===============================================================\n");
   printf("System-dependent settings:\n");
   printf("---------------------------------------------------------------\n");
-  printf("CHAR_BIT: %2d bits (number of bits in a byte)\n", CHAR_BIT);
+  printf("CHAR_BIT: %d bits (number of bits in a byte)\n", CHAR_BIT);
   printf("word size (best guess): %2zu bits\n", kWordSizeBits);
   printf("boundary for alignment: %zu bytes\n", kAlignmentBoundaryBytes);
   printf("sizeof(size_t): %zu bytes\n", sizeof(size_t));
@@ -210,7 +212,7 @@ int main(void) {
     size_t i = 0;
     struct block_meta *current = global_base;
     while (current) {
-      char *s;
+      char *s = NULL;
       block_to_string(current, &s);
       if (s) {
         printf("%zu: %s\n", i, s);
@@ -225,3 +227,4 @@ int main(void) {
   }
   return 0;
 }
+// NOLINTEND(cppcoreguidelines-avoid-magic-numbers)
