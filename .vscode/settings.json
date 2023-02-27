@@ -18,7 +18,6 @@
     "*.script": "lua",
     "*.lua": "lua",
     "greatest.h": "c",
-    "criterion.h": "c",
     "assert.h": "c",
     "stb_ds.h": "c",
     "miguno.h": "c"

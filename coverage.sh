@@ -20,10 +20,8 @@ declare -r PROJECT_DIR=$(echo $(cd $(dirname $0); pwd))
 declare -r BUILD_DIR="build-for-coverage/" # must match "binaryDir" in CMakePresets.json
 declare -r TEST_DIR="test/"
 declare -r COVERAGE_DIR="$PROJECT_DIR/coverage-report"
-# TODO: Decide which test suite to pick, Criterion vs. Unity
 declare -r BINARIES_TO_RUN=(
-    "$TEST_DIR/criterion_testsuite"
-    #"$TEST_DIR/unity_testsuite"
+    "$TEST_DIR/unity_testsuite"
 )
 declare -r FORCE_OPEN_REPORT_IN_BROWSER="no" # yes or no
 
