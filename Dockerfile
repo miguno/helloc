@@ -18,7 +18,7 @@ ENV CC="clang"
 # Prepare OS
 RUN apt-get update && apt-get upgrade -y
 # Install C toolchain
-RUN apt-get install -y clang clang-tidy cmake libcriterion-dev lldb ninja-build zip
+RUN apt-get install -y clang clang-tidy cmake lldb ninja-build zip
 
 # Clean
 RUN rm -rf build/ && mkdir -p build/
@@ -28,7 +28,6 @@ RUN cmake -B build/ -S . -G "Ninja Multi-Config"
 RUN CMAKE_BUILD_PARALLEL_LEVEL="$NUM_BUILD_WORKERS" \
     cmake --build build/ --config Debug --target "$TARGET"
 RUN build/src/Debug/main # to trigger ASan and friends
-RUN build/test/Debug/criterion_testsuite --short-filename --jobs "$NUM_BUILD_WORKERS"
 RUN build/test/Debug/unity_testsuite
 # Build release
 RUN CMAKE_BUILD_PARALLEL_LEVEL="$NUM_BUILD_WORKERS" \

@@ -1,27 +1,3 @@
-### Criterion {{{
-add_executable(criterion_testsuite criterion_tests.c)
-
-find_package(Criterion REQUIRED)
-
-target_include_directories(criterion_testsuite
-    # SYSTEM is required here to prevent clang-tidy to check the included headers
-    SYSTEM PRIVATE
-        ${CRITERION_INCLUDE_DIRS}
-)
-target_include_directories(criterion_testsuite
-    PRIVATE
-        "${CMAKE_SOURCE_DIR}/src" # to find `miguno.h`; alternatively, "../src"
-)
-target_compile_options(criterion_testsuite PRIVATE
-    -Wno-conversion
-)
-target_link_libraries (criterion_testsuite ${CRITERION_LIBRARIES} Miguno)
-
-# To let us run tests via `cd build && ninja test`
-add_test(criterion_testsuite criterion_testsuite)
-### }}} Criterion
-
-
 ### Unity {{{
 add_executable(unity_testsuite unity_tests.c)
 

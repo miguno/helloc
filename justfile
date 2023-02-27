@@ -108,13 +108,7 @@ tidy:
     fd '\.(c|h)$' -X clang-tidy {} -p {{build_dir}} --quiet
 
 # test all
-test: test-criterion test-unity
-
-# test with criterion
-test-criterion *args: build
-    @echo "Running criterion tests ..."
-    # `--short-filename` is needed to make the filenames of failed tests Ctrl-clickable in vscode.
-    {{test_dir}}/Debug/criterion_testsuite --short-filename --jobs {{num_build_workers}} {{args}}
+test: test-unity
 
 # test with unity
 test-unity *args: build

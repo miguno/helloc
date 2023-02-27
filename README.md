@@ -31,12 +31,9 @@ Maybe you find this useful, too. Enjoy!
   [ninja](https://github.com/ninja-build/ninja) ![](https://img.shields.io/github/stars/ninja-build/ninja),
   using a [multi-config generator](https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html)
   setup [for ninja](https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html).
-* Our toy library is tested with the multiple C test frameworks, so we can
-  evaluate which of them is preferable to us:
-    * [criterion_tests.c](test/criterion_tests.c) via
-      [Criterion](https://github.com/Snaipe/Criterion) ![](https://img.shields.io/github/stars/Snaipe/Criterion)
-    * [unity_tests.c](test/unity_tests.c) via
-      [Unity](https://github.com/ThrowTheSwitch/Unity) ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity)
+* Our toy library is tested with [Unity](https://github.com/ThrowTheSwitch/Unity)
+  ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity), see
+  [unity_tests.c](test/unity_tests.c).
 * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
   for running common commands conveniently, see [justfile](justfile). Think:
   a modern version of `make`, written in Rust.
@@ -74,21 +71,15 @@ $ just test
 
     ```shell
     # macOS
-    $ brew install cmake llvm criterion ninja
+    $ brew install cmake llvm ninja
     $ brew install gcc lcov # optional, for generating coverage reports
     $ brew install doxygen # optional, for generating documentation
 
     # Debian/Ubuntu
-    $ sudo apt-get install -y clang clang-tidy cmake libcriterion-dev lldb ninja-build
+    $ sudo apt-get install -y clang clang-tidy cmake lldb ninja-build
     $ sudo apt-get install -y build-essential lcov # optional, for generating coverage reports
     $ sudo apt-get -y install doxygen # optional, for generating documentation
     ```
-
-* [Criterion](https://github.com/Snaipe/Criterion) must be installed
-  system-wide.
-    * macOS: `brew install criterion`
-    * Debian/Ubuntu: `sudo apt-get install libcriterion-dev`
-
 
 ## Dependency management
 
@@ -101,8 +92,8 @@ folder.  An example in this project is the
 ### System-managed Dependencies
 
 Some dependencies can also be installed via the operating system, e.g., with
-apt on Debian/Ubuntu or homebrew on macOS.  An example in this project is the
-[Criterion](https://github.com/Snaipe/Criterion) test framework.
+apt on Debian/Ubuntu or homebrew on macOS.  This project does not use any such
+dependencies at the moment.
 
 ## Code Formatting
 
