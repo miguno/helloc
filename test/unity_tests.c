@@ -10,6 +10,7 @@
 // Allows us to use shortened names of functions in miguno.h in addition to
 // their long, prefixed names.
 #define MIGUNO_SHORT_NAMES
+
 #include "miguno.h"
 #include "unity.h"
 
