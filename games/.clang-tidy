@@ -1,0 +1,4 @@
+---
+# This file is in YAML format.
+Checks: >
+  -cppcoreguidelines-avoid-magic-numbers
