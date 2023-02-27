@@ -14,7 +14,6 @@
 #
 #   $ clang-tidy --verify-config
 #
-# Verify configuration:
 Checks: >
   -*,
   bugprone-*,
