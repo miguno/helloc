@@ -35,11 +35,10 @@ void pointer_equality(void) {
 }
 
 void verify_sum(void) {
-  int a = 2;
-  int b = 2;
   // Because we defined the macro MIGUNO_SHORT_NAMES before including miguno.h,
   // we can now use the shortened name of `miguno_sum()`.
-  TEST_ASSERT_EQUAL(4, sum(a, b));
+  TEST_ASSERT_EQUAL(4, sum(2, 2));
+  TEST_ASSERT_EQUAL(0, sum(-2, 2));
 
   // Verify overflow scenarios
   TEST_ASSERT_EQUAL(INT_MAX, sum(INT_MAX, 1));
