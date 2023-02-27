@@ -105,7 +105,7 @@ add_compile_definitions(UNITY_OUTPUT_COLOR)
 
 # Add `./cmake` to the module path.
 # Contains e.g. `FindCriterion.cmake` to find the Criterion headers and library.
-list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # External libraries we will link to (e.g., Unity)
 add_subdirectory(external)
