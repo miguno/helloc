@@ -9,7 +9,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
 # https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html
 # https://ninja-build.org/manual.html
-set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo" CACHE STRING "" FORCE)
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 
 project(helloc C)
 
