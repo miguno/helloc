@@ -19,14 +19,12 @@ Checks: >
   -*,
   bugprone-*,
   clang-analyzer-*,
-  google-*,
+  cppcoreguidelines-*,
   misc-*,
   modernize-*,
   performance-*,
   portability-*,
   readability-*,
-  -google-readability-namespace-comments,
-  -google-runtime-int,
   -misc-non-private-member-variables-in-classes,
   -readability-named-parameter,
   -readability-braces-around-statements,
@@ -35,7 +33,10 @@ Checks: >
   -readability-magic-numbers
 
 # Turn all the warnings from the checks above into errors.
-WarningsAsErrors: "*"
+WarningsAsErrors: >
+  *,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-init-variables
 
 CheckOptions:
   # https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
