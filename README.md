@@ -19,8 +19,8 @@ Maybe you find this useful, too. Enjoy!
 * This project implements a [main.c](src/main.c) application that uses our toy
   library [miguno.h](src/miguno.h), implemented in [miguno.c](src/miguno.c).
     * For starters there are also additional [examples](examples/).
-* C language standard is C17, see `CMAKE_C_STANDARD` in
-  [CMakeLists.txt](CMakeLists.txt).
+* C language standard is [C17](https://en.cppreference.com/w/c/17), see
+  `CMAKE_C_STANDARD` in [CMakeLists.txt](CMakeLists.txt).
 * Uses [clang](https://clang.llvm.org/) as the pre-configured compiler (see
   [.env](.env)), along with tools such as clang-format and clang-tidy.
     * You can also use [gcc](https://gcc.gnu.org/) as the compiler.  Simply set
