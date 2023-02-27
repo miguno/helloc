@@ -103,9 +103,21 @@ examples-run binary *args: build
 examples-run-release binary *args: release
     {{examples_dir}}/Release/{{binary}} {{args}}
 
-# clang-tidy (see .clang-tidy)
+# run clang-tidy (see .clang-tidy)
 tidy:
     fd '\.(c|h)$' -X clang-tidy {} -p {{build_dir}} --quiet
+
+# show configured checks of clang-tidy
+tidy-checks:
+    clang-tidy --list-checks
+
+# show effective configuration of clang-tidy
+tidy-config:
+    clang-tidy --dump-config
+
+# verify configuration of clang-tidy
+tidy-verify-config:
+    clang-tidy --verify-config
 
 # test all
 test: test-unity
