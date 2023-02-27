@@ -37,20 +37,19 @@
 /**
  * @brief Metadata for a block of allocated memory.
  */
-struct block_meta {         // 24 bytes total
-  size_t size;              // 8 bytes
-  struct block_meta *next;  // 8 bytes (pointer)
-  int free;                 // 4 bytes
-  int magic;  // For debugging only. TODO: remove this in non-debug mode.
+struct block_meta {        // 24 bytes total
+  size_t size;             // 8 bytes
+  struct block_meta *next; // 8 bytes (pointer)
+  int free;                // 4 bytes
+  int magic;               // For debugging only. TODO: remove this in non-debug mode.
 };
 #define META_BLOCK_SIZE sizeof(struct block_meta)
 
 void *global_base = NULL;
 
 void block_to_string(struct block_meta *block, char **s) {
-  int result = asprintf(
-      s, "address=%p { size=%zu, free=%d, magic=%d, next=%p }", (void *)block,
-      block->size, block->free, block->magic, (void *)(block->next));
+  int result = asprintf(s, "address=%p { size=%zu, free=%d, magic=%d, next=%p }", (void *)block, block->size,
+                        block->free, block->magic, (void *)(block->next));
   if (result == -1) {
     errno = ENOMEM;
   }
@@ -69,12 +68,12 @@ struct block_meta *request_space(struct block_meta *last, size_t size) {
   struct block_meta *block;
   block = sbrk(0);
   void *request = sbrk((int)(size + META_BLOCK_SIZE));
-  assert((void *)block == request);  // not thread-safe
-  if (request == (void *)-1) {       // NOLINT(performance-no-int-to-ptr)
-    return NULL;                     // sbrk failed
+  assert((void *)block == request); // not thread-safe
+  if (request == (void *)-1) {      // NOLINT(performance-no-int-to-ptr)
+    return NULL;                    // sbrk failed
   }
 
-  if (last) {  // NULL on first request
+  if (last) { // NULL on first request
     last->next = block;
   }
   block->size = size;
@@ -110,7 +109,7 @@ void *my_malloc(size_t size) {
   size_t aligned_size = get_aligned_size(size);
 
   struct block_meta *block;
-  if (!global_base) {  // first call
+  if (!global_base) { // first call
     block = request_space(NULL, aligned_size);
     if (!block) {
       return NULL;
@@ -119,12 +118,12 @@ void *my_malloc(size_t size) {
   } else {
     struct block_meta *last = global_base;
     block = find_free_block(&last, aligned_size);
-    if (!block) {  // failed to find free block
+    if (!block) { // failed to find free block
       block = request_space(last, aligned_size);
       if (!block) {
         return NULL;
       }
-    } else {  // found free block
+    } else { // found free block
       // TODO(miguno): consider splitting block here.
       block->free = 0;
       block->magic = 0x77777777;
@@ -133,9 +132,7 @@ void *my_malloc(size_t size) {
   return (block + 1);
 }
 
-struct block_meta *get_block_ptr(void *ptr) {
-  return (struct block_meta *)ptr - 1;
-}
+struct block_meta *get_block_ptr(void *ptr) { return (struct block_meta *)ptr - 1; }
 
 void my_free(void *ptr) {
   if (!ptr) {
@@ -158,7 +155,7 @@ int main(void) {
   printf("word size (best guess): %2zu bits\n", kWordSizeBits);
   printf("boundary for alignment: %zu bytes\n", kAlignmentBoundaryBytes);
   printf("sizeof(size_t): %zu bytes\n", sizeof(size_t));
-  printf("sizeof(void *): %zu bytes\n", sizeof(void *));  // pointer size
+  printf("sizeof(void *): %zu bytes\n", sizeof(void *)); // pointer size
 
   size_t n1 = 4;
   int *ptr1 = my_malloc(sizeof(*ptr1) * n1);
@@ -195,16 +192,14 @@ int main(void) {
     size_t beyond_elements = 10;
     for (size_t i = 0; i < n1 + beyond_elements; i++) {
       char *s = i < n1 ? "" : " <== beyond what was malloc'd for ptr1";
-      printf("ptr1[%2zu]: %10d [%p]%s\n", i, *(ptr1 + i), (void *)(ptr1 + i),
-             s);
+      printf("ptr1[%2zu]: %10d [%p]%s\n", i, *(ptr1 + i), (void *)(ptr1 + i), s);
     }
     printf("===============================================================\n");
     printf("ptr2 data:\n");
     printf("---------------------------------------------------------------\n");
     for (size_t i = 0; i < n2 + beyond_elements; i++) {
       char *s = i < n2 ? "" : " <== beyond what was malloc'd for ptr2";
-      printf("ptr2[%2zu]: %10d [%p]%s\n", i, *(ptr2 + i), (void *)(ptr2 + i),
-             s);
+      printf("ptr2[%2zu]: %10d [%p]%s\n", i, *(ptr2 + i), (void *)(ptr2 + i), s);
     }
 
     printf("===============================================================\n");
