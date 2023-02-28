@@ -104,6 +104,7 @@ format:
 
 # run clang-tidy (see .clang-tidy)
 tidy:
+    clang-tidy --version
     @find examples src test \( -name "*.c" -o -name "*.h" \) -exec clang-tidy {} -p build/ --quiet \;
 
 # show configured checks of clang-tidy
