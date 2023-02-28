@@ -47,6 +47,8 @@ Maybe you find this useful, too. Enjoy!
   (but does not enforce) this project's formatting conventions for source code
   automatically when code is pushed to the repository or when a pull request
   is created.
+* Code linting with [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) as
+  configured in [.clang-tidy](.clang-tidy).
 * Uses [Doxygen](https://www.doxygen.nl/) for code documentation, see
   [Doxyfile](Doxyfile).
 * Code coverage reports can be generated locally, see
