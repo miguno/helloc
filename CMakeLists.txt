@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 # `-DCMAKE_EXPORT_COMPILE_COMMANDS` generates `build/compile_commands.json`,
-# which is needed for the clangd LSP server.
+# which is needed for several tools including the clangd LSP server.
 # https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
 # https://clangd.llvm.org/installation#compile_commandsjson
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
