@@ -89,7 +89,7 @@ $ just test
     $ sudo apt-get -y install doxygen # optional, for generating documentation
     ```
 
-## Dependency management
+## Dependency management for source code
 
 ### Manually-managed Dependencies
 
