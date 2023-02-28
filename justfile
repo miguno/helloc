@@ -104,7 +104,7 @@ format:
 
 # run clang-tidy (see .clang-tidy)
 tidy:
-    fd '\.(c|h)$' -X clang-tidy {} -p {{build_dir}} --quiet
+    @find examples src test \( -name "*.c" -o -name "*.h" \) -exec clang-tidy {} -p build/ --quiet \;
 
 # show configured checks of clang-tidy
 tidy-checks:
