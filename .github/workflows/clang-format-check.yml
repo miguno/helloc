@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Code Style Guide Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  formatting-check:
+    name: Check format of C/C++ sources
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path:
+          # https://github.com/jidicula/clang-format-action
+          - check: 'examples'
+            #exclude: '(hello|world)' # Exclude file paths containing "hello" or "world"
+            exclude: '' # Nothing to exclude
+          - check: 'src'
+            exclude: ''
+          - check: 'test'
+            exclude: ''
+    steps:
+    - uses: actions/checkout@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # https://github.com/jidicula/clang-format-action
+    - name: Run clang-format style check for C/C++ sources
+      uses: jidicula/clang-format-action@v4.10.2
+      with:
+        clang-format-version: '15'
+        check-path: ${{ matrix.path['check'] }}
+        exclude-regex: ${{ matrix.path['exclude'] }}

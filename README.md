@@ -2,6 +2,7 @@
 [![helloc GitHub repository](https://img.shields.io/github/stars/miguno/helloc)](https://github.com/miguno/helloc)
 [![CI workflow status](https://github.com/miguno/helloc/actions/workflows/ci.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/ci.yml)
 [![Docker workflow status](https://github.com/miguno/helloc/actions/workflows/docker-image.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/docker-image.yml)
+[![Code Style Guide Check workflow status](https://github.com/miguno/helloc/actions/workflows/clang-format-check.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/clang-format-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 My template project for writing in the C programming language in 2023.
@@ -37,10 +38,15 @@ Maybe you find this useful, too. Enjoy!
 * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
   for running common commands conveniently, see [justfile](justfile). Think:
   a modern version of `make`, written in Rust.
-* Code style guide uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
-  and is configured in [.clang-format](.clang-format).
 * [GitHub Action workflows](https://github.com/miguno/helloc/actions)
   for CI/CD support.
+* Code style guide uses
+  [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
+  and is configured in [.clang-format](.clang-format).  The workflow definition
+  at [clang-format-check.yml](.github/workflows/clang-format-check.yml) checks
+  (but does not enforce) this project's formatting conventions for source code
+  automatically when code is pushed to the repository or when a pull request
+  is created.
 * Uses [Doxygen](https://www.doxygen.nl/) for code documentation, see
   [Doxyfile](Doxyfile).
 * Code coverage reports can be generated locally, see
