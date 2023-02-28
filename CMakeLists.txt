@@ -45,9 +45,17 @@ set(CMAKE_C_STANDARD 17)
 if ("${CMAKE_C_COMPILER_ID}" MATCHES "GNU" AND APPLE)
   # gcc on Apple Silicon is missing AddressSanitizer/UBSanitizer,
   # see https://github.com/Homebrew/discussions/discussions/3384
+  MESSAGE(STATUS "Compiler: GCC on macOS. ASan and UBSan are not supported on Apple Silicon. Using minimal set of compile flags.")
   set(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -fno-omit-frame-pointer")
-else()
+elseif ("${CMAKE_C_COMPILER_ID}" MATCHES "GNU")
+  MESSAGE(STATUS "Compiler: GCC. Using extended set of compile flags.")
+  set(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -fsanitize=address,undefined,float-divide-by-zero -fno-omit-frame-pointer")
+elseif ("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
+  MESSAGE(STATUS "Compiler: Clang. Using full set of compile flags.")
   set(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -fsanitize=address,undefined,float-divide-by-zero,integer,implicit-conversion,local-bounds,nullability -fno-omit-frame-pointer")
+else()
+  MESSAGE(STATUS "Compiler: unknown (neither Clang nor GCC). Using minimal set of compile flags.")
+  set(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -fno-omit-frame-pointer")
 endif()
 # See generated `build/build-Release.ninja` & `build/CMakeFiles/impl-Release.ninja`
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g -D_FORTIFY_SOURCE=2")
