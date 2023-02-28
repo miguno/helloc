@@ -24,6 +24,8 @@ RUN apt-get install -y clang clang-tidy cmake lldb ninja-build zip
 RUN rm -rf build/ && mkdir -p build/
 # Configure
 RUN cmake -B build/ -S . -G "Ninja Multi-Config"
+# Run clang-tidy
+RUN find examples src test \( -name "*.c" -o -name "*.h" \) -exec clang-tidy {} -p build/ --quiet \;
 # Test using a Debug build, which has additional flags for better testing
 RUN CMAKE_BUILD_PARALLEL_LEVEL="$NUM_BUILD_WORKERS" \
     cmake --build build/ --config Debug --target "$TARGET"
