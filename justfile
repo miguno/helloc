@@ -103,6 +103,10 @@ examples-run binary *args: build
 examples-run-release binary *args: release
     {{examples_dir}}/Release/{{binary}} {{args}}
 
+# format source code (.c and .h files) with clang-format
+format:
+    fd '\.(c|h)$' --exclude external/ -X clang-format -i {}
+
 # run clang-tidy (see .clang-tidy)
 tidy:
     fd '\.(c|h)$' -X clang-tidy {} -p {{build_dir}} --quiet
