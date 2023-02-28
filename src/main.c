@@ -8,7 +8,7 @@
  * This comment demonstrates the use of doxygen for documenting your code.
  */
 int main(void) {
-  printf("Zwei plus zwei ist %d. Immer und überall!\n", miguno_sum(2, 2));
+  printf("Two plus two is %d. Always and everywhere!\n", miguno_sum(2, 2));
 
   return 0;
 }
