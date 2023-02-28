@@ -91,6 +91,9 @@ $ just test
 
 ## Dependency management for source code
 
+Dependencies are managed with cmake.  The entry point is the top-level
+[CMakeLists.txt](CMakeLists.txt).
+
 ### Manually-managed Dependencies
 
 Manually managed dependencies are stored under the [external/](external/)
