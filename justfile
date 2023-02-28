@@ -1,11 +1,6 @@
 # Load environment variables from `.env` file.
 set dotenv-load
 
-timestamp := `date +%s`
-semver := "0.1.0-alpha"
-commit := `git show -s --format=%h`
-version := semver + "+" + commit
-
 project_dir := justfile_directory()
 build_dir := project_dir + "/build"
 src_dir := build_dir + "/src"
