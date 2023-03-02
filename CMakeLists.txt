@@ -19,7 +19,6 @@ project(helloc C)
 set(CMAKE_C_STANDARD 17)
 
 # Add `./cmake` to the module path.
-# Contains e.g. `FindCriterion.cmake` to find the Criterion headers and library.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(AddIfFlagCompiles)
 
@@ -53,9 +52,6 @@ add_if_flag_compiles(-O3 -g -D_FORTIFY_SOURCE=2 CMAKE_C_FLAGS_RELEASE)
 # `-fno-omit-frame-pointer`: nicer stack traces in error messages
 add_if_flag_compiles(-fno-omit-frame-pointer CMAKE_C_FLAGS_DEBUG)
 add_if_flag_compiles(-fno-omit-frame-pointer CMAKE_C_FLAGS_RELEASE)
-
-#option(ENABLE_ASAN "Enable AddressSanitizer" ON)
-#option(ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" ON)
 
 if (CMAKE_C_COMPILER_ID MATCHES "GNU" AND APPLE)
   # gcc on Apple Silicon is missing AddressSanitizer/UBSanitizer,

@@ -100,7 +100,7 @@ examples-run-release binary *args: release
 
 # format source code (.c and .h files) with clang-format
 format:
-    fd '\.(c|h)$' --exclude external/ -X clang-format -i {}
+    @find examples src test \( -name "*.c" -o -name "*.h" \) -exec clang-format -i {} \;
 
 # run clang-tidy (see .clang-tidy)
 tidy:
