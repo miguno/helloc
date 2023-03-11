@@ -22,7 +22,7 @@ default:
     @just --list --justfile {{justfile()}}
 
 # evaluate and print all just variables
-evaluate:
+just-vars:
     @just --evaluate
 
 # print system information such as OS and architecture
