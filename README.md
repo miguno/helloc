@@ -26,7 +26,7 @@ Maybe you find this useful, too. Enjoy!
   [.env](.env)), along with tools such as clang-format and clang-tidy.
     * You can also use [gcc](https://gcc.gnu.org/) as the compiler.  Simply set
       the environment variable `CC` accordingly, e.g. in [.env](.env) or
-      in the shell environment with `CC=gcc` or `CC=gcc-12`.
+      in the shell environment with `CC=gcc` or `CC=gcc-13`.
 * Build and dependency management:
   [cmake](https://github.com/Kitware/CMake) with
   [ninja](https://github.com/ninja-build/ninja) ![](https://img.shields.io/github/stars/ninja-build/ninja),
@@ -150,7 +150,7 @@ Then run the coverage script with the `CC` environment variable set to your
 GCC installation:
 
 ```shell
-$ CC=gcc-12 ./coverage.sh
+$ CC=gcc-13 ./coverage.sh
 ```
 
 Example output:
