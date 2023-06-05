@@ -1,5 +1,6 @@
 .cache/
 build/
 build-for-coverage/
+cmake-build-debug/
 coverage-report/
 generated-docs/
