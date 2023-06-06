@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.22)
 
+# Example setups for CMakeLists.txt to get inspired by:
+# - https://github.com/duckdb/duckdb/blob/master/CMakeLists.txt
+
 # `-DCMAKE_EXPORT_COMPILE_COMMANDS` generates `build/compile_commands.json`,
 # which is needed for several tools including clang-tidy and the clangd LSP
 # server.
