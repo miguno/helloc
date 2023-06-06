@@ -14,7 +14,7 @@ declare -r HELLOC_MAJOR_VERSION=$(grep -m 1 HELLOC_MAJOR_VERSION ${CMAKELISTS} |
 declare -r HELLOC_MINOR_VERSION=$(grep -m 1 HELLOC_MINOR_VERSION ${CMAKELISTS} | sed -rn 's/^(.*) (.*)\)/\2/p')
 declare -r HELLOC_PATCH_VERSION=$(grep -m 1 HELLOC_PATCH_VERSION ${CMAKELISTS} | sed -rn 's/^(.*) (.*)\)/\2/p')
 declare -r HELLOC_DEV_ITERATION=$(grep -m 1 HELLOC_DEV_ITERATION ${CMAKELISTS} | sed -rn 's/^(.*) (.*)\)/\2/p')
-# IMPORTANT: Versioning logic must match with the logic in CMakeLists.txt!
+# IMPORTANT: Versioning logic here must match the logic in CMakeLists.txt!
 declare -r HELLOC_VERSION="${HELLOC_MAJOR_VERSION}.${HELLOC_MINOR_VERSION}.${HELLOC_PATCH_VERSION}-${HELLOC_DEV_ITERATION}"
 DOCKER_IMAGE_TAG="${HELLOC_VERSION}"
 
