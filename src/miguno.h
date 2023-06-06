@@ -15,7 +15,7 @@
  * @param a The first int
  * @param b The second int
  */
-extern int miguno_sum(int a, int b);
+int miguno_sum(int a, int b);
 
 // Short names for the library API
 #ifdef MIGUNO_SHORT_NAMES
