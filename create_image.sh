@@ -19,9 +19,11 @@ else
 fi
 
 echo "Building image '$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG'..."
+# `--no-cache`: To avoid cache hits and to ensure a fresh download of images
+#
 # TIP: Add `--progress=plain` to see the full docker output when you are
 # troubleshooting the build setup of your image.
-declare -r DOCKER_OPTIONS=""
+declare -r DOCKER_OPTIONS="--no-cache"
 # Use BuildKit, i.e. `buildx build` instead of just `build`
 # https://docs.docker.com/build/
 docker buildx build $DOCKER_OPTIONS -t "$DOCKER_IMAGE_NAME":"$DOCKER_IMAGE_TAG" .
