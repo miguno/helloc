@@ -18,6 +18,27 @@ project(helloc C)
 # https://cmake.org/cmake/help/latest/prop_tgt/C_STANDARD.html
 set(CMAKE_C_STANDARD 17)
 
+# Detect host architecture
+set(OS_ARCH "amd64")
+string(REGEX MATCH "(arm64|aarch64)" IS_ARM "${CMAKE_SYSTEM_PROCESSOR}")
+if (IS_ARM)
+  set(OS_ARCH "arm64")
+endif()
+MESSAGE(STATUS "Host architecture: ${OS_ARCH}")
+
+# Detect host operating system
+set(OS_NAME "unknown")
+if (APPLE)
+  set(OS_NAME "osx")
+endif()
+if (WIN32)
+  set(OS_NAME "windows")
+endif()
+if (UNIX AND NOT APPLE)
+  set(OS_NAME "linux") # We ignore other OS like BSD in the current logic.
+endif()
+MESSAGE(STATUS "Host operating system: ${OS_NAME}")
+
 # Add `./cmake` to the module path.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(AddIfFlagCompiles)
