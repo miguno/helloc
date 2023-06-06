@@ -85,5 +85,5 @@ jobs:
       - name: Generate test coverage report
         run: just coverage
 
-      - name: Generated documentation
+      - name: Generate documentation
         run: just docs
