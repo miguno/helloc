@@ -15,10 +15,15 @@ ARG TARGET="all"
 
 ENV CC="clang"
 
-# Prepare OS
-RUN apt-get update && apt-get upgrade -y
 # Install C toolchain
-RUN apt-get install -y clang clang-tidy cmake lldb ninja-build zip
+RUN apt-get update && apt-get install -y \
+    clang \
+    clang-tidy \
+    cmake \
+    lldb \
+    ninja-build \
+    zip \
+    && rm -rf /var/lib/apt/lists/*
 
 # Clean
 RUN rm -rf build/ && mkdir -p build/
