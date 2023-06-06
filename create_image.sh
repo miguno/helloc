@@ -9,14 +9,14 @@ set -uo pipefail
 # Import environment variables from .env
 set -o allexport && source .env && set +o allexport
 
-CMAKELISTS="CMakeLists.txt"
-declare -r HELLOC_MAJOR_VERSION=$(grep -m 1 HELLOC_MAJOR_VERSION ${CMAKELISTS} | sed -rn 's/^(.*) (.*)\)/\2/p')
-declare -r HELLOC_MINOR_VERSION=$(grep -m 1 HELLOC_MINOR_VERSION ${CMAKELISTS} | sed -rn 's/^(.*) (.*)\)/\2/p')
-declare -r HELLOC_PATCH_VERSION=$(grep -m 1 HELLOC_PATCH_VERSION ${CMAKELISTS} | sed -rn 's/^(.*) (.*)\)/\2/p')
-declare -r HELLOC_DEV_ITERATION=$(grep -m 1 HELLOC_DEV_ITERATION ${CMAKELISTS} | sed -rn 's/^(.*) (.*)\)/\2/p')
-# IMPORTANT: Versioning logic here must match the logic in CMakeLists.txt!
-declare -r HELLOC_VERSION="${HELLOC_MAJOR_VERSION}.${HELLOC_MINOR_VERSION}.${HELLOC_PATCH_VERSION}-${HELLOC_DEV_ITERATION}"
-DOCKER_IMAGE_TAG="${HELLOC_VERSION}"
+declare -r SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+
+declare -r HELLOC_VERSION="$("${SCRIPT_DIR}/version.sh")"
+if [ $? -eq 0 ]; then
+    declare -r DOCKER_IMAGE_TAG="${HELLOC_VERSION}"
+else
+    exit 1
+fi
 
 echo "Building image '$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG'..."
 # TIP: Add `--progress=plain` to see the full docker output when you are

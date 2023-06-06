@@ -1,6 +1,7 @@
 # Load environment variables from `.env` file.
 set dotenv-load
 
+project_version := `./version.sh`
 project_dir := justfile_directory()
 build_dir := project_dir + "/build"
 src_dir := build_dir + "/src"
@@ -147,6 +148,10 @@ docs:
     echo "---------------------------------------------------------------" && \
     echo "HTML docs are at {{docs_dir}}/html/index.html" && \
     echo "---------------------------------------------------------------"
+
+# show project version
+version:
+    @echo "{{project_version}}"
 
 # create a docker image (requires Docker)
 docker-image-create:
