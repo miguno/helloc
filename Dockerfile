@@ -55,7 +55,18 @@ FROM alpine:3.18.0
 # `gcompat`: adds shared libraries needed for running our non-static binary;
 #            without it, running our binary will fail with the misleading error
 #            message: "exec /usr/local/bin/main: no such file or directory"
-RUN apk --no-cache add ca-certificates gcompat
-WORKDIR /root/
+RUN apk --no-cache add ca-certificates gcompat libgcc
+
+# Create a dedicated non-root user to run the application
+ARG USER_NAME="appuser"
+ARG USER_ID="1000"
+ARG GROUP_NAME="$USER_NAME"
+ARG GROUP_ID="1000"
+# TIP: To get `useradd` and `groupadd`, install the `shadow` package via apk.
+RUN addgroup --gid $GROUP_ID $GROUP_NAME && \
+    adduser --disabled-password --ingroup $GROUP_NAME --uid $USER_ID $USER_NAME
+
+WORKDIR /home/$USER_NAME
+USER $USER_NAME
 COPY --from=builder /app/build/src/Release/main /usr/local/bin/main
 CMD ["main"]
