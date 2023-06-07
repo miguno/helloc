@@ -8,6 +8,7 @@
  * This comment demonstrates the use of doxygen for documenting your code.
  */
 int main(void) {
+  printf("Project version: %s\n", HELLOC_VERSION);
   printf("Two plus two is %d. Always and everywhere!\n", miguno_sum(2, 2));
 
   return 0;

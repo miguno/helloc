@@ -24,6 +24,9 @@ set(HELLOC_DEV_ITERATION 0)
 # IMPORTANT: Versioning logic here must match the logic in version.sh!
 set(HELLOC_VERSION "${HELLOC_MAJOR_VERSION}.${HELLOC_MINOR_VERSION}.${HELLOC_PATCH_VERSION}-${HELLOC_DEV_ITERATION}")
 MESSAGE(STATUS "helloc version: ${HELLOC_VERSION}")
+# Make HELLOC_VERSION available as a preprocessor definition, so we can access
+# the version information from within our source code.
+add_definitions(-DHELLOC_VERSION="${HELLOC_VERSION}")
 
 # https://cmake.org/cmake/help/latest/prop_tgt/C_STANDARD.html
 set(CMAKE_C_STANDARD 17)
