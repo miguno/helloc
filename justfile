@@ -4,6 +4,9 @@ set dotenv-load
 project_version := `./version.sh`
 project_dir := justfile_directory()
 build_dir := project_dir + "/build"
+build_debug_dir := project_dir + "/cmake-build-debug"
+coverage_build_dir := project_dir + "/build-for-coverage"
+coverage_report_dir := project_dir + "/coverage-report"
 src_dir := build_dir + "/src"
 examples_dir := build_dir + "/examples"
 test_dir := build_dir + "/test"
@@ -43,6 +46,10 @@ clangd-check filename:
 # clean
 clean:
     rm -rf {{build_dir}}
+    rm -rf {{build_debug_dir}}
+    rm -rf {{coverage_build_dir}}
+    rm -rf {{coverage_report_dir}}
+    rm -rf {{docs_dir}}
 
 # configure a build
 configure:
