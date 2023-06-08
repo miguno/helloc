@@ -2,7 +2,7 @@
 # shellcheck disable=SC2155
 
 declare -r SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
-declare -r PROJECT_DIR=$(realpath "$SCRIPT_DIR/../..")
+declare -r PROJECT_DIR=$(readlink -f "$SCRIPT_DIR/../..")
 
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 # `-u`: Errors if a variable is referenced before being set

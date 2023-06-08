@@ -8,7 +8,7 @@
 # * Debian/Ubuntu: `sudo apt-get install -y build-essential lcov`
 
 declare -r SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
-declare -r PROJECT_DIR=$(realpath "$SCRIPT_DIR/..")
+declare -r PROJECT_DIR=$(readlink -f "$SCRIPT_DIR/..")
 
 # Define bash set builtins to ensure safer execution of this script.
 set -Eeuo pipefail
@@ -121,7 +121,7 @@ genhtml coverage.info --output-directory "$COVERAGE_DIR"
 # Print coverage report to the terminal
 "$LCOV" --list coverage.info
 
-declare -r COVERAGE_REPORT_INDEX=$(realpath "$COVERAGE_DIR/index.html")
+declare -r COVERAGE_REPORT_INDEX=$(readlink -f "$COVERAGE_DIR/index.html")
 echo
 echo "Coverage report in HTML format is available at $COVERAGE_REPORT_INDEX"
 
