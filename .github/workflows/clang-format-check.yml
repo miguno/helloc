@@ -28,7 +28,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     # https://github.com/jidicula/clang-format-action
     - name: Run clang-format style check for C/C++ sources
-      uses: jidicula/clang-format-action@v4.10.2
+      uses: jidicula/clang-format-action@v4.11.0
       with:
         clang-format-version: '15'
         check-path: ${{ matrix.path['check'] }}
