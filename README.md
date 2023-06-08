@@ -24,7 +24,9 @@ Maybe you find this useful, too. Enjoy!
   (a bug-fix version of the C11 standard), see
   `CMAKE_C_STANDARD` in [CMakeLists.txt](CMakeLists.txt).
 * Uses [clang](https://clang.llvm.org/) as the pre-configured compiler (see
-  [.env](.env)), along with tools such as clang-format and clang-tidy.
+  [.env](.env)), along with tools such as
+  [clang-format](https://clang.llvm.org/docs/ClangFormat.html) and
+  [clang-tidy](https://clang.llvm.org/extra/clang-tidy/).
     * You can also use [gcc](https://gcc.gnu.org/) as the compiler.  Simply set
       the environment variable `CC` accordingly, e.g. in [.env](.env) or
       in the shell environment with `CC=gcc` or `CC=gcc-13`.
