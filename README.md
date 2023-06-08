@@ -18,7 +18,7 @@ Maybe you find this useful, too. Enjoy!
   [Visual Studio Code](https://code.visualstudio.com/)
   as code editors, and likely with others, too.
 * This project implements a [main.c](src/main.c) application that uses our toy
-  library [miguno.h](src/miguno.h), implemented in [miguno.c](src/miguno.c).
+  library [helloc.h](src/helloc.h), implemented in [helloc.c](src/helloc.c).
     * For starters there are also additional [examples](examples/).
 * C language standard is [C17](https://en.cppreference.com/w/c/17), see
   `CMAKE_C_STANDARD` in [CMakeLists.txt](CMakeLists.txt).
@@ -159,7 +159,7 @@ Example output:
 $ ./coverage.sh
 ...
 Generating output.
-Processing file src/miguno.c
+Processing file src/helloc.c
 Writing directory view page.
 Overall coverage rate:
   lines......: 100.0% (1 of 1 line)
@@ -169,7 +169,7 @@ Reading tracefile coverage.info
 Filename    |Rate     Num|Rate    Num|Rate     Num
 ==================================================
 [/home/miguno/git/helloc/src/]
-miguno.c    | 100%      1| 100%     1|    -      0
+helloc.c    | 100%      1| 100%     1|    -      0
 ==================================================
       Total:| 100%      1| 100%     1|    -      0
 ```
@@ -188,7 +188,7 @@ Then browse the documentation under `generated-docs/`.
 Man pages can be displayed with:
 
 ```shell
-$ man generated-docs/man/man3/miguno.h.3
+$ man generated-docs/man/man3/helloc.h.3
 ```
 
 ## Docker

@@ -1,8 +1,8 @@
-/* miguno.h */
+/* helloc.h */
 
 // Inclusion guard
-#ifndef MIGUNO_H
-#define MIGUNO_H
+#ifndef HELLOC_H
+#define HELLOC_H
 
 // Long, prefixed names for the library API
 
@@ -15,13 +15,13 @@
  * @param a The first int
  * @param b The second int
  */
-int miguno_sum(int a, int b);
+int helloc_sum(int a, int b);
 
 // Short names for the library API
-#ifdef MIGUNO_SHORT_NAMES
+#ifdef HELLOC_SHORT_NAMES
 // NOLINTBEGIN(readability-identifier-naming)
-#define sum miguno_sum
+#define sum helloc_sum
 // NOLINTEND(readability-identifier-naming)
 #endif
 
-#endif // MIGUNO_H
+#endif // HELLOC_H

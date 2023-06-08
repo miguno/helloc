@@ -3,9 +3,9 @@ add_executable(unity_testsuite unity_tests.c)
 
 target_include_directories(unity_testsuite
     PRIVATE
-        "${CMAKE_SOURCE_DIR}/src" # to find `miguno.h`; alternatively, "../src"
+        "${CMAKE_SOURCE_DIR}/src" # to find `helloc.h`; alternatively, "../src"
 )
-target_link_libraries(unity_testsuite unity Miguno)
+target_link_libraries(unity_testsuite unity Helloc)
 
 add_test(
   NAME

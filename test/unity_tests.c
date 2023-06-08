@@ -7,11 +7,11 @@
 
 #include <limits.h>
 
-// Allows us to use shortened names of functions in miguno.h in addition to
+// Allows us to use shortened names of functions in helloc.h in addition to
 // their long, prefixed names.
-#define MIGUNO_SHORT_NAMES
+#define HELLOC_SHORT_NAMES
 
-#include "miguno.h"
+#include "helloc.h"
 #include "unity.h"
 
 void setUp(void) {
@@ -35,8 +35,8 @@ void pointer_equality(void) {
 }
 
 void verify_sum(void) {
-  // Because we defined the macro MIGUNO_SHORT_NAMES before including miguno.h,
-  // we can now use the shortened name of `miguno_sum()`.
+  // Because we defined the macro HELLOC_SHORT_NAMES before including helloc.h,
+  // we can now use the shortened name of `helloc()`.
   TEST_ASSERT_EQUAL(4, sum(2, 2));
   TEST_ASSERT_EQUAL(0, sum(-2, 2));
 

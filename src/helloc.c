@@ -1,10 +1,10 @@
-/* miguno.c */
+/* helloc.c */
 
-#include "miguno.h"
+#include "helloc.h"
 
 #include <limits.h>
 
-int miguno_sum(const int a, const int b) {
+int helloc_sum(const int a, const int b) {
   if (a >= 0) {
     if (b > INT_MAX - a) {
       // Integer overflow
