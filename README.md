@@ -20,7 +20,8 @@ Maybe you find this useful, too. Enjoy!
 * This project implements a [main.c](src/main.c) application that uses our toy
   library [helloc.h](src/helloc.h), implemented in [helloc.c](src/helloc.c).
     * For starters there are also additional [examples](examples/).
-* C language standard is [C17](https://en.cppreference.com/w/c/17), see
+* C language standard is [C17](https://en.cppreference.com/w/c/17)
+  (a bug-fix version of the C11 standard), see
   `CMAKE_C_STANDARD` in [CMakeLists.txt](CMakeLists.txt).
 * Uses [clang](https://clang.llvm.org/) as the pre-configured compiler (see
   [.env](.env)), along with tools such as clang-format and clang-tidy.
