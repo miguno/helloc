@@ -18,3 +18,5 @@ int helloc_sum(const int a, const int b) {
   }
   return a + b;
 }
+
+const char *helloc_library_version(void) { return HELLOC_VERSION; }

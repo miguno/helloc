@@ -17,6 +17,14 @@
  */
 int helloc_sum(int a, int b);
 
+/**
+ * Returns the version of the linked helloc library, with a version postfix
+ * for dev versions.
+ *
+ * Example return value: "0.1.0-0"
+ */
+const char *helloc_library_version(void);
+
 // Short names for the library API
 #ifdef HELLOC_SHORT_NAMES
 // NOLINTBEGIN(readability-identifier-naming)
