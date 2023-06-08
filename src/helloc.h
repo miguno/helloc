@@ -7,7 +7,7 @@
 // Long, prefixed names for the library API
 
 /**
- * Compute the sum of two ints.
+ * Computes the sum of two ints.
  *
  * Integer overflows result in a return value of INT_MAX.
  * Integer underflows result in a return value of INT_MIN.
