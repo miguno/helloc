@@ -1,7 +1,7 @@
 # Load environment variables from `.env` file.
 set dotenv-load
 
-project_version := `./version.sh`
+project_version := `./tools/version.sh`
 project_dir := justfile_directory()
 build_dir := project_dir + "/build"
 build_debug_dir := project_dir + "/cmake-build-debug"
@@ -146,7 +146,7 @@ coverage:
     @echo "gcc is {{gcc}}"
     (cd {{project_dir}} && \
     CC={{gcc}} GCOV={{gcov}} \
-    ./coverage.sh)
+    ./tools/coverage.sh)
 
 # generated documentation (requires Doxygen)
 docs:
@@ -163,7 +163,7 @@ version:
 # create a docker image (requires Docker)
 docker-image-create:
     @echo "Creating a docker image ..."
-    ./create_image.sh
+    ./tools/docker/create_image.sh
 
 # size of the docker image (requires Docker)
 docker-image-size:
@@ -172,4 +172,4 @@ docker-image-size:
 # run the docker image (requires Docker)
 docker-image-run:
     @echo "Running container from docker image ..."
-    ./start_container.sh
+    ./tools/docker/start_container.sh

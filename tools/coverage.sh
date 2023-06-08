@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2155
 #
 # Requires gcc and lcov installed, and the CC environment variable set to the
 # gcc binary.
 #
 # * macOS: `brew install gcc lcov`
 # * Debian/Ubuntu: `sudo apt-get install -y build-essential lcov`
+
+declare -r SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+declare -r PROJECT_DIR=$(realpath "$SCRIPT_DIR/..")
 
 # Define bash set builtins to ensure safer execution of this script.
 set -Eeuo pipefail
@@ -15,7 +19,8 @@ declare -r GCOV="${GCOV:-gcov-13}"
 declare -r LCOV="${LCOV:-lcov}"
 
 declare -r SAVED_DIR=$(pwd)
-declare -r PROJECT_DIR=$(echo $(cd $(dirname $0); pwd))
+cd "$PROJECT_DIR"
+
 # Use a separate build directory to not mess up our normal development workspace
 declare -r BUILD_DIR="build-for-coverage/" # must match "binaryDir" in CMakePresets.json
 declare -r TEST_DIR="test/"

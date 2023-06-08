@@ -17,4 +17,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Build the Docker image
-      run: ./create_image.sh
+      run: ./tools/docker/create_image.sh

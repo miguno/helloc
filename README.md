@@ -52,7 +52,7 @@ Maybe you find this useful, too. Enjoy!
 * Uses [Doxygen](https://www.doxygen.nl/) for code documentation, see
   [Doxyfile](Doxyfile).
 * Code coverage reports can be generated locally, see
-  [coverage.sh](coverage.sh) and the section below.
+  [coverage.sh](tools/coverage.sh) and the section below.
 * Create and run Docker images for your C app.
   The [Docker build](Dockerfile) uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
@@ -128,11 +128,12 @@ Some further interesting settings:
 
 ## Code Coverage Reports with gcov/lcov
 
-> Try `just coverage` first before manually running [coverage.sh](coverage.sh).
+> Try `just coverage` first before manually running
+> [coverage.sh](tools/coverage.sh).
 > Most likely, it will work out-of-the-box for you.
 
-You can generate code coverage reports with [coverage.sh](coverage.sh).  Even
-though this project defaults to `clang` as the compiler, generating code
+You can generate code coverage reports with [coverage.sh](tools/coverage.sh).
+Even though this project defaults to `clang` as the compiler, generating code
 coverage requires the `gcc` toolchain as well as
 [lcov](https://github.com/linux-test-project/lcov).
 
@@ -150,13 +151,13 @@ Then run the coverage script with the `CC` environment variable set to your
 GCC installation:
 
 ```shell
-$ CC=gcc-13 ./coverage.sh
+$ CC=gcc-13 ./tools/coverage.sh
 ```
 
 Example output:
 
 ```
-$ ./coverage.sh
+$ ./tools/coverage.sh
 ...
 Generating output.
 Processing file src/helloc.c
@@ -199,7 +200,7 @@ Requires [Docker](https://www.docker.com/) to be installed locally.
 **Step 1:** Create the Docker image.
 
 ```shell
-# Alternatively, run `./create_image.sh`.
+# Alternatively, run `./tools/docker/create_image.sh`.
 $ just docker-image-create
 ```
 
@@ -215,7 +216,7 @@ miguno/helloc   latest    0e55e8877994   31 minutes ago   8.45MB
 **Step 2:** Run a container for the image.
 
 ```shell
-# Alternatively, run `./start_container.sh`.
+# Alternatively, run `./tools/docker/start_container.sh`.
 $ just docker-image-run
 ```
 
