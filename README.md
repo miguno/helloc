@@ -121,14 +121,14 @@ The code style is defined in [.clang-format](.clang-format).  See
 [Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)
 for details.
 
-For example, if you want to indent your code with 4 spaces instead of the
-default 2 spaces for the "Google" style, update [.clang-format](.clang-format)
+For example, if you want to indent your code with 2 spaces instead of the
+default 4 spaces for the "LLVM" style, update [.clang-format](.clang-format)
 as follows:
 
     # .clang-format
-    BasedOnStyle: Google
-    IndentWidth: 4
-    TabWidth: 4
+    BasedOnStyle: LLVM
+    IndentWidth: 2
+    TabWidth: 2
 
 Some further interesting settings:
 

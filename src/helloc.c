@@ -5,18 +5,18 @@
 #include <limits.h>
 
 int helloc_sum(const int a, const int b) {
-  if (a >= 0) {
-    if (b > INT_MAX - a) {
-      // Integer overflow
-      return INT_MAX;
+    if (a >= 0) {
+        if (b > INT_MAX - a) {
+            // Integer overflow
+            return INT_MAX;
+        }
+        return a + b;
+    }
+    if (b < INT_MIN - a) {
+        // Integer underflow
+        return INT_MIN;
     }
     return a + b;
-  }
-  if (b < INT_MIN - a) {
-    // Integer underflow
-    return INT_MIN;
-  }
-  return a + b;
 }
 
 const char *helloc_library_version(void) { return HELLOC_VERSION; }
