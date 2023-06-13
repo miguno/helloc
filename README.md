@@ -38,7 +38,7 @@ Maybe you find this useful, too. Enjoy!
 * Our toy library is tested with [Unity](https://github.com/ThrowTheSwitch/Unity)
   ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity), see
   [unity_tests.c](test/unity_tests.c).
-* Detect memory leaks, undefined behavior, and more with tools such as
+* Detects memory leaks, undefined behavior, and more with tools such as
   [AddressSanitizer (ASAN)](https://clang.llvm.org/docs/AddressSanitizer.html)
   [UndefinedBehaviorSanitizer (UBSan)](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html),
   and [valgrind](https://valgrind.org/).
