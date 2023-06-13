@@ -49,7 +49,6 @@ void verify_sum(void) {
     TEST_ASSERT_EQUAL(INT_MIN, sum(INT_MIN, INT_MIN));
 }
 
-// not needed when using generate_test_runner.rb
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(string_equality);
