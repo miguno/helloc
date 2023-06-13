@@ -27,9 +27,9 @@ default:
 
 # build for Debug
 build:
-    (cd {{project_dir}} && mkdir -p {{build_dir}} && \
+    mkdir -p {{build_dir}} && \
     CMAKE_BUILD_PARALLEL_LEVEL={{num_build_workers}} \
-    cmake --build {{build_dir}} --config Debug --target all)
+    cmake --build {{build_dir}} --config Debug --target all
 
 # print clang details, including environment and architecture
 clang-details:
@@ -57,9 +57,7 @@ configure:
     # Set compiler with CC to 'clang' to ensure that macOS does not pick up
     # the default XCode clang version, which has a `cc` symlink or hardcopy,
     # which cmake prefers.
-    (cd {{project_dir}} && \
-    CC="$CC" \
-    cmake -B {{build_dir}} -S . -G "Ninja Multi-Config")
+    CC="$CC" cmake -B {{build_dir}} -S . -G "Ninja Multi-Config"
 
 [private]
 configure-valgrind:
@@ -69,9 +67,7 @@ configure-valgrind:
 coverage:
     @echo "Generating code coverage report ..."
     @echo "gcc is {{gcc}}"
-    (cd {{project_dir}} && \
-    CC={{gcc}} GCOV={{gcov}} \
-    ./tools/coverage.sh)
+    CC={{gcc}} GCOV={{gcov}} ./tools/coverage.sh
 
 # test with ctest (requires adding tests via `add_test()` in CMakeLists.txt)
 ctest *args: build
