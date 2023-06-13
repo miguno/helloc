@@ -38,6 +38,11 @@ Maybe you find this useful, too. Enjoy!
 * Our toy library is tested with [Unity](https://github.com/ThrowTheSwitch/Unity)
   ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity), see
   [unity_tests.c](test/unity_tests.c).
+* Detect memory leaks, undefined behavior, and more with tools such as
+  [AddressSanitizer (ASAN)](https://clang.llvm.org/docs/AddressSanitizer.html)
+  [UndefinedBehaviorSanitizer (UBSan)](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html),
+  and [valgrind](https://valgrind.org/).
+  See the [valgrind.yml](.github/workflows/valgrind.yml).
 * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
   for running common commands conveniently, see [justfile](justfile). Think:
   a modern version of `make`, written in Rust.
