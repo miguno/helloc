@@ -141,9 +141,9 @@ run-release binary *args: release
 
 # print system information such as OS and architecture
 system-info:
-  @echo "architecture: {{arch()}}"
-  @echo "os: {{os()}}"
-  @echo "os family: {{os_family()}}"
+    @echo "architecture: {{arch()}}"
+    @echo "os: {{os()}}"
+    @echo "os family: {{os_family()}}"
 
 # test all
 test: test-unity
