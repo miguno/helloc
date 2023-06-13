@@ -41,7 +41,7 @@ Maybe you find this useful, too. Enjoy!
 * Detects memory leaks, undefined behavior, and more with tools such as
   [AddressSanitizer (ASAN)](https://clang.llvm.org/docs/AddressSanitizer.html)
   [UndefinedBehaviorSanitizer (UBSan)](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html),
-  and [valgrind](https://valgrind.org/).
+  and [valgrind](https://valgrind.org/) (valgrind is only supported on Linux).
   See the [valgrind.yml](.github/workflows/valgrind.yml).
 * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
   for running common commands conveniently, see [justfile](justfile). Think:

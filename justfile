@@ -170,8 +170,8 @@ tidy-config:
 tidy-verify-config:
     clang-tidy --verify-config
 
-# test a debug binary with valgrind (requires valgrind; supported on Unix/Linux but not macOS)
-[unix]
+# test a debug binary with valgrind (requires valgrind; supported on Linux, but e.g., not on macOS)
+[linux]
 valgrind binary: clean configure-valgrind build
     valgrind -v --error-exitcode=1 --track-origins=yes --leak-check=full {{src_dir}}/Debug/{{binary}}
 
