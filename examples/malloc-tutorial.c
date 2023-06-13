@@ -10,9 +10,8 @@
 /**
  * @file malloc-tutorial.c
  *
- * @brief DIY-implementation of malloc(), realloc(), calloc(), and free() for
- * educational purposes.  Heavily inspired by
- * https://danluu.com/malloc-tutorial/
+ * @brief DIY-implementation of malloc() and free() for educational purposes.
+ * Heavily inspired by https://danluu.com/malloc-tutorial/
  *
  * WARNING:
  * This code is for educational purposes only.  DO NOT use it in production!
