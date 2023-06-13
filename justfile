@@ -72,7 +72,7 @@ coverage:
 # test with ctest (requires adding tests via `add_test()` in CMakeLists.txt)
 ctest *args: build
     @echo "Running tests via ctest ..."
-    (cd build && ninja test {{args}})
+    (cd {{build_dir}} && ninja test {{args}})
 
 # clean, compile, build for Debug
 do: clean configure build
