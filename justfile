@@ -25,15 +25,11 @@ num_build_workers := env_var_or_default("CMAKE_BUILD_PARALLEL_LEVEL", "12")
 default:
     @just --list --justfile {{justfile()}}
 
-# evaluate and print all just variables
-just-vars:
-    @just --evaluate
-
-# print system information such as OS and architecture
-system-info:
-  @echo "architecture: {{arch()}}"
-  @echo "os: {{os()}}"
-  @echo "os family: {{os_family()}}"
+# build for Debug
+build:
+    (cd {{project_dir}} && mkdir -p {{build_dir}} && \
+    CMAKE_BUILD_PARALLEL_LEVEL={{num_build_workers}} \
+    cmake --build {{build_dir}} --config Debug --target all)
 
 # print clang details, including environment and architecture
 clang-details:
@@ -65,33 +61,43 @@ configure:
     CC="$CC" \
     cmake -B {{build_dir}} -S . -G "Ninja Multi-Config")
 
-# build for Debug
-build:
-    (cd {{project_dir}} && mkdir -p {{build_dir}} && \
-    CMAKE_BUILD_PARALLEL_LEVEL={{num_build_workers}} \
-    cmake --build {{build_dir}} --config Debug --target all)
-
-# build for Release
-release:
+# generate code coverage report
+coverage:
+    @echo "Generating code coverage report ..."
+    @echo "gcc is {{gcc}}"
     (cd {{project_dir}} && \
-    CMAKE_BUILD_PARALLEL_LEVEL={{num_build_workers}} \
-    cmake --build {{build_dir}} --config Release --target all)
+    CC={{gcc}} GCOV={{gcov}} \
+    ./tools/coverage.sh)
+
+# test with ctest (requires adding tests via `add_test()` in CMakeLists.txt)
+ctest *args: build
+    @echo "Running tests via ctest ..."
+    (cd build && ninja test {{args}})
 
 # clean, compile, build for Debug
 do: clean configure build
 
-# run a Debug binary
-run binary *args: build
-    # Enabling memory leak checking with Address Sanitizer (ASan) including
-    # Leak Sanitizer
-    ASAN_OPTIONS=detect_leaks=1 \
-    # Suppress known false positives of ASan
-    LSAN_OPTIONS=suppressions=lsan.supp \
-    {{src_dir}}/Debug/{{binary}} {{args}}
+# create a docker image (requires Docker)
+docker-image-create:
+    @echo "Creating a docker image ..."
+    ./tools/docker/create_image.sh
 
-# run a Release binary
-run-release binary *args: release
-    {{src_dir}}/Release/{{binary}} {{args}}
+# size of the docker image (requires Docker)
+docker-image-size:
+    docker images $DOCKER_IMAGE_NAME
+
+# run the docker image (requires Docker)
+docker-image-run:
+    @echo "Running container from docker image ..."
+    ./tools/docker/start_container.sh
+
+# generated documentation (requires Doxygen)
+docs:
+    rm -rf {{docs_dir}} && \
+    doxygen Doxyfile && \
+    echo "---------------------------------------------------------------" && \
+    echo "HTML docs are at {{docs_dir}}/html/index.html" && \
+    echo "---------------------------------------------------------------"
 
 # run a Debug binary from the examples
 examples-run binary *args: build
@@ -110,6 +116,43 @@ examples-run-release binary *args: release
 format:
     @find examples src test \( -name "*.c" -o -name "*.h" \) -exec clang-format -i {} \;
 
+# evaluate and print all just variables
+just-vars:
+    @just --evaluate
+
+# build for Release
+release:
+    (cd {{project_dir}} && \
+    CMAKE_BUILD_PARALLEL_LEVEL={{num_build_workers}} \
+    cmake --build {{build_dir}} --config Release --target all)
+
+# run a Debug binary
+run binary *args: build
+    # Enabling memory leak checking with Address Sanitizer (ASan) including
+    # Leak Sanitizer
+    ASAN_OPTIONS=detect_leaks=1 \
+    # Suppress known false positives of ASan
+    LSAN_OPTIONS=suppressions=lsan.supp \
+    {{src_dir}}/Debug/{{binary}} {{args}}
+
+# run a Release binary
+run-release binary *args: release
+    {{src_dir}}/Release/{{binary}} {{args}}
+
+# print system information such as OS and architecture
+system-info:
+  @echo "architecture: {{arch()}}"
+  @echo "os: {{os()}}"
+  @echo "os family: {{os_family()}}"
+
+# test all
+test: test-unity
+
+# test with unity
+test-unity *args: build
+    @echo "Running unity tests ..."
+    {{test_dir}}/Debug/unity_testsuite {{args}}
+
 # run clang-tidy (see .clang-tidy)
 tidy:
     clang-tidy --version
@@ -127,49 +170,6 @@ tidy-config:
 tidy-verify-config:
     clang-tidy --verify-config
 
-# test all
-test: test-unity
-
-# test with unity
-test-unity *args: build
-    @echo "Running unity tests ..."
-    {{test_dir}}/Debug/unity_testsuite {{args}}
-
-# test with ctest (requires adding tests via `add_test()` in CMakeLists.txt)
-ctest *args: build
-    @echo "Running tests via ctest ..."
-    (cd build && ninja test {{args}})
-
-# generate code coverage report
-coverage:
-    @echo "Generating code coverage report ..."
-    @echo "gcc is {{gcc}}"
-    (cd {{project_dir}} && \
-    CC={{gcc}} GCOV={{gcov}} \
-    ./tools/coverage.sh)
-
-# generated documentation (requires Doxygen)
-docs:
-    rm -rf {{docs_dir}} && \
-    doxygen Doxyfile && \
-    echo "---------------------------------------------------------------" && \
-    echo "HTML docs are at {{docs_dir}}/html/index.html" && \
-    echo "---------------------------------------------------------------"
-
 # show project version
 version:
     @echo "{{project_version}}"
-
-# create a docker image (requires Docker)
-docker-image-create:
-    @echo "Creating a docker image ..."
-    ./tools/docker/create_image.sh
-
-# size of the docker image (requires Docker)
-docker-image-size:
-    docker images $DOCKER_IMAGE_NAME
-
-# run the docker image (requires Docker)
-docker-image-run:
-    @echo "Running container from docker image ..."
-    ./tools/docker/start_container.sh
