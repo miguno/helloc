@@ -61,6 +61,10 @@ configure:
     CC="$CC" \
     cmake -B {{build_dir}} -S . -G "Ninja Multi-Config")
 
+[private]
+configure-valgrind:
+    VALGRIND=1 CC="$CC" cmake -B {{build_dir}} -S . -G "Ninja Multi-Config"
+
 # generate code coverage report
 coverage:
     @echo "Generating code coverage report ..."
@@ -169,6 +173,11 @@ tidy-config:
 # verify configuration of clang-tidy
 tidy-verify-config:
     clang-tidy --verify-config
+
+# test a debug binary with valgrind (requires valgrind; supported on Unix/Linux but not macOS)
+[unix]
+valgrind binary: clean configure-valgrind build
+    valgrind -v --error-exitcode=1 --track-origins=yes --leak-check=full {{src_dir}}/Debug/{{binary}}
 
 # show project version
 version:

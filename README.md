@@ -90,6 +90,7 @@ $ just test
     $ sudo apt-get install -y clang clang-tidy cmake lldb ninja-build
     $ sudo apt-get install -y build-essential lcov # optional, for generating coverage reports
     $ sudo apt-get -y install doxygen # optional, for generating documentation
+    $ sudo apt-get -y install valgrind # optional, for detecting errors with valgrind
     ```
 
 ## Dependency management for source code

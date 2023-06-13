@@ -71,14 +71,6 @@ include(AddIfFlagCompiles)
 # * `-fsanitize=undefined`: for UBSan https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
 # * `-fno-omit-frame-pointer`: nicer stack traces in error messages
 #
-# Valgrind users:
-# 1. Valgrind is incompatible with ASan.  Set ENABLE_ASAN to OFF when you want
-#    to use valgrind.
-# 2. Valgrind does not properly read DWARF5 as used by clang 14.  Until the bug
-#    is fixed, you must add `-gdwarf-4` to CMAKE_C_FLAGS_* to make its output
-#    compatible with valgrind.
-#    https://bugs.kde.org/show_bug.cgi?id=452758
-#
 # For Debug builds, see generated `build/build-Debug.ninja`   & `build/CMakeFiles/impl-Debug.ninja`
 add_if_flag_compiles(-O0 -g3                    CMAKE_C_FLAGS_DEBUG)
 # For Release builds, see generated `build/build-Release.ninja` & `build/CMakeFiles/impl-Release.ninja`
@@ -108,6 +100,19 @@ else()
   option(ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" OFF)
 endif()
 
+if("$ENV{VALGRIND}" STREQUAL "1")
+  # Valgrind is incompatible with ASan.
+  MESSAGE(STATUS "Disabling ASan because you want to run valgrind against the binaries.")
+  set(ENABLE_ASAN OFF)
+  # Older versions of valgrind do not properly read DWARF5 as used by clang 14.
+  # Unless you are using valgrind 3.20.0+, you must add `-gdwarf-4` to
+  # CMAKE_C_FLAGS_* to make clang's output compatible with valgrind.
+  # https://bugs.kde.org/show_bug.cgi?id=452758
+  # TODO: Only set this when using clang, but not when using gcc
+  MESSAGE(STATUS "Configuring clang to output DWARF4 instead of DWARF5 to make it compatible with valgrind (see https://bugs.kde.org/show_bug.cgi?id=452758)")
+  add_if_flag_compiles(-gdwarf-4 CMAKE_C_FLAGS_DEBUG)
+endif()
+
 # https://clang.llvm.org/docs/AddressSanitizer.html
 if (ENABLE_ASAN)
   # IMPORTANT: ASan is apparently only compatible with `-O0`, so we enable it only for our Debug builds.
@@ -129,6 +134,10 @@ elseif (ENABLE_UBSAN AND CMAKE_C_COMPILER_ID MATCHES "GNU")
     -fsanitize=undefined,float-divide-by-zero
     CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE)
 endif()
+
+if("$ENV{VALGRIND}" STREQUAL "1")
+endif()
+
 
 # Compile options used across Debug/Release/... builds are defined here.
 #
