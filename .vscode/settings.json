@@ -10,5 +10,12 @@
   // CMakeLists.txt over CMakePresets.json.
   // https://github.com/microsoft/vscode-cmake-tools/blob/HEAD/docs/cmake-presets.md
   "cmake.useCMakePresets": "never",
-  "clang-tidy.buildPath": "build/"
+  "clang-tidy.buildPath": "build/",
+  "files.associations": {
+    "*.script": "lua",
+    "*.lua": "lua",
+    "*.h": "c",
+    "cstring": "c",
+    "locale": "c"
+  }
 }
