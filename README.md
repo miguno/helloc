@@ -1,8 +1,9 @@
 # helloc
 [![helloc GitHub repository](https://img.shields.io/github/stars/miguno/helloc)](https://github.com/miguno/helloc)
 [![CI workflow status](https://github.com/miguno/helloc/actions/workflows/ci.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/ci.yml)
-[![Docker workflow status](https://github.com/miguno/helloc/actions/workflows/docker-image.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/docker-image.yml)
 [![Code Style Guide Check workflow status](https://github.com/miguno/helloc/actions/workflows/clang-format-check.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/clang-format-check.yml)
+[![Valgrind workflow status](https://github.com/miguno/helloc/actions/workflows/valgrind.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/valgrind.yml)
+[![Docker workflow status](https://github.com/miguno/helloc/actions/workflows/docker-image.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/docker-image.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 My template project for writing in the C programming language in 2023.
