@@ -21,7 +21,7 @@ gcov := if os() == "macos" { env_var('COVERAGE_GCOV_MACOS') } else { env_var('CO
 # https://cmake.org/cmake/help/latest/envvar/CMAKE_BUILD_PARALLEL_LEVEL.html
 num_build_workers := env_var_or_default("CMAKE_BUILD_PARALLEL_LEVEL", "12")
 
-# print available targets
+# print available just recipes
 default:
     @just --list --justfile {{justfile()}}
 
