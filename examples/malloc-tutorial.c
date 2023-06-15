@@ -188,7 +188,6 @@ int main(void) {
         // Examples:
         //  ptr1[4] = 12345;
         //  ptr1[8] = 67890;
-
         printf("===============================================================\n");
         printf("ptr1 data:\n");
         printf("---------------------------------------------------------------\n");
@@ -224,6 +223,6 @@ int main(void) {
         my_free(ptr1);
         my_free(ptr2);
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
 // NOLINTEND(cppcoreguidelines-avoid-magic-numbers)
