@@ -11,3 +11,5 @@ if (UNIX)
   #
   target_compile_definitions(malloc-tutorial PRIVATE _GNU_SOURCE)
 endif()
+
+add_executable (uppercase uppercase.c)
