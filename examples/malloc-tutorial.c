@@ -215,13 +215,16 @@ int main(void) {
             if (s) {
                 printf("%zu: %s\n", i, s);
                 free(s);
+                s = NULL;
             }
             current = current->next;
             ++i;
         }
 
         my_free(ptr1);
+        ptr1 = NULL;
         my_free(ptr2);
+        ptr2 = NULL;
     }
     return EXIT_SUCCESS;
 }
