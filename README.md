@@ -23,48 +23,59 @@ Maybe you find this useful, too. Enjoy!
 * C language standard is [C17](https://en.cppreference.com/w/c/17)
   (a bug-fix version of the C11 standard), see
   `CMAKE_C_STANDARD` in [CMakeLists.txt](CMakeLists.txt).
-* Uses [clang](https://clang.llvm.org/) as the pre-configured compiler (see
-  [.env](.env)), along with tools such as
-  [clang-format](https://clang.llvm.org/docs/ClangFormat.html) and
-  [clang-tidy](https://clang.llvm.org/extra/clang-tidy/).
+* Compiler:
+    * Uses [clang](https://clang.llvm.org/) as the pre-configured compiler (see
+      [.env](.env)), along with tools such as
+      [clang-format](https://clang.llvm.org/docs/ClangFormat.html) and
+      [clang-tidy](https://clang.llvm.org/extra/clang-tidy/).
     * You can also use [gcc](https://gcc.gnu.org/) as the compiler.  Simply set
       the environment variable `CC` accordingly, e.g. in [.env](.env) or
       in the shell environment with `CC=gcc` or `CC=gcc-13`.
 * Build and dependency management:
-  [cmake](https://github.com/Kitware/CMake) with
-  [ninja](https://github.com/ninja-build/ninja) ![](https://img.shields.io/github/stars/ninja-build/ninja),
-  using a [multi-config generator](https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html)
-  setup [for ninja](https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html).
-* Our toy library is tested with [Unity](https://github.com/ThrowTheSwitch/Unity)
-  ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity), see
-  [unity_tests.c](test/unity_tests.c).
-* Detects memory leaks, undefined behavior, and more with tools such as
-  [AddressSanitizer (ASAN)](https://clang.llvm.org/docs/AddressSanitizer.html)
-  [UndefinedBehaviorSanitizer (UBSan)](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html),
-  and [valgrind](https://valgrind.org/) (valgrind is only supported on Linux).
-  See the [valgrind.yml](.github/workflows/valgrind.yml).
-* Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
-  for running common commands conveniently, see [justfile](justfile). Think:
-  a modern version of `make`, written in Rust.
-* [GitHub Action workflows](https://github.com/miguno/helloc/actions)
-  for CI/CD support. See [workflow definitions](.github/workflows/).
-* Code style guide uses
-  [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
-  and is configured in [.clang-format](.clang-format).  The workflow definition
-  at [clang-format-check.yml](.github/workflows/clang-format-check.yml) checks
-  (but does not enforce) this project's formatting conventions for source code
-  automatically when code is pushed to the repository or when a pull request
-  is created.
-* Code linting with [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) as
-  configured in [.clang-tidy](.clang-tidy).
-* Uses [Doxygen](https://www.doxygen.nl/) for code documentation, see
-  [Doxyfile](Doxyfile).
-* Code coverage reports can be generated locally, see
-  [coverage.sh](tools/coverage.sh) and the section below.
-* Create and run Docker images for your C app.
-  The [Docker build](Dockerfile) uses a
-  [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
-  to minimize the size of the generated Docker image, which is only 9MB.
+    * [cmake](https://github.com/Kitware/CMake) with
+      [ninja](https://github.com/ninja-build/ninja)
+      ![](https://img.shields.io/github/stars/ninja-build/ninja),
+      using a
+      [multi-config generator](https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html)
+      setup [for ninja](https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html).
+* Testing:
+    * Our toy library is tested with
+      [Unity](https://github.com/ThrowTheSwitch/Unity)
+      ![](https://img.shields.io/github/stars/ThrowTheSwitch/Unity), see
+      [unity_tests.c](test/unity_tests.c).
+    * Detects memory leaks, undefined behavior, and more with tools such as
+      [AddressSanitizer (ASAN)](https://clang.llvm.org/docs/AddressSanitizer.html)
+      [UndefinedBehaviorSanitizer (UBSan)](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html),
+      and [valgrind](https://valgrind.org/) (valgrind is only supported on Linux).
+      See the [valgrind.yml](.github/workflows/valgrind.yml).
+    * Code coverage reports can be generated locally, see
+      [coverage.sh](tools/coverage.sh) and the section below.
+* Continuous Integration:
+    * [GitHub Action workflows](https://github.com/miguno/helloc/actions)
+      for CI/CD support. See [workflow definitions](.github/workflows/).
+* Code style:
+    * Uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
+      and is configured in [.clang-format](.clang-format).  The GitHub Action
+      definition at
+      [clang-format-check.yml](.github/workflows/clang-format-check.yml) checks
+      (but does not enforce) this project's formatting conventions for source
+      code automatically when code is pushed to the repository or when a pull
+      request is created.
+* Code quality:
+    * Code linting with [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) as
+      configured in [.clang-tidy](.clang-tidy).
+* Documenting the project:
+    * Uses [Doxygen](https://www.doxygen.nl/) for code documentation, see
+      [Doxyfile](Doxyfile).
+* Docker support:
+    * Create and run Docker images for your C app.
+      The [Docker build](Dockerfile) uses a
+      [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
+      to minimize the size of the generated Docker image, which is only 9MB.
+* Tooling:
+    * Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
+      for running common commands conveniently, see [justfile](justfile). Think:
+      a modern version of `make`, written in Rust.
 
 ## Usage
 
