@@ -47,7 +47,7 @@ Maybe you find this useful, too. Enjoy!
       [AddressSanitizer (ASAN)](https://clang.llvm.org/docs/AddressSanitizer.html)
       [UndefinedBehaviorSanitizer (UBSan)](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html),
       and [valgrind](https://valgrind.org/) (valgrind is only supported on Linux).
-      See the [valgrind.yml](.github/workflows/valgrind.yml).
+      See [valgrind.yml](.github/workflows/valgrind.yml).
     * Code coverage reports can be generated locally, see
       [coverage.sh](tools/coverage.sh) and the section below.
 * Continuous Integration:
@@ -100,12 +100,12 @@ $ just test
     # macOS
     $ brew install cmake llvm ninja
     $ brew install gcc lcov # optional, for generating coverage reports
-    $ brew install doxygen # optional, for generating documentation
+    $ brew install doxygen  # optional, for generating documentation
 
     # Debian/Ubuntu
     $ sudo apt-get install -y clang clang-tidy cmake lldb ninja-build
     $ sudo apt-get install -y build-essential lcov # optional, for generating coverage reports
-    $ sudo apt-get install -y doxygen # optional, for generating documentation
+    $ sudo apt-get install -y doxygen  # optional, for generating documentation
     $ sudo apt-get install -y valgrind # optional, for detecting errors with valgrind
     ```
 
