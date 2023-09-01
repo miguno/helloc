@@ -14,5 +14,5 @@ endif()
 
 add_executable (uppercase uppercase.c)
 
-add_executable (single_header_demo single_header_demo.c)
-target_link_libraries(single_header_demo PRIVATE zpl)
+add_executable (single-header-demo single-header-demo.c)
+target_link_libraries(single-header-demo PRIVATE zpl)
