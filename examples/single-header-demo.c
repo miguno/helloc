@@ -1,9 +1,8 @@
-/* gui.c */
+/* single-header-demo.c */
+
+// This example uses https://github.com/zpl-c/zpl to demonstrate working with header-only libraries.
 
 #include <stdio.h>
-
-// This example uses https://github.com/zpl-c/zpl to demonstrate working with
-// header-only libraries.
 
 #define ZPL_IMPLEMENTATION
 #define ZPL_NANO
