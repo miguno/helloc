@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-// This example uses http://nothings.org/stb_ds to demonstrate working with
+// This example uses https://github.com/zpl-c/zpl to demonstrate working with
 // header-only libraries.
 
 #define ZPL_IMPLEMENTATION
