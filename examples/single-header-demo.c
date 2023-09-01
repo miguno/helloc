@@ -17,8 +17,7 @@ void print_item(const zpl_list item) {
 // For more zpl examples, see
 // https://github.com/zpl-c/zpl/tree/master/code/apps/examples
 int main(void) {
-    // Showcase the use of zpl's list data structure, which is a doubly-linked
-    // list.
+    // Showcase the use of zpl's list data structure, which is a doubly-linked list.
     // Adapted from https://github.com/zpl-c/zpl/blob/7b27bd98a91722284cd1b75b3f4435cafd0dbd9e/code/apps/examples/list.c
     zpl_list *head = NULL;
     zpl_list *cursor = NULL;
