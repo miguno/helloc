@@ -129,11 +129,12 @@ release:
 
 # run a Debug binary
 run binary *args: build
+    #!/usr/bin/env bash
     # Enabling memory leak checking with Address Sanitizer (ASan) including
     # Leak Sanitizer
-    ASAN_OPTIONS=detect_leaks=1 \
+    ASAN_OPTIONS=detect_leaks=1
     # Suppress known false positives of ASan
-    LSAN_OPTIONS=suppressions=lsan.supp \
+    LSAN_OPTIONS=suppressions=lsan.supp
     {{src_dir}}/Debug/{{binary}} {{args}}
 
 # run a Release binary
