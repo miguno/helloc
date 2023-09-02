@@ -104,7 +104,6 @@ $ just test
 
     # Debian/Ubuntu
     $ sudo apt-get install -y clang clang-tidy cmake lldb ninja-build
-    $ sudo apt-get install -y libasound2-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxinerama-dev # dependencies for raylib examples
     $ sudo apt-get install -y build-essential lcov # optional, for generating coverage reports
     $ sudo apt-get install -y doxygen  # optional, for generating documentation
     $ sudo apt-get install -y valgrind # optional, for detecting errors with valgrind
@@ -121,7 +120,6 @@ Manually managed dependencies are stored under the [external/](external/)
 folder.  Example dependencies in this project are:
 
 * [Unity](https://github.com/ThrowTheSwitch/Unity), a test framework
-* [raylib](https://github.com/raysan5/raylib), a library for game development
 * [zpl](https://github.com/zpl-c/zpl), a C99 header-only library
 
 ### System-managed Dependencies

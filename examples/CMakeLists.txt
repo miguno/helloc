@@ -18,14 +18,3 @@ add_executable (uppercase uppercase.c)
 # (https://github.com/zpl-c/zpl)
 add_executable (single-header-demo single-header-demo.c)
 target_link_libraries(single-header-demo PRIVATE zpl)
-
-# A demo app that demonstrates how to build a simple game with raylib
-# (https://github.com/raysan5/raylib)
-add_executable (game game.c)
-target_link_libraries(game raylib)
-# Link appropriate frameworks when on macOS
-if (APPLE)
-  target_link_libraries(game "-framework IOKit")
-  target_link_libraries(game "-framework Cocoa")
-  target_link_libraries(game "-framework OpenGL")
-endif()

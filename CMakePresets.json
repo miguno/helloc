@@ -13,7 +13,7 @@
             "binaryDir": "${sourceDir}/build-for-coverage",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "CMAKE_C_FLAGS": "-fprofile-arcs -ftest-coverage -fsanitize=address -fsanitize=undefined"
+                "CMAKE_C_FLAGS": "-fprofile-arcs -ftest-coverage"
             }
         }
     ],

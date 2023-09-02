@@ -23,15 +23,6 @@ RUN apt-get update && apt-get install -y \
     lldb \
     ninja-build \
     zip \
-    # raylib dependencies
-    libasound2-dev \
-    libx11-dev \
-    libxrandr-dev \
-    libxi-dev \
-    libgl1-mesa-dev \
-    libglu1-mesa-dev \
-    libxcursor-dev \
-    libxinerama-dev \
     # purge apt data
     && rm -rf /var/lib/apt/lists/*
 
