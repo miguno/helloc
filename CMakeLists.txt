@@ -198,6 +198,31 @@ add_compile_definitions(UNITY_OUTPUT_COLOR)
 # External libraries we will link to (e.g., Unity)
 add_subdirectory(external)
 
+# Integrate raylib
+# https://github.com/raysan5/raylib/wiki/Working-with-CMake
+set(RAYLIB_VERSION 4.5.0)
+# Enable verbosity to troubleshoot any cmake-raylib integration issues.
+set(raylib_VERBOSE 1)
+# Try to find raylib locally
+find_package(raylib ${RAYLIB_VERSION} QUIET) # require at least the given version; REQUIRED or QUIET
+if (NOT raylib_FOUND)
+  # If there's none, fetch and build raylib
+  include(FetchContent)
+  FetchContent_Declare(
+    raylib
+    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+  )
+  FetchContent_GetProperties(raylib)
+  if (NOT raylib_POPULATED)
+      # We haven't downloaded raylib yet, so we do it now
+    set(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(raylib)
+    set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the included examples
+    add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
+  endif()
+endif()
+
 # Location of our source files
 add_subdirectory(src)
 add_subdirectory(examples)

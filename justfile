@@ -101,15 +101,50 @@ docs:
 
 # run a Debug binary from the examples
 examples-run binary *args: build
+    #!/usr/bin/env sh
+    # Setting LIBGL_ALWAYS_INDIRECT to 0 fixes the following error when running
+    # an application using raylib on Windows 11 in WSL 2:
+    #
+    #    WARNING: GLFW: Error: 65543 Description: GLX: Failed to create context: GLXBadFBConfig
+    #    WARNING: GLFW: Failed to initialize Window
+    #    FATAL: Failed to initialize Graphic Device
+    #
+    # Excursus:
+    # 1. Indirect rendering means that the GLX protocol will be used to transmit
+    #    OpenGL commands and the X server will do the real drawing.
+    # 2. Direct rendering means that application can access hardware directly
+    #    without communication with X first via mesa.  The direct rendering is
+    #    faster because it does not require a change of context into the X server
+    #    process.
+    #
+    # This workaround was discovered when running `glxinfo -B` while the
+    # DISPLAY env variable was set in WSL to point at a VcXsrv Windows X Server,
+    # as the command output showed that LIBGL_ALWAYS_INDIRECT was enabled.
+    #
+    # With this workaround, apps using raylib will work whether you are using
+    # the built-in WSL 2 graphics server (aka WSLg; you must set DISPLAY=":0";
+    # see https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
+    # or a third-party X server such as VcXsrv, where you must set DISPLAY
+    # to a different value than the default of `:0`:
+    #
+    #    $ export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+    #
+    # VcXsrv was run with `-wgl` (default) to enable the GLX extension to use
+    # the native Windows WGL interface for hardware-accelerated OpenGL.
+    #
+    # Further references about this issue:
+    # https://github.com/microsoft/WSL/issues/2855#issuecomment-613935650
+    LIBGL_ALWAYS_INDIRECT=0
     # Enabling memory leak checking with Address Sanitizer (ASan) including
     # Leak Sanitizer
-    ASAN_OPTIONS=detect_leaks=1 \
+    ASAN_OPTIONS=detect_leaks=1
     # Suppress known false positives of ASan
-    LSAN_OPTIONS=suppressions=lsan.supp \
+    LSAN_OPTIONS=suppressions=lsan.supp
     {{examples_dir}}/Debug/{{binary}} {{args}}
 
 # run a Release binary from the examples
 examples-run-release binary *args: release
+    LIBGL_ALWAYS_INDIRECT=0 \
     {{examples_dir}}/Release/{{binary}} {{args}}
 
 # format source code (.c and .h files) with clang-format

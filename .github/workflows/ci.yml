@@ -43,6 +43,10 @@ jobs:
         run: echo "PATH=$PATH:$(brew --prefix llvm)/bin" >> $GITHUB_ENV
         if: matrix.platform == 'macos-latest'
 
+      - name: Install raylib dependencies (Linux)
+        run: sudo apt-get install -y libasound2-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxinerama-dev
+        if: matrix.platform == 'ubuntu-latest'
+
       - name: Print PATH
         run: echo "$PATH"
 
