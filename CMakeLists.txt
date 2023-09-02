@@ -119,7 +119,7 @@ if (ENABLE_ASAN)
   #
   # NOTE: To enable leak detection on macOS, you must explicitly run your
   #       binary with `ASAN_OPTIONS=detect_leaks=1 my_binary ...`.
-  add_if_flag_compiles(-fsanitize=address CMAKE_C_FLAGS_DEBUG)
+  add_if_flag_compiles(-fsanitize=address CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE)
 endif()
 
 # https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
