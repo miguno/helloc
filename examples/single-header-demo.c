@@ -36,6 +36,9 @@ int main(void) {
     zpl_list d = {"Last"};
     cursor = zpl_list_add(cursor, &d);
 
+    // Print item at current cursor
+    zpl_printf("Current item: %s\n", cast(char *) cursor->ptr);
+
     // Print the full list
     for (zpl_list *item = head; item; item = item->next) {
         zpl_printf("%s -> ", cast(char *) item->ptr);
