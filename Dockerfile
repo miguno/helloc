@@ -5,7 +5,7 @@
 
 # Stage 1 (to create a "build" image)
 # ===================================
-FROM ubuntu:22.04 AS builder
+FROM ubuntu:22.04.2 AS builder
 WORKDIR /app
 COPY . .
 
