@@ -1,6 +1,26 @@
 # .clang-format
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 BasedOnStyle: LLVM
+# When using neovim/vim, the settings below should match your settings for:
+#
+# Lua:
+#   vim.opt.colorcolumn = 120
+#
+# Vimscript:
+#   set colorcolumn=120
+#
 ColumnLimit: 120
+# When using neovim/vim, the settings below should match your settings for:
+#
+# Lua:
+#   vim.opt_local.shiftwidth = 4
+#   vim.opt_local.softtabstop = 4
+#   vim.opt_local.tabstop = 4
+#
+# Vimscript:
+#   set shiftwidth=4
+#   set softtabstop=4
+#   set tabstop=4
+#
 IndentWidth: 4
 TabWidth: 4
