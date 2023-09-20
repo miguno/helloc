@@ -123,9 +123,8 @@ just-vars:
 
 # build for Release
 release:
-    (cd {{project_dir}} && \
     CMAKE_BUILD_PARALLEL_LEVEL={{num_build_workers}} \
-    cmake --build {{build_dir}} --config Release --target all)
+    cmake --build {{build_dir}} --config Release --target all
 
 # run a Debug binary
 run binary *args: build
