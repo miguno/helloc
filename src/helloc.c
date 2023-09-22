@@ -4,7 +4,7 @@
 
 #include <limits.h>
 
-int helloc_sum(const int a, const int b) {
+int helloc_sum(int a, int b) {
     if (a >= 0) {
         if (b > INT_MAX - a) {
             // Integer overflow
