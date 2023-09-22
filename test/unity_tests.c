@@ -36,7 +36,7 @@ void pointer_equality(void) {
 
 void verify_sum(void) {
     // Because we defined the macro HELLOC_SHORT_NAMES before including helloc.h,
-    // we can now use the shortened name of `helloc()`.
+    // we can now use the shortened name of `sum()`.
     TEST_ASSERT_EQUAL(4, sum(2, 2));
     TEST_ASSERT_EQUAL(0, sum(-2, 2));
 
