@@ -41,6 +41,7 @@ clangd-check filename:
 
 # clean
 clean:
+    rm -rf .cache/
     rm -rf {{build_dir}}
     rm -rf {{build_debug_dir}}
     rm -rf {{coverage_build_dir}}
