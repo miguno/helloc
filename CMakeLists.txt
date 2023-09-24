@@ -21,7 +21,7 @@ set(HELLOC_MAJOR_VERSION 0)
 set(HELLOC_MINOR_VERSION 1)
 set(HELLOC_PATCH_VERSION 0)
 set(HELLOC_DEV_ITERATION 0)
-# IMPORTANT: Versioning logic here must match the logic in version.sh!
+# IMPORTANT: Versioning logic here must match the logic in tools/version.sh!
 set(HELLOC_VERSION "${HELLOC_MAJOR_VERSION}.${HELLOC_MINOR_VERSION}.${HELLOC_PATCH_VERSION}-${HELLOC_DEV_ITERATION}")
 MESSAGE(STATUS "helloc version: ${HELLOC_VERSION}")
 # Make HELLOC_VERSION available as a preprocessor definition, so we can access
