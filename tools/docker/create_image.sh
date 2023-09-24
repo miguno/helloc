@@ -12,9 +12,9 @@ set -uo pipefail
 # Import environment variables from .env
 set -o allexport && source "$PROJECT_DIR/.env" && set +o allexport
 
-declare -r HELLOC_VERSION="$("${PROJECT_DIR}/tools/version.sh")"
+declare -r PROJECT_VERSION="$("${PROJECT_DIR}/tools/version.sh")"
 if [ $? -eq 0 ]; then
-    declare -r DOCKER_IMAGE_TAG="${HELLOC_VERSION}"
+    declare -r DOCKER_IMAGE_TAG="${PROJECT_VERSION}"
 else
     exit 1
 fi
