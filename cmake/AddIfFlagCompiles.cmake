@@ -3,6 +3,10 @@
 # https://github.com/Kitware/CMake/blob/master/Modules/CheckCCompilerFlag.cmake
 include(CheckCCompilerFlag)
 
+# IMPORTANT: You MUST NOT add multiple flags per `add_if_flag_compiles()` call.
+# If you do, only the first flag will be tested and added. If you have N flags,
+# you need N calls to `add_if_flag_compiles()`!
+#
 # Examples:
 #
 # add_if_flag_compiles(-Wall COMPILE_OPTIONS) # same as add_compile_options(-Wall)
