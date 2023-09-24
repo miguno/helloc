@@ -122,7 +122,7 @@ if (ENABLE_ASAN)
   #
   # NOTE: To enable leak detection on macOS, you must explicitly run your
   #       binary with `ASAN_OPTIONS=detect_leaks=1 my_binary ...`.
-  add_if_flag_compiles(-fsanitize=address CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE)
+  add_if_flag_compiles(-fsanitize=address CMAKE_C_FLAGS_DEBUG)
 endif()
 
 # https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
@@ -130,12 +130,12 @@ if (ENABLE_UBSAN AND CMAKE_C_COMPILER_ID MATCHES "Clang")
   MESSAGE(STATUS "Compiler is Clang. Using full set of UBSan settings.")
   add_if_flag_compiles(
     -fsanitize=undefined,float-divide-by-zero,integer,implicit-conversion,local-bounds,nullability
-    CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE)
+    CMAKE_C_FLAGS_DEBUG)
 elseif (ENABLE_UBSAN AND CMAKE_C_COMPILER_ID MATCHES "GNU")
   MESSAGE(STATUS "Compiler is GCC. Using limited set of UBSan settings.")
   add_if_flag_compiles(
     -fsanitize=undefined,float-divide-by-zero
-    CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE)
+    CMAKE_C_FLAGS_DEBUG)
 endif()
 
 # Compile options used across Debug/Release/... builds are defined here.
