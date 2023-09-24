@@ -135,10 +135,6 @@ elseif (ENABLE_UBSAN AND CMAKE_C_COMPILER_ID MATCHES "GNU")
     CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE)
 endif()
 
-if("$ENV{VALGRIND}" STREQUAL "1")
-endif()
-
-
 # Compile options used across Debug/Release/... builds are defined here.
 #
 # Explanation:
