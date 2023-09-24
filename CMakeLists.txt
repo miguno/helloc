@@ -72,9 +72,12 @@ include(AddIfFlagCompiles)
 # * `-fno-omit-frame-pointer`: nicer stack traces in error messages
 #
 # For Debug builds, see generated `build/build-Debug.ninja`   & `build/CMakeFiles/impl-Debug.ninja`
-add_if_flag_compiles(-O0 -g3                    CMAKE_C_FLAGS_DEBUG)
+add_if_flag_compiles(-O0 CMAKE_C_FLAGS_DEBUG)
+add_if_flag_compiles(-g3 CMAKE_C_FLAGS_DEBUG)
 # For Release builds, see generated `build/build-Release.ninja` & `build/CMakeFiles/impl-Release.ninja`
-add_if_flag_compiles(-O3 -g -D_FORTIFY_SOURCE=2 CMAKE_C_FLAGS_RELEASE)
+add_if_flag_compiles(-O3                 CMAKE_C_FLAGS_RELEASE)
+add_if_flag_compiles(-g                  CMAKE_C_FLAGS_RELEASE)
+add_if_flag_compiles(-D_FORTIFY_SOURCE=2 CMAKE_C_FLAGS_RELEASE)
 # `-fno-omit-frame-pointer`: nicer stack traces in error messages
 add_if_flag_compiles(-fno-omit-frame-pointer CMAKE_C_FLAGS_DEBUG)
 add_if_flag_compiles(-fno-omit-frame-pointer CMAKE_C_FLAGS_RELEASE)
