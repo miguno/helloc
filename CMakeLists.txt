@@ -30,6 +30,7 @@ add_definitions(-DHELLOC_VERSION="${HELLOC_VERSION}")
 
 # https://cmake.org/cmake/help/latest/prop_tgt/C_STANDARD.html
 set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Detect host architecture
 set(OS_ARCH "amd64")
