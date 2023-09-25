@@ -53,6 +53,8 @@ if (UNIX AND NOT APPLE)
 endif()
 MESSAGE(STATUS "Host operating system: ${OS_NAME}")
 
+MESSAGE(STATUS "cmake version: ${CMAKE_VERSION}")
+
 # Add `./cmake` to the module path.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(AddIfFlagCompiles)
