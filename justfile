@@ -49,7 +49,7 @@ clean:
     rm -rf {{docs_dir}}
 
 # configure a build
-configure:
+configure *args:
     # https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html
     # https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html
     #
@@ -58,7 +58,7 @@ configure:
     # Set compiler with CC to 'clang' to ensure that macOS does not pick up
     # the default XCode clang version, which has a `cc` symlink or hardcopy,
     # which cmake prefers.
-    CC="$CC" cmake -B {{build_dir}} -S . -G "Ninja Multi-Config"
+    CC="$CC" cmake -B {{build_dir}} -S . -G "Ninja Multi-Config" {{args}}
 
 [private]
 configure-valgrind:
