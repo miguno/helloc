@@ -148,6 +148,14 @@ elseif (CMAKE_C_COMPILER_ID MATCHES "MSVC")
   set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} /O2")
 endif()
 
+# Parse environment variables
+if (DEFINED ENV{ENABLE_ASAN})
+    set(ENABLE_ASAN $ENV{ENABLE_ASAN})
+endif()
+if (DEFINED ENV{ENABLE_UBSAN})
+    set(ENABLE_UBSAN $ENV{ENABLE_UBSAN})
+endif()
+
 if (DEFINED ENABLE_ASAN)
     MESSAGE(STATUS "ENABLE_ASAN was already set by user (${ENABLE_ASAN}), skipping auto-configuration")
 else()
