@@ -1,27 +1,121 @@
 {
-    "version": 3,
-    "cmakeMinimumRequired": {
-        "major": 3,
-        "minor": 21,
-        "patch": 0
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 26,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "windows-base",
+      "description": "Sets Ninja generator, compilers, x64 architecture, build and install directory. For more information: http://aka.ms/cmakepresetsvs",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_C_COMPILER": "clang"
+      },
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
     },
-    "configurePresets": [
-        {
-            "name": "coverage",
-            "displayName": "Code coverage (GCC)",
-            "description": "Enable code coverage on GCC-compatible compilers",
-            "binaryDir": "${sourceDir}/build-for-coverage",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "CMAKE_C_FLAGS": "-fprofile-arcs -ftest-coverage"
-            }
-        }
-    ],
-    "buildPresets": [
-        {
-            "name": "coverage",
-            "configurePreset": "coverage",
-            "configuration": "RelWithDebInfo"
-        }
-    ]
+    {
+      "name": "windows-x64-debug",
+      "displayName": "Windows x64 Debug",
+      "description": "Sets Ninja generator, compilers, x64 architecture, build and install directory, debug build type",
+      "inherits": "windows-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "windows-x64-release",
+      "displayName": "Windows x64 Release",
+      "description": "Sets Ninja generator, compilers, x64 architecture, build and install directory, release build type",
+      "inherits": "windows-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "macos-arm64-base",
+      "description": "Sets Ninja Multi-Config generator",
+      "hidden": true,
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_C_COMPILER": "gcc-13"
+      }
+    },
+    {
+      "name": "macos-arm64-debug",
+      "displayName": "Unix 64 Debug",
+      "description": "Sets Ninja Multi-Config, debug build type",
+      "inherits": "macos-arm64-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "macos-arm64-release",
+      "displayName": "Unix 64 Release",
+      "description": "Sets Ninja Multi-Config generator, release build type",
+      "inherits": "macos-arm64-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "coverage",
+      "displayName": "Code coverage (GCC)",
+      "description": "Enable code coverage on GCC-compatible compilers",
+      "binaryDir": "${sourceDir}/build-for-coverage",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_C_FLAGS": "-fprofile-arcs -ftest-coverage"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "coverage",
+      "configurePreset": "coverage",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "windows-x64-debug",
+      "configurePreset": "windows-x64-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "windows-x64-release",
+      "configurePreset": "windows-x64-release",
+      "configuration": "Release"
+    },
+    {
+      "name": "macos-arm64-debug",
+      "configurePreset": "macos-arm64-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "macos-arm64-release",
+      "configurePreset": "macos-arm64-release",
+      "configuration": "Release"
+    }
+  ]
 }
