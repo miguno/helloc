@@ -53,7 +53,7 @@ RUN CMAKE_BUILD_PARALLEL_LEVEL="$NUM_BUILD_WORKERS" \
 # This is not affecting this Docker setup, but worth remembering when working
 # with C on macOS.
 # https://developer.apple.com/library/archive/qa/qa1118/_index.html
-FROM alpine:3.18.0
+FROM alpine:3.18.4
 # `gcompat`: adds shared libraries needed for running our non-static binary;
 #            without it, running our binary will fail with the misleading error
 #            message: "exec /usr/local/bin/main: no such file or directory"
