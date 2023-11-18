@@ -58,6 +58,17 @@ MESSAGE(STATUS "cmake version: ${CMAKE_VERSION}")
 # Add `./cmake` to the module path.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(AddIfFlagCompiles)
+include(CCache) # Ccache.cmake
+
+# Use ccache to speed up builds, if available.
+if (NOT DEFINED USE_CCACHE)
+    set(USE_CCACHE AUTO CACHE STRING "Use ccache if found when invoking compiler")
+endif ()
+
+# Add `./cmake` to the module path.
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(AddIfFlagCompiles)
+include(CCache) # Ccache.cmake
 
 # Compiler options for different builds, e.g. Debug vs. Release
 # https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_FLAGS_CONFIG.html

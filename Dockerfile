@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     cmake \
     lldb \
     ninja-build \
+    ccache \
     zip \
     # purge apt data
     && rm -rf /var/lib/apt/lists/*
