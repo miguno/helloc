@@ -1,0 +1,4 @@
+# File: asan.supp
+#
+# ASan (AddressSanitizer) configuration
+# https://clang.llvm.org/docs/AddressSanitizer.html

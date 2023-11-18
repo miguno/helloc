@@ -1,6 +1,8 @@
 # File: lsan.supp
-# For ASan (AddressSanitizer) configuration.
 #
+# LSan (Leak Sanitizer) configuration
+# https://clang.llvm.org/docs/LeakSanitizer.html
+
 # Suppress memory leaks if the supplied pattern matches matches any function
 # name, source file name, or library name in the symbolized stack trace of the
 # leak report.
@@ -19,3 +21,5 @@
 #        ...
 #
 leak:realizeClassWithoutSwift
+leak:_fetchInitializingClassList
+#leak:cache_t::insert

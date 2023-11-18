@@ -1,0 +1,4 @@
+# File: ubsan.supp
+#
+# UBSan (UndefinedBehaviorSanitizer) configuration
+# https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html

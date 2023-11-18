@@ -103,11 +103,55 @@ docs:
 # run a Debug binary from the examples
 examples-run binary *args: build
     #!/usr/bin/env bash
-    # Enabling memory leak checking with Address Sanitizer (ASan) including
-    # Leak Sanitizer
-    ASAN_OPTIONS=detect_leaks=1
-    # Suppress known false positives of ASan
-    LSAN_OPTIONS=suppressions=lsan.supp
+    #
+    # IMPORTANT: There's some buggy behavior when both ASan and UBSan are
+    # enabled together, at least when using clang.  One such example is
+    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=94328.  Another example
+    # that we run into is that setting `verbosity=1` in ASAN_OPTIONS and then
+    # setting `verbosity=2` in UBSAN_OPTIONS makes ASan use `verbosity=2`
+    # instead of `verbosity=1`.  Or, the ubsan.supp file is seemingly also read
+    # by ASan, even though ASan fails to parse UBSan-related suppressions when
+    # you put them directly into asan.supp.
+    # So there's some weird behavior going on where the environment variable
+    # for one sanitizer is read and applied by another sanitizer.  Oh my!
+    #
+    # TIP: Add `verbosity=1` or higher numbers to get more verbose output from
+    # the sanitizers.
+    #
+    # TIP: Add `help=1` to print out the supported settings of the respective
+    # sanitizer.
+    #
+    # detect_leaks=1 (ASan)
+    #   enable memory leak checking with Address Sanitizer (ASan) including
+    #   Leak Sanitizer
+    #
+    # allocator_frees_and_returns_null_on_realloc_zero=0 (ASan)
+    #   (To detect uses of realloc() where behavior was changed in C23.)
+    #   realloc(p, 0) is equivalent to free(p) by default. If set to false,
+    #   realloc(p, 0) will return a pointer to an allocated space which can not
+    #   be used.
+    #
+    # report_error_type=1 (UBSan)
+    #  Print the exact name of the rule that was violated, which allows us, for
+    #  example, to suppress that rule for a specific file via an entry in
+    #  `sanitizers.supp`.
+    #
+    export  ASAN_OPTIONS=suppressions={{project_dir}}/asan.supp:detect_leaks=1:halt_on_error=false:allocator_frees_and_returns_null_on_realloc_zero=0
+    export  LSAN_OPTIONS=suppressions={{project_dir}}/lsan.supp
+    export UBSAN_OPTIONS=suppressions={{project_dir}}/ubsan.supp:report_error_type=1
+    # To prevent the warning:
+    # "malloc: nano zone abandoned due to inability to preallocate reserved vm space"
+    #
+    # Background:
+    # The nano_malloc routine in libmalloc tries to pre-allocate the
+    # pre-calculated sized memory for pre-calculated memory addresses.
+    # Because we are injecting Address Sanitizer hooks into the binary,
+    # the addresses are not usable to calculate the exact size for
+    # preallocation, which in turn means that the pre-determination of how much
+    # space is needed at which bands in the virtual memory is not working.
+    #
+    # Source: https://stackoverflow.com/questions/69861144/
+    export MallocNanoZone=0
     {{examples_dir}}/Debug/{{binary}} {{args}}
 
 # run a Release binary from the examples
@@ -130,11 +174,55 @@ release:
 # run a Debug binary
 run binary *args: build
     #!/usr/bin/env bash
-    # Enabling memory leak checking with Address Sanitizer (ASan) including
-    # Leak Sanitizer
-    ASAN_OPTIONS=detect_leaks=1
-    # Suppress known false positives of ASan
-    LSAN_OPTIONS=suppressions=lsan.supp
+    #
+    # IMPORTANT: There's some buggy behavior when both ASan and UBSan are
+    # enabled together, at least when using clang.  One such example is
+    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=94328.  Another example
+    # that we run into is that setting `verbosity=1` in ASAN_OPTIONS and then
+    # setting `verbosity=2` in UBSAN_OPTIONS makes ASan use `verbosity=2`
+    # instead of `verbosity=1`.  Or, the ubsan.supp file is seemingly also read
+    # by ASan, even though ASan fails to parse UBSan-related suppressions when
+    # you put them directly into asan.supp.
+    # So there's some weird behavior going on where the environment variable
+    # for one sanitizer is read and applied by another sanitizer.  Oh my!
+    #
+    # TIP: Add `verbosity=1` or higher numbers to get more verbose output from
+    # the sanitizers.
+    #
+    # TIP: Add `help=1` to print out the supported settings of the respective
+    # sanitizer.
+    #
+    # detect_leaks=1 (ASan)
+    #   enable memory leak checking with Address Sanitizer (ASan) including
+    #   Leak Sanitizer
+    #
+    # allocator_frees_and_returns_null_on_realloc_zero=0 (ASan)
+    #   (To detect uses of realloc() where behavior was changed in C23.)
+    #   realloc(p, 0) is equivalent to free(p) by default. If set to false,
+    #   realloc(p, 0) will return a pointer to an allocated space which can not
+    #   be used.
+    #
+    # report_error_type=1 (UBSan)
+    #  Print the exact name of the rule that was violated, which allows us, for
+    #  example, to suppress that rule for a specific file via an entry in
+    #  `sanitizers.supp`.
+    #
+    export  ASAN_OPTIONS=suppressions={{project_dir}}/asan.supp:detect_leaks=1:halt_on_error=false:allocator_frees_and_returns_null_on_realloc_zero=0
+    export  LSAN_OPTIONS=suppressions={{project_dir}}/lsan.supp
+    export UBSAN_OPTIONS=suppressions={{project_dir}}/ubsan.supp:report_error_type=1
+    # To prevent the warning:
+    # "malloc: nano zone abandoned due to inability to preallocate reserved vm space"
+    #
+    # Background:
+    # The nano_malloc routine in libmalloc tries to pre-allocate the
+    # pre-calculated sized memory for pre-calculated memory addresses.
+    # Because we are injecting Address Sanitizer hooks into the binary,
+    # the addresses are not usable to calculate the exact size for
+    # preallocation, which in turn means that the pre-determination of how much
+    # space is needed at which bands in the virtual memory is not working.
+    #
+    # Source: https://stackoverflow.com/questions/69861144/
+    export MallocNanoZone=0
     {{src_dir}}/Debug/{{binary}} {{args}}
 
 # run a Release binary
