@@ -9,7 +9,7 @@ BasedOnStyle: LLVM
 # Vimscript:
 #   set colorcolumn=120
 #
-ColumnLimit: 120
+ColumnLimit: 80
 # When using neovim/vim, the settings below should match your settings for:
 #
 # Lua:
