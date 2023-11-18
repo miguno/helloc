@@ -5,7 +5,7 @@
 #include <limits.h>
 
 int helloc_sum(int a, int b) {
-    if (a >=  0) {
+    if (a >= 0) {
         if (b > INT_MAX - a) {
             // Integer overflow
             return INT_MAX;

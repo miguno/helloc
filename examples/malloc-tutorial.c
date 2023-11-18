@@ -40,7 +40,7 @@ struct block_meta {          // 24 bytes total
     size_t size;             // 8 bytes
     struct block_meta *next; // 8 bytes (pointer)
     int free;                // 4 bytes
-    int magic;               // For debugging only. TODO: remove this in non-debug mode.
+    int magic; // For debugging only. TODO: remove this in non-debug mode.
 };
 #define META_BLOCK_SIZE sizeof(struct block_meta)
 
@@ -49,8 +49,9 @@ void *global_base = NULL;
 // NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 
 void block_to_string(struct block_meta *block, char **s) {
-    int result = asprintf(s, "address=%p { size=%zu, free=%d, magic=%d, next=%p }", (void *)block, block->size,
-                          block->free, block->magic, (void *)(block->next));
+    int result = asprintf(
+        s, "address=%p { size=%zu, free=%d, magic=%d, next=%p }", (void *)block,
+        block->size, block->free, block->magic, (void *)(block->next));
     if (result == -1) {
         errno = ENOMEM;
     }
@@ -65,7 +66,11 @@ struct block_meta *find_free_block(struct block_meta **last, size_t size) {
     return current;
 }
 
-enum { kMagicBlockCreated = 0x12345678, kMagicBlockReused = 0x7777777, kMagicBlockFreed = 0x55555555 };
+enum {
+    kMagicBlockCreated = 0x12345678,
+    kMagicBlockReused = 0x7777777,
+    kMagicBlockFreed = 0x55555555
+};
 
 struct block_meta *request_space(struct block_meta *last, size_t size) {
     struct block_meta *block = sbrk(0);
@@ -134,17 +139,21 @@ void *my_malloc(size_t size) {
     return (block + 1);
 }
 
-struct block_meta *get_block_ptr(void *ptr) { return (struct block_meta *)ptr - 1; }
+struct block_meta *get_block_ptr(void *ptr) {
+    return (struct block_meta *)ptr - 1;
+}
 
 void my_free(void *ptr) {
     if (!ptr) {
         return;
     }
 
-    // TODO(miguno): consider merging blocks once splitting blocks is implemented.
+    // TODO(miguno): consider merging blocks once splitting blocks is
+    // implemented.
     struct block_meta *block_ptr = get_block_ptr(ptr);
     assert(block_ptr->free == 0);
-    assert(block_ptr->magic == kMagicBlockReused || block_ptr->magic == kMagicBlockCreated);
+    assert(block_ptr->magic == kMagicBlockReused ||
+           block_ptr->magic == kMagicBlockCreated);
     block_ptr->free = 1;
     block_ptr->magic = kMagicBlockFreed;
 }
@@ -177,8 +186,8 @@ int main(void) {
         *(ptr2 + 1) = 5005;
         *(ptr2 + 2) = 6006;
         // Given how the custom memory allocation is implemented here, we can
-        // overwrite the block_meta struct of the second allocated memory with the
-        // statements below:
+        // overwrite the block_meta struct of the second allocated memory with
+        // the statements below:
         //
         //  block->size: ptr1[4-5]
         //  block->next: ptr1[6-7]
@@ -188,25 +197,33 @@ int main(void) {
         // Examples:
         //  ptr1[4] = 12345;
         //  ptr1[8] = 67890;
-        printf("===============================================================\n");
+        printf("==============================================================="
+               "\n");
         printf("ptr1 data:\n");
-        printf("---------------------------------------------------------------\n");
+        printf("---------------------------------------------------------------"
+               "\n");
         size_t beyond_elements = 10;
         for (size_t i = 0; i < n1 + beyond_elements; i++) {
             char *s = i < n1 ? "" : " <== beyond what was malloc'd for ptr1";
-            printf("ptr1[%2zu]: %10d [%p]%s\n", i, *(ptr1 + i), (void *)(ptr1 + i), s);
+            printf("ptr1[%2zu]: %10d [%p]%s\n", i, *(ptr1 + i),
+                   (void *)(ptr1 + i), s);
         }
-        printf("===============================================================\n");
+        printf("==============================================================="
+               "\n");
         printf("ptr2 data:\n");
-        printf("---------------------------------------------------------------\n");
+        printf("---------------------------------------------------------------"
+               "\n");
         for (size_t i = 0; i < n2 + beyond_elements; i++) {
             char *s = i < n2 ? "" : " <== beyond what was malloc'd for ptr2";
-            printf("ptr2[%2zu]: %10d [%p]%s\n", i, *(ptr2 + i), (void *)(ptr2 + i), s);
+            printf("ptr2[%2zu]: %10d [%p]%s\n", i, *(ptr2 + i),
+                   (void *)(ptr2 + i), s);
         }
 
-        printf("===============================================================\n");
+        printf("==============================================================="
+               "\n");
         printf("Allocated blocks:\n");
-        printf("---------------------------------------------------------------\n");
+        printf("---------------------------------------------------------------"
+               "\n");
         size_t i = 0;
         struct block_meta *current = global_base;
         while (current) {
