@@ -1,0 +1,10 @@
+# All files
+[*]
+# Guidelines (https://marketplace.visualstudio.com/items?itemName=PaulHarrington.EditorGuidelinesPreview)
+guidelines = 80, 120
+# ARGB color format (25% opacity for dark grey)
+guidelines_style = 2.0px solid 403b3b3b
+
+# C# or VB files
+#[*.{cs,vb}]
+#guidelines = 80
