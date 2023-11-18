@@ -44,21 +44,15 @@ MESSAGE(STATUS "Host architecture: ${OS_ARCH}")
 set(OS_NAME "unknown")
 if (APPLE)
   set(OS_NAME "osx")
-endif()
-if (WIN32)
+elseif (WIN32)
   set(OS_NAME "windows")
-endif()
-if (UNIX AND NOT APPLE)
+elseif (UNIX AND NOT APPLE)
   set(OS_NAME "linux") # We ignore other OS like BSD in the current logic.
 endif()
 MESSAGE(STATUS "Host operating system: ${OS_NAME}")
 
+# CMake
 MESSAGE(STATUS "cmake version: ${CMAKE_VERSION}")
-
-# Add `./cmake` to the module path.
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(AddIfFlagCompiles)
-include(CCache) # Ccache.cmake
 
 # Use ccache to speed up builds, if available.
 if (NOT DEFINED USE_CCACHE)
