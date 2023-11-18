@@ -19,4 +19,4 @@ int helloc_sum(int a, int b) {
     return a + b;
 }
 
-const char *helloc_library_version(void) { return HELLOC_VERSION; }
+const char *helloc_library_version(void) { return PROJECT_VERSION; }
