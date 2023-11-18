@@ -21,4 +21,5 @@ target_include_directories(unity PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 # More details at https://leimao.github.io/blog/CMake-Public-Private-Interface/
 add_library(zpl INTERFACE)
 target_include_directories(zpl INTERFACE ${CMAKE_CURRENT_LIST_DIR})
+set_target_properties(zpl PROPERTIES C_EXTENSIONS ON)
 ### }}} zpl
