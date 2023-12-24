@@ -45,7 +45,7 @@ struct block_meta {          // 24 bytes total
 #define META_BLOCK_SIZE sizeof(struct block_meta)
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
-void *global_base = NULL;
+void *g_global_base = NULL;
 // NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 
 void block_to_string(struct block_meta *block, char **s) {
@@ -58,7 +58,7 @@ void block_to_string(struct block_meta *block, char **s) {
 }
 
 struct block_meta *find_free_block(struct block_meta **last, size_t size) {
-    struct block_meta *current = global_base;
+    struct block_meta *current = g_global_base;
     while (current && !(current->free && current->size >= size)) {
         *last = current;
         current = current->next;
@@ -91,20 +91,20 @@ struct block_meta *request_space(struct block_meta *last, size_t size) {
 }
 
 // CHAR_BIT is defined in limits.h
-const size_t kWordSizeBits = sizeof(int *) * CHAR_BIT;
-const size_t kAlignmentBoundaryBytes = kWordSizeBits / CHAR_BIT;
+const size_t g_kKWordSizeBits = sizeof(int *) * CHAR_BIT;
+const size_t g_kKAlignmentBoundaryBytes = g_kKWordSizeBits / CHAR_BIT;
 
 size_t get_aligned_size(size_t size) {
     if (size == 0) {
         return 0;
     }
-    size_t quotient = size / kAlignmentBoundaryBytes;
-    size_t remainder = size % kAlignmentBoundaryBytes;
+    size_t quotient = size / g_kKAlignmentBoundaryBytes;
+    size_t remainder = size % g_kKAlignmentBoundaryBytes;
     size_t aligned_size = 0;
     if (quotient < 1) {
-        aligned_size = kAlignmentBoundaryBytes;
+        aligned_size = g_kKAlignmentBoundaryBytes;
     } else if (remainder != 0) {
-        aligned_size = (quotient + 1) * kAlignmentBoundaryBytes;
+        aligned_size = (quotient + 1) * g_kKAlignmentBoundaryBytes;
     } else {
         aligned_size = size;
     }
@@ -116,14 +116,14 @@ void *my_malloc(size_t size) {
     size_t aligned_size = get_aligned_size(size);
 
     struct block_meta *block = NULL;
-    if (!global_base) { // first call
+    if (!g_global_base) { // first call
         block = request_space(NULL, aligned_size);
         if (!block) {
             return NULL;
         }
-        global_base = block;
+        g_global_base = block;
     } else {
-        struct block_meta *last = global_base;
+        struct block_meta *last = g_global_base;
         block = find_free_block(&last, aligned_size);
         if (!block) { // failed to find free block
             block = request_space(last, aligned_size);
@@ -164,8 +164,8 @@ int main(void) {
     printf("System-dependent settings:\n");
     printf("---------------------------------------------------------------\n");
     printf("CHAR_BIT: %d bits (number of bits in a byte)\n", CHAR_BIT);
-    printf("word size (best guess): %2zu bits\n", kWordSizeBits);
-    printf("boundary for alignment: %zu bytes\n", kAlignmentBoundaryBytes);
+    printf("word size (best guess): %2zu bits\n", g_kKWordSizeBits);
+    printf("boundary for alignment: %zu bytes\n", g_kKAlignmentBoundaryBytes);
     printf("sizeof(size_t): %zu bytes\n", sizeof(size_t));
     printf("sizeof(void *): %zu bytes\n", sizeof(void *)); // pointer size
 
@@ -225,7 +225,7 @@ int main(void) {
         printf("---------------------------------------------------------------"
                "\n");
         size_t i = 0;
-        struct block_meta *current = global_base;
+        struct block_meta *current = g_global_base;
         while (current) {
             char *s = NULL;
             block_to_string(current, &s);
