@@ -1,8 +1,13 @@
-#include <ctype.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+// Include ctype.h at the end so that, at least on macOS, its `size_t`
+// definition does not override stddef.h's.  (If this include is added to the
+// block of includes above, then your code editor might auto-sort the ctype.h
+// include to the beginning of the list, which is not what we want.)
+#include <ctype.h>
 
 void nuppercase(const char *src, char *dst, size_t n) {
     for (size_t i = 0; i < n; i++) {
