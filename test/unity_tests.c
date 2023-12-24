@@ -50,9 +50,11 @@ void verify_sum(void) {
 }
 
 int main(void) {
+    // NOLINTBEGIN(misc-include-cleaner)
     UNITY_BEGIN();
     RUN_TEST(string_equality);
     RUN_TEST(pointer_equality);
     RUN_TEST(verify_sum);
     return UNITY_END();
+    // NOLINTEND(misc-include-cleaner)
 }
