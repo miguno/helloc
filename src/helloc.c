@@ -7,6 +7,8 @@
 #include <stddef.h>
 #include <string.h>
 
+const char *helloc_library_version(void) { return PROJECT_VERSION; }
+
 int helloc_sum(int a, int b) {
     if (a >= 0) {
         if (b > INT_MAX - a) {
@@ -21,8 +23,6 @@ int helloc_sum(int a, int b) {
     }
     return a + b;
 }
-
-const char *helloc_library_version(void) { return PROJECT_VERSION; }
 
 size_t helloc_str_trim(const char *s, char *out, size_t out_len) {
     if (out == NULL || out_len == 0) {

@@ -9,6 +9,15 @@
 // Long, prefixed names for the library API
 
 /**
+ * Returns the version of the linked helloc library.
+ *
+ * Example return value: "0.1.0-0"
+ *
+ * @return The library version.
+ */
+const char *helloc_library_version(void);
+
+/**
  * Computes the sum of two ints.
  *
  * Integer overflows result in a return value of INT_MAX.
@@ -18,14 +27,6 @@
  * @param b The second int
  */
 int helloc_sum(int a, int b);
-
-/**
- * Returns the version of the linked helloc library, with a version postfix
- * for dev versions.
- *
- * Example return value: "0.1.0-0"
- */
-const char *helloc_library_version(void);
 
 /**
  * Trims leading and trailing whitespace from a string.
