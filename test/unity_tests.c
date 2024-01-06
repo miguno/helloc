@@ -58,6 +58,7 @@ void verify_str_trim(void) {
     size_t actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
 
     s = "    ";
     expected = "";
@@ -65,6 +66,7 @@ void verify_str_trim(void) {
     actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
 
     s = "";
     expected = "";
@@ -72,6 +74,7 @@ void verify_str_trim(void) {
     actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
 
     s = "    foo \t bar \n lorem ";
     expected = "foo \t bar \n lorem";
@@ -79,6 +82,7 @@ void verify_str_trim(void) {
     actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
 
     s = "case: NULL output buffer";
     expected = NULL;
@@ -100,7 +104,6 @@ void verify_str_trim(void) {
     actual_len = str_trim(s, actual, 0); // caller mistakenly set out_len to 0
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(0, actual_len);
-    // free(actual);
 }
 
 int main(void) {
