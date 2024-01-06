@@ -6,6 +6,8 @@
  */
 
 #include <limits.h>
+#include <stdlib.h>
+#include <string.h>
 
 // Allows us to use shortened names of functions in helloc.h in addition to
 // their long, prefixed names.
@@ -49,12 +51,65 @@ void verify_sum(void) {
     TEST_ASSERT_EQUAL(INT_MIN, sum(INT_MIN, INT_MIN));
 }
 
+void verify_str_trim(void) {
+    char *s = "   foo ";
+    char *expected = "foo";
+    char *actual = strdup(s);
+    size_t actual_len = str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+
+    s = "    ";
+    expected = "";
+    actual = strdup(s);
+    actual_len = str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+
+    s = "";
+    expected = "";
+    actual = strdup(s);
+    actual_len = str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+
+    s = "    foo \t bar \n lorem ";
+    expected = "foo \t bar \n lorem";
+    actual = strdup(s);
+    actual_len = str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+
+    s = "case: NULL output buffer";
+    expected = NULL;
+    actual = NULL;
+    actual_len = str_trim(s, actual, 12345);
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(0, actual_len);
+
+    s = "case: zero output buffer length";
+    actual = "";
+    expected = actual; // actual will not be modified in this case
+    actual_len = str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(0, actual_len);
+
+    s = "case: non-zero output buffer length, but zero out_len parameter";
+    actual = "irrelevant";
+    expected = actual; // actual will not be modified in this case
+    actual_len = str_trim(s, actual, 0); // caller mistakenly set out_len to 0
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(0, actual_len);
+    // free(actual);
+}
+
 int main(void) {
     // NOLINTBEGIN(misc-include-cleaner)
     UNITY_BEGIN();
     RUN_TEST(string_equality);
     RUN_TEST(pointer_equality);
     RUN_TEST(verify_sum);
+    RUN_TEST(verify_str_trim);
     return UNITY_END();
     // NOLINTEND(misc-include-cleaner)
 }
