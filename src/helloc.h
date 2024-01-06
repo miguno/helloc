@@ -25,6 +25,8 @@ const char *helloc_library_version(void);
  *
  * @param a The first int
  * @param b The second int
+ *
+ * @return The sum of the inputs.
  */
 int helloc_sum(int a, int b);
 
