@@ -12,10 +12,11 @@ if (UNIX)
   target_compile_definitions(malloc-tutorial PRIVATE _GNU_SOURCE)
 endif()
 
-add_executable (uppercase uppercase.c)
-
 # A demo app that demonstrates how to integrate and use a single-header library
 # (https://github.com/zpl-c/zpl)
 add_executable (single-header-demo single-header-demo.c)
 target_link_libraries(single-header-demo PRIVATE zpl)
 set_target_properties(single-header-demo PROPERTIES C_EXTENSIONS ON)
+
+add_executable (uppercase uppercase.c)
+
