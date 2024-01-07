@@ -19,7 +19,6 @@ char *helloc_str_dup(const char *s) {
     return p;
 }
 
-// NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
 Result_t helloc_str_split_once(const char *s, const char delim, char **lout,
                                char **rout) {
     if (s == NULL) {
