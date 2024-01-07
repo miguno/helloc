@@ -67,9 +67,9 @@ struct block_meta *find_free_block(struct block_meta **last, size_t size) {
 }
 
 enum {
-    MagicBlockCreated = 0x12345678,
-    MagicBlockReused = 0x7777777,
-    MagicBlockFreed = 0x55555555
+    MAGIC_BLOCK_CREATED = 0x12345678,
+    MAGIC_BLOCK_REUSED = 0x7777777,
+    MAGIC_BLOCK_FREED = 0x55555555
 };
 
 struct block_meta *request_space(struct block_meta *last, size_t size) {
@@ -86,7 +86,7 @@ struct block_meta *request_space(struct block_meta *last, size_t size) {
     block->size = size;
     block->next = NULL;
     block->free = 0;
-    block->magic = MagicBlockCreated;
+    block->magic = MAGIC_BLOCK_CREATED;
     return block;
 }
 
@@ -133,7 +133,7 @@ void *my_malloc(size_t size) {
         } else { // found free block
             // TODO(miguno): consider splitting block here.
             block->free = 0;
-            block->magic = MagicBlockReused;
+            block->magic = MAGIC_BLOCK_REUSED;
         }
     }
     return (block + 1);
@@ -152,10 +152,10 @@ void my_free(void *ptr) {
     // implemented.
     struct block_meta *block_ptr = get_block_ptr(ptr);
     assert(block_ptr->free == 0);
-    assert(block_ptr->magic == MagicBlockReused ||
-           block_ptr->magic == MagicBlockCreated);
+    assert(block_ptr->magic == MAGIC_BLOCK_REUSED ||
+           block_ptr->magic == MAGIC_BLOCK_CREATED);
     block_ptr->free = 1;
-    block_ptr->magic = MagicBlockFreed;
+    block_ptr->magic = MAGIC_BLOCK_FREED;
 }
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers)
