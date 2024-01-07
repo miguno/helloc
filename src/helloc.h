@@ -87,6 +87,17 @@ Result_t helloc_str_split_once(const char *s, char delim, char **lout,
 /// trimmed string.
 /// @param[in] out_len The length (size) of the output buffer.
 ///
+/// Example:
+///
+/// ```
+/// char *s = "  foo \t\n  ";
+/// size_t size = strlen(s) + 1;
+/// char *copy = (char *)malloc(size);
+/// if (copy != NULL) {
+///     size_t copy_len = helloc_str_trim(s, copy, size);
+///     free(copy);
+/// }
+/// ```
 /// @returns The length of the trimmed string stored in the output buffer.
 size_t helloc_str_trim(const char *s, char *out, size_t out_len);
 
