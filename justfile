@@ -243,6 +243,9 @@ test-unity *args: build
     @echo "Running unity tests ..."
     {{test_dir}}/Debug/unity_testsuite {{args}}
 
+# test all, including tidy
+test-with-tidy: tidy test-unity
+
 # run clang-tidy (see .clang-tidy)
 tidy:
     clang-tidy --version
