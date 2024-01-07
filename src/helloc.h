@@ -50,6 +50,24 @@ int helloc_sum(int a, int b);
 /// @returns The length of the trimmed string stored in the output buffer.
 size_t helloc_str_trim(const char *s, char *out, size_t out_len);
 
+/// @brief Create an owned copy of the string.
+///
+/// See also the
+/// <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2353.htm">C2x
+/// strdup() proposal</a>.
+///
+/// Example:
+/// @code{c}
+/// char *s = "Hello, World";
+/// char *copy = strdup(s);
+/// free(copy);
+/// @endcode
+///
+/// @returns An owned copy of the string.  That is, the ownership (e.g., to
+/// `free()`) is passed to the caller.
+/// @returns NULL if memory allocation failed.
+char *helloc_str_dup(const char *s);
+
 /// @brief Split the string at the first occurrence of the delimiter.
 ///
 /// @param[in] s The input string to be split.  Must not be NULL.
@@ -87,7 +105,7 @@ Result_t helloc_str_split_once(const char *s, char delim, char **lout,
 #ifdef HELLOC_SHORT_NAMES
 // NOLINTBEGIN(readability-identifier-naming)
 #define sum helloc_sum
-#define str_trim helloc_str_trim
+#define str_dup helloc_str_dup
 #define str_split_once helloc_str_split_once
 // NOLINTEND(readability-identifier-naming)
 #endif

@@ -16,12 +16,6 @@
 #include "helloc.h"
 #include "unity.h"
 
-// On Linux, we must manually make `strdup()` available, which is not in the C
-// standard.  See `src/helloc.c` for additional information.
-#if defined(__linux__)
-char *strdup(const char *s);
-#endif
-
 void setUp(void) {
     // set stuff up here
 }
@@ -60,7 +54,7 @@ void verify_sum(void) {
 void verify_str_trim(void) {
     char *s = "   foo ";
     char *expected = "foo";
-    char *actual = strdup(s);
+    char *actual = helloc_str_dup(s);
     size_t actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
@@ -68,7 +62,7 @@ void verify_str_trim(void) {
 
     s = "    ";
     expected = "";
-    actual = strdup(s);
+    actual = helloc_str_dup(s);
     actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
@@ -76,7 +70,7 @@ void verify_str_trim(void) {
 
     s = "";
     expected = "";
-    actual = strdup(s);
+    actual = helloc_str_dup(s);
     actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
@@ -84,7 +78,7 @@ void verify_str_trim(void) {
 
     s = "    foo \t bar \n lorem ";
     expected = "foo \t bar \n lorem";
-    actual = strdup(s);
+    actual = helloc_str_dup(s);
     actual_len = str_trim(s, actual, strlen(actual));
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
