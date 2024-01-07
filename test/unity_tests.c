@@ -9,32 +9,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-// On Linux, we must manually define `strdup()`, which is not in the C standard.
-// (On macOS, the function is available simply by including `string.h`.)
-//
-// A second option is to declare (but not define) the function so that, given
-// that we include `string.h`, the function can and will be linked then.
-//
-//    char *strdup(const char *s);
-//
-// A third option is to define `_GNU_SOURCE 1` before the #include directives.
-#if defined(__linux__)
-char *strdup(const char *s) {
-    size_t size = strlen(s) + 1;
-    char *p = malloc(size);
-    if (p) {
-        memcpy(p, s, size);
-    }
-    return p;
-}
-#endif
-
 // Allows us to use shortened names of functions in helloc.h in addition to
 // their long, prefixed names.
 #define HELLOC_SHORT_NAMES
 
 #include "helloc.h"
 #include "unity.h"
+
+// On Linux, we must manually make `strdup()` available, which is not in the C
+// standard.  See `src/helloc.c` for additional information.
+#if defined(__linux__)
+char *strdup(const char *s);
+#endif
 
 void setUp(void) {
     // set stuff up here
