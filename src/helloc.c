@@ -8,6 +8,26 @@
 #include <stdlib.h>
 #include <string.h>
 
+// On Linux, we must manually define `strdup()`, which is not in the C standard.
+// (On macOS, the function is available simply by including `string.h`.)
+//
+// A second option is to declare (but not define) the function so that, given
+// that we include `string.h`, the function can and will be linked then.
+//
+//    char *strdup(const char *s);
+//
+// A third option is to define `_GNU_SOURCE 1` before the #include directives.
+#if defined(__linux__)
+char *strdup(const char *s) {
+    size_t size = strlen(s) + 1;
+    char *p = malloc(size);
+    if (p) {
+        memcpy(p, s, size);
+    }
+    return p;
+}
+#endif
+
 const char *helloc_library_version(void) { return PROJECT_VERSION; }
 
 int helloc_sum(int a, int b) {

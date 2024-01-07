@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// On Linux, we manually define `strdup()`, which is not in the C standard.
+// On Linux, we must manually define `strdup()`, which is not in the C standard.
 // (On macOS, the function is available simply by including `string.h`.)
 //
 // A second option is to declare (but not define) the function so that, given
