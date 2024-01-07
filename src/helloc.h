@@ -107,6 +107,7 @@ Result_t helloc_str_split_once(const char *s, char delim, char **lout,
 #define sum helloc_sum
 #define str_dup helloc_str_dup
 #define str_split_once helloc_str_split_once
+#define str_trim helloc_str_trim
 // NOLINTEND(readability-identifier-naming)
 #endif
 
