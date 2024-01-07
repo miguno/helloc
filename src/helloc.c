@@ -54,16 +54,6 @@ size_t helloc_str_trim(const char *s, char *out, size_t out_len) {
     return trimmed_size;
 }
 
-char *split(char *str, const char *delim) {
-    char *p = strstr(str, delim);
-
-    if (p == NULL)
-        return NULL; // delimiter not found
-
-    *p = '\0';                // terminate string after head
-    return p + strlen(delim); // return tail substring
-}
-
 // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
 Result_t helloc_str_split_once(const char *s, const char delim, char **lout,
                                char **rout) {
