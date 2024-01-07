@@ -1,12 +1,12 @@
 /* helloc.c */
 
+#include "helloc.h"
+
 #include <ctype.h>
 #include <limits.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "helloc.h"
 
 const char *helloc_library_version(void) { return PROJECT_VERSION; }
 
