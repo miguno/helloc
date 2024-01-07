@@ -126,6 +126,66 @@ void verify_str_trim(void) {
     TEST_ASSERT_EQUAL_size_t(0, actual_len);
 }
 
+void verify_str_split_once(void) {
+    char *s = "foo:bar";
+    char *expected_left = "foo";
+    char *expected_right = "bar";
+    char *actual_left = NULL;
+    char *actual_right = NULL;
+    Result_t res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
+    TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
+    TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
+    TEST_ASSERT_EQUAL_INT(E_SUCCESS, res);
+    free(actual_left);
+    free(actual_right);
+
+    s = ":";
+    expected_left = "";
+    expected_right = "";
+    actual_left = NULL;
+    actual_right = NULL;
+    res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
+    TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
+    TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
+    TEST_ASSERT_EQUAL_INT(E_SUCCESS, res);
+    free(actual_left);
+    free(actual_right);
+
+    s = "::";
+    expected_left = "";
+    expected_right = ":";
+    actual_left = NULL;
+    actual_right = NULL;
+    res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
+    TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
+    TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
+    TEST_ASSERT_EQUAL_INT(E_SUCCESS, res);
+    free(actual_left);
+    free(actual_right);
+
+    s = "";
+    expected_left = "";
+    expected_right = NULL;
+    actual_left = NULL;
+    actual_right = NULL;
+    res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
+    TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
+    TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
+    TEST_ASSERT_EQUAL_INT(E_SUCCESS, res);
+    free(actual_left);
+    free(actual_right);
+
+    s = NULL;
+    expected_left = NULL;
+    expected_right = NULL;
+    actual_left = NULL;
+    actual_right = NULL;
+    res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
+    TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
+    TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
+    TEST_ASSERT_EQUAL_INT(E_INVALID_INPUT, res);
+}
+
 int main(void) {
     // NOLINTBEGIN(misc-include-cleaner)
     UNITY_BEGIN();
@@ -133,6 +193,7 @@ int main(void) {
     RUN_TEST(pointer_equality);
     RUN_TEST(verify_sum);
     RUN_TEST(verify_str_trim);
+    RUN_TEST(verify_str_split_once);
     return UNITY_END();
     // NOLINTEND(misc-include-cleaner)
 }

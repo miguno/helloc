@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <limits.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
 
 const char *helloc_library_version(void) { return PROJECT_VERSION; }
@@ -51,4 +52,46 @@ size_t helloc_str_trim(const char *s, char *out, size_t out_len) {
     memcpy(out, s, trimmed_size);
     out[trimmed_size] = 0;
     return trimmed_size;
+}
+
+char *split(char *str, const char *delim) {
+    char *p = strstr(str, delim);
+
+    if (p == NULL)
+        return NULL; // delimiter not found
+
+    *p = '\0';                // terminate string after head
+    return p + strlen(delim); // return tail substring
+}
+
+// NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
+Result_t helloc_str_split_once(const char *s, const char delim, char **lout,
+                               char **rout) {
+    if (s == NULL) {
+        return E_INVALID_INPUT;
+    }
+    const char *colon_pos = strchr(s, delim);
+    if (colon_pos != NULL) {
+        // Calculate the length of the left part.
+        size_t lout_len = colon_pos - s;
+
+        // Allocate memory for the left part and copy the characters.
+        *lout = malloc(lout_len + 1);
+        if (*lout == NULL) {
+            return E_MEMORY_ALLOCATION_FAILED;
+        }
+        strncpy(*lout, s, lout_len);
+        (*lout)[lout_len] = 0; // Null-terminate the left part.
+
+        // Allocate memory for the right part and copy the characters.
+        *rout = strdup(colon_pos + 1);
+        if (*rout == NULL) {
+            return E_MEMORY_ALLOCATION_FAILED;
+        }
+    } else {
+        // No delimiter found.
+        *lout = strdup(s);
+        *rout = NULL;
+    }
+    return E_SUCCESS;
 }
