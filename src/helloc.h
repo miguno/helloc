@@ -32,11 +32,11 @@ const char *helloc_library_version(void);
 /// strdup() proposal</a>.
 ///
 /// Example:
-/// @code{c}
+/// ```
 /// char *s = "Hello, World";
 /// char *copy = strdup(s);
 /// free(copy);
-/// @endcode
+/// ```
 ///
 /// @returns An owned copy of the string.  That is, the ownership (e.g., to
 /// `free()`) is passed to the caller.
@@ -62,13 +62,13 @@ char *helloc_str_dup(const char *s);
 ///
 /// Example:
 ///
-/// @code{c}
+/// ```
 /// char *lout = NULL;
 /// char *rout = NULL;
 /// Result_t res = helloc_str_split_once("foo:bar", ':', &lout, &rout);
 /// free(lout);
 /// free(rout);
-/// @endcode
+/// ```
 ///
 /// @returns E_SUCCESS if successful.
 /// @returns E_INVALID_INPUT if s is NULL.
