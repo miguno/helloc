@@ -25,31 +25,6 @@ typedef enum {
 /// @returns The library version.
 const char *helloc_library_version(void);
 
-/// @brief Computes the sum of two ints.
-///
-/// Integer overflows result in a return value of INT_MAX.
-/// Integer underflows result in a return value of INT_MIN.
-///
-/// @param a The first int
-/// @param b The second int
-///
-/// @returns The sum of the inputs.
-int helloc_sum(int a, int b);
-
-/// @brief Trims leading and trailing whitespace from a string.
-///
-/// Stores a copy of the trimmed input string into the given output buffer,
-/// which must be large enough to store the result.  If it is too small, the
-/// output is truncated.
-///
-/// @param[in] s The input string to be trimmed.
-/// @param[out] out The output buffer, provided by the caller, that stores the
-/// trimmed string.
-/// @param[in] out_len The length (size) of the output buffer.
-///
-/// @returns The length of the trimmed string stored in the output buffer.
-size_t helloc_str_trim(const char *s, char *out, size_t out_len);
-
 /// @brief Create an owned copy of the string.
 ///
 /// See also the
@@ -100,6 +75,31 @@ char *helloc_str_dup(const char *s);
 /// @returns E_MEMORY_ALLOCATION_FAILED
 Result_t helloc_str_split_once(const char *s, char delim, char **lout,
                                char **rout);
+
+/// @brief Trims leading and trailing whitespace from a string.
+///
+/// Stores a copy of the trimmed input string into the given output buffer,
+/// which must be large enough to store the result.  If it is too small, the
+/// output is truncated.
+///
+/// @param[in] s The input string to be trimmed.
+/// @param[out] out The output buffer, provided by the caller, that stores the
+/// trimmed string.
+/// @param[in] out_len The length (size) of the output buffer.
+///
+/// @returns The length of the trimmed string stored in the output buffer.
+size_t helloc_str_trim(const char *s, char *out, size_t out_len);
+
+/// @brief Computes the sum of two ints.
+///
+/// Integer overflows result in a return value of INT_MAX.
+/// Integer underflows result in a return value of INT_MIN.
+///
+/// @param a The first int
+/// @param b The second int
+///
+/// @returns The sum of the inputs.
+int helloc_sum(int a, int b);
 
 // Short names for the library API
 #ifdef HELLOC_SHORT_NAMES
