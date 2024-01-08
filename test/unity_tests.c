@@ -53,62 +53,6 @@ void verify_sum(void) {
     TEST_ASSERT_EQUAL(INT_MIN, sum(INT_MIN, INT_MIN));
 }
 
-void verify_helloc_str_trim(void) {
-    char *s = "   foo ";
-    char *expected = "foo";
-    char *actual = helloc_str_dup(s);
-    size_t actual_len = helloc_str_trim(s, actual, strlen(actual));
-    TEST_ASSERT_EQUAL_STRING(expected, actual);
-    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
-    free(actual);
-
-    s = "    ";
-    expected = "";
-    actual = helloc_str_dup(s);
-    actual_len = helloc_str_trim(s, actual, strlen(actual));
-    TEST_ASSERT_EQUAL_STRING(expected, actual);
-    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
-    free(actual);
-
-    s = "";
-    expected = "";
-    actual = helloc_str_dup(s);
-    actual_len = helloc_str_trim(s, actual, strlen(actual));
-    TEST_ASSERT_EQUAL_STRING(expected, actual);
-    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
-    free(actual);
-
-    s = "    foo \t bar \n lorem ";
-    expected = "foo \t bar \n lorem";
-    actual = helloc_str_dup(s);
-    actual_len = helloc_str_trim(s, actual, strlen(actual));
-    TEST_ASSERT_EQUAL_STRING(expected, actual);
-    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
-    free(actual);
-
-    s = "case: NULL output buffer";
-    expected = NULL;
-    actual = NULL;
-    actual_len = helloc_str_trim(s, actual, 12345);
-    TEST_ASSERT_EQUAL_STRING(expected, actual);
-    TEST_ASSERT_EQUAL_size_t(0, actual_len);
-
-    s = "case: zero output buffer length";
-    actual = "";
-    expected = actual; // actual will not be modified in this case
-    actual_len = helloc_str_trim(s, actual, strlen(actual));
-    TEST_ASSERT_EQUAL_STRING(expected, actual);
-    TEST_ASSERT_EQUAL_size_t(0, actual_len);
-
-    s = "case: non-zero output buffer length, but zero out_len parameter";
-    actual = "irrelevant";
-    expected = actual; // actual will not be modified in this case
-    actual_len =
-        helloc_str_trim(s, actual, 0); // caller mistakenly set out_len to 0
-    TEST_ASSERT_EQUAL_STRING(expected, actual);
-    TEST_ASSERT_EQUAL_size_t(0, actual_len);
-}
-
 void verify_helloc_str_split_once(void) {
     char *s = "foo:bar";
     char *expected_left = "foo";
@@ -169,14 +113,70 @@ void verify_helloc_str_split_once(void) {
     TEST_ASSERT_EQUAL_INT(E_INVALID_INPUT, res);
 }
 
+void verify_helloc_str_trim(void) {
+    char *s = "   foo ";
+    char *expected = "foo";
+    char *actual = helloc_str_dup(s);
+    size_t actual_len = helloc_str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
+
+    s = "    ";
+    expected = "";
+    actual = helloc_str_dup(s);
+    actual_len = helloc_str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
+
+    s = "";
+    expected = "";
+    actual = helloc_str_dup(s);
+    actual_len = helloc_str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
+
+    s = "    foo \t bar \n lorem ";
+    expected = "foo \t bar \n lorem";
+    actual = helloc_str_dup(s);
+    actual_len = helloc_str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
+    free(actual);
+
+    s = "case: NULL output buffer";
+    expected = NULL;
+    actual = NULL;
+    actual_len = helloc_str_trim(s, actual, 12345);
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(0, actual_len);
+
+    s = "case: zero output buffer length";
+    actual = "";
+    expected = actual; // actual will not be modified in this case
+    actual_len = helloc_str_trim(s, actual, strlen(actual));
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(0, actual_len);
+
+    s = "case: non-zero output buffer length, but zero out_len parameter";
+    actual = "irrelevant";
+    expected = actual; // actual will not be modified in this case
+    actual_len =
+        helloc_str_trim(s, actual, 0); // caller mistakenly set out_len to 0
+    TEST_ASSERT_EQUAL_STRING(expected, actual);
+    TEST_ASSERT_EQUAL_size_t(0, actual_len);
+}
+
 int main(void) {
     // NOLINTBEGIN(misc-include-cleaner)
     UNITY_BEGIN();
     RUN_TEST(string_equality);
     RUN_TEST(pointer_equality);
     RUN_TEST(verify_sum);
-    RUN_TEST(verify_helloc_str_trim);
     RUN_TEST(verify_helloc_str_split_once);
+    RUN_TEST(verify_helloc_str_trim);
     return UNITY_END();
     // NOLINTEND(misc-include-cleaner)
 }
