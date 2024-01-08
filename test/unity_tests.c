@@ -53,6 +53,18 @@ void verify_sum(void) {
     TEST_ASSERT_EQUAL(INT_MIN, sum(INT_MIN, INT_MIN));
 }
 
+void verify_helloc_str_dup(void) {
+    char *s = "foo";
+    char *actual = helloc_str_dup(s);
+    TEST_ASSERT_EQUAL_STRING(s, actual);
+    free(actual);
+
+    s = "";
+    actual = helloc_str_dup(s);
+    TEST_ASSERT_EQUAL_STRING(s, actual);
+    free(actual);
+}
+
 void verify_helloc_str_split_once(void) {
     char *s = "foo:bar";
     char *expected_left = "foo";
@@ -175,6 +187,7 @@ int main(void) {
     RUN_TEST(string_equality);
     RUN_TEST(pointer_equality);
     RUN_TEST(verify_sum);
+    RUN_TEST(verify_helloc_str_dup);
     RUN_TEST(verify_helloc_str_split_once);
     RUN_TEST(verify_helloc_str_trim);
     return UNITY_END();
