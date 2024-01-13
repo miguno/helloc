@@ -6,7 +6,7 @@
 [![Docker workflow status](https://github.com/miguno/helloc/actions/workflows/docker-image.yml/badge.svg)](https://github.com/miguno/helloc/actions/workflows/docker-image.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-My template project for writing in the C programming language in 2023.
+My template project for writing in the C programming language in 2024.
 
 As a C beginner, it took me longer than expected to come up with a base project,
 after having enjoyed the modern toolchains of languages like Golang and Rust.
