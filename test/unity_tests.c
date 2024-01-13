@@ -1,10 +1,9 @@
-/* unity_tests.c
- *
- * Requires https://github.com/ThrowTheSwitch/Unity
- *
- * Installed in this project by manually copying a Unity release (C and header
- * files) into the top-level `external/` folder.
- */
+/// @file unity_tests.c
+/// @brief Unit tests for the helloc library.
+///
+/// Requires https://github.com/ThrowTheSwitch/Unity,
+/// which is installed in this project by manually copying a Unity release (C
+/// and header files) into the top-level `external/` folder.
 
 #include <limits.h>
 #include <stddef.h>

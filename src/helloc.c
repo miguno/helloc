@@ -1,4 +1,5 @@
-/* helloc.c */
+/// @file helloc.c
+/// @brief Implementation of the helloc library.
 
 #include "helloc.h"
 

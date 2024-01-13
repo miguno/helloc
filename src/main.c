@@ -1,4 +1,5 @@
-/* main.c */
+/// @file main.c
+/// @brief Main application of this project.
 
 #include <stdio.h>
 #include <stdlib.h>

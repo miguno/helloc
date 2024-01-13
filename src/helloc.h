@@ -1,4 +1,5 @@
-/* helloc.h */
+/// @file helloc.h
+/// @brief Provides string-related functions plus some toy functions.
 
 // Inclusion guard
 #ifndef HELLOC_H
