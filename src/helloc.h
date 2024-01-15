@@ -121,6 +121,6 @@ int helloc_sum(int a, int b);
 #define str_split_once helloc_str_split_once
 #define str_trim helloc_str_trim
 // NOLINTEND(readability-identifier-naming)
-#endif
+#endif // HELLOC_SHORT_NAMES
 
 #endif // HELLOC_H
