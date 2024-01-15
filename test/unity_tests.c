@@ -70,7 +70,7 @@ void verify_helloc_str_split_once(void) {
     char *expected_right = "bar";
     char *actual_left = NULL;
     char *actual_right = NULL;
-    Result_t res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
+    Result res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
     TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
     TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
     TEST_ASSERT_EQUAL_INT(E_SUCCESS, res);

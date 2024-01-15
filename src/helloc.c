@@ -20,8 +20,8 @@ char *helloc_str_dup(const char *s) {
     return p;
 }
 
-Result_t helloc_str_split_once(const char *s, const char delim, char **lout,
-                               char **rout) {
+Result helloc_str_split_once(const char *s, const char delim, char **lout,
+                             char **rout) {
     if (s == NULL) {
         return E_INVALID_INPUT;
     }

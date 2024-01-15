@@ -17,7 +17,7 @@ typedef enum {
     E_INVALID_INPUT = 1,
     /// When memory allocation failed within a function.
     E_MEMORY_ALLOCATION_FAILED = 2
-} Result_t;
+} Result;
 
 /// @brief Returns the version of the linked helloc library.
 ///
@@ -74,8 +74,8 @@ char *helloc_str_dup(const char *s);
 /// @returns E_SUCCESS if successful.
 /// @returns E_INVALID_INPUT if s is NULL.
 /// @returns E_MEMORY_ALLOCATION_FAILED
-Result_t helloc_str_split_once(const char *s, char delim, char **lout,
-                               char **rout);
+Result helloc_str_split_once(const char *s, char delim, char **lout,
+                             char **rout);
 
 /// @brief Trims leading and trailing whitespace from a string.
 ///
