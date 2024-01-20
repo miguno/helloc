@@ -92,14 +92,16 @@ Result helloc_str_split_once(const char *s, char delim, char **lout,
 ///
 /// ```
 /// char *s = "  foo \t\n  ";
-/// size_t size = strlen(s) + 1;
-/// char *copy = (char *)malloc(size);
-/// if (copy != NULL) {
-///     size_t copy_len = helloc_str_trim(s, copy, size);
-///     free(copy);
+/// size_t out_len = strlen(s) + 1;
+/// char *out = (char *)malloc(out_len);
+/// if (out != NULL) {
+///     size_t trimmed_len = helloc_str_trim(s, out, out_len);
+///     // ...do something with `out`...
+///     free(out);
 /// }
 /// ```
-/// @returns The length of the trimmed string stored in the output buffer.
+/// @returns The length of the trimmed string stored in the output buffer,
+///          with the invariant 0 <= trimmed length <= out_len.
 size_t helloc_str_trim(const char *s, char *out, size_t out_len);
 
 /// @brief Computes the sum of two ints.
