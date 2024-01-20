@@ -111,12 +111,6 @@ size_t helloc_str_trim(const char *s, char *out, size_t out_len) {
         s++;
     }
 
-    // All spaces?
-    if (s == 0) {
-        out = NULL;
-        return 0;
-    }
-
     // Trim trailing space
     const char *end = s + strlen(s) - 1;
     while (end > s && isspace((unsigned char)*end)) {
