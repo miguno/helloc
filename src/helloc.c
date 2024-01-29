@@ -3,6 +3,7 @@
 
 #include "helloc.h"
 
+#include <assert.h>
 #include <ctype.h>
 #include <limits.h>
 #include <stddef.h>
@@ -26,10 +27,16 @@ typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 // Will fail at compile-time if float is not 32 bits.
-typedef char assert_float_size[(sizeof(float) * CHAR_BIT == 32) ? 1 : -1];
+//
+// Alternatively, we could also use this trick:
+// typedef char assert_float_size[(sizeof(float) * CHAR_BIT == 32) ? 1 : -1];
+static_assert(sizeof(float) * CHAR_BIT == 32, "foo");
 typedef float f32;
 // Will fail at compile-time if double is not 64 bits.
-typedef char assert_double_size[(sizeof(double) * CHAR_BIT == 64) ? 1 : -1];
+//
+// Alternatively, we could also use this trick:
+// typedef char assert_double_size[(sizeof(double) * CHAR_BIT == 64) ? 1 : -1];
+static_assert(sizeof(double) * CHAR_BIT == 64, "foo");
 typedef double f64;
 typedef uintptr_t uptr;
 typedef char byte; // raw memory
