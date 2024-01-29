@@ -65,8 +65,6 @@ typedef struct {
     __builtin_unreachable()
 //---------------------------------------------------------------------------//
 
-// Long, prefixed names for the library API
-
 /// @brief Success and error codes used throughout this library.
 typedef enum {
     /// On success.
