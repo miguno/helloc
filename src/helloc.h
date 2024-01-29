@@ -5,7 +5,65 @@
 #ifndef HELLOC_H
 #define HELLOC_H
 
+#include <assert.h>
+#include <limits.h>
 #include <stddef.h>
+#include <stdint.h>
+
+//---------------------------------------------------------------------------//
+// EXPERIMENT: Playing with typedefs and macros described at
+// https://nullprogram.com/blog/2023/10/08/
+// https://github.com/skeeto/scratch/blob/master/misc/wordhist.c
+//---------------------------------------------------------------------------//
+// NOLINTBEGIN(readability-identifier-naming)
+typedef uint8_t u8; // "octet", usually UTF-8 data
+// typedef char16_t  c16; // 16-bit char (UTF-16), mostly for Win32 (uchar.h)
+typedef int32_t b32; // 32-bit boolean
+typedef int16_t i16;
+typedef int32_t i32;
+typedef int64_t i64;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef uint64_t u64;
+// Will fail at compile-time if float is not 32 bits.
+//
+// Alternatively, we could also use this trick:
+// typedef char assert_float_size[(sizeof(float) * CHAR_BIT == 32) ? 1 : -1];
+static_assert(sizeof(float) * CHAR_BIT == 32, "foo");
+typedef float f32;
+// Will fail at compile-time if double is not 64 bits.
+//
+// Alternatively, we could also use this trick:
+// typedef char assert_double_size[(sizeof(double) * CHAR_BIT == 64) ? 1 : -1];
+static_assert(sizeof(double) * CHAR_BIT == 64, "foo");
+typedef double f64;
+typedef uintptr_t uptr;
+typedef char byte; // raw memory
+typedef ptrdiff_t size;
+typedef size_t usize;
+
+typedef struct {
+    u8 *data;
+    size len;
+} s8; // String literal, with "s" for string and "8" for UTF-8 (or u8).
+
+// Wrap a C string literal as s8.
+#define s8(s)                                                                  \
+    (s8) { (u8 *)(s), lengthof(s) }
+// NOLINTEND(readability-identifier-naming)
+
+#define SIZEOF(x) ((size)(sizeof(x)))
+#define ALIGNOF(x) ((size)(_Alignof(x)))
+#define COUNTOF(...) ((size)(sizeof(__VA_ARGS__) / sizeof(*__VA_ARGS__)))
+#define LENGTHOF(s) ((countof(s)) - 1)
+#define NEW(a, t, n) ((t *)(alloc(a, (sizeof(t)), (alignof(t)), (n))))
+
+// To enable assertions in release builds, put UBSan in trap mode with
+// ``-fsanitize-trap` and then enable at least `-fsanitize=unreachable`.
+#define ASSERT(c)                                                              \
+    while (!(c))                                                               \
+    __builtin_unreachable()
+//---------------------------------------------------------------------------//
 
 // Long, prefixed names for the library API
 
