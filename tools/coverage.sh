@@ -7,15 +7,15 @@
 # * macOS: `brew install gcc lcov`
 # * Debian/Ubuntu: `sudo apt-get install -y build-essential lcov`
 
-declare -r SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 declare -r PROJECT_DIR=$(readlink -f "$SCRIPT_DIR/..")
 
 # Define bash set builtins to ensure safer execution of this script.
 set -Eeuo pipefail
 
 # Set up defaults for CC and GCOV_PATH
-export CC="${CC:-gcc-13}"
-declare -r GCOV="${GCOV:-gcov-13}"
+export CC="${CC:-gcc-14}"
+declare -r GCOV="${GCOV:-gcov-14}"
 declare -r LCOV="${LCOV:-lcov}"
 
 declare -r SAVED_DIR=$(pwd)
@@ -30,7 +30,7 @@ declare -r BINARIES_TO_RUN=(
 )
 declare -r FORCE_OPEN_REPORT_IN_BROWSER="no" # yes or no
 
-if ! command -v "$CC" &> /dev/null; then
+if ! command -v "$CC" &>/dev/null; then
     echo "ERROR: The gcc binary '$CC' (CC=$CC) could not be found"
     echo
     echo "HOW TO FIX"
@@ -40,7 +40,7 @@ if ! command -v "$CC" &> /dev/null; then
     echo "    * macOS: brew install gcc"
     echo "    * Debian/Ubuntu: sudo apt-get install -y build-essential"
     echo
-    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-13\`"
+    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-14\`"
     echo "   and run this script again."
     exit 1
 fi
@@ -69,12 +69,12 @@ if [ -z "$DETECT_GCC" ]; then
     echo "    * macOS: brew install gcc"
     echo "    * Debian/Ubuntu: sudo apt-get install -y build-essential"
     echo
-    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-13\`"
+    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-14\`"
     echo "   and run this script again."
     exit 2
 fi
 
-if ! command -v "$GCOV" &> /dev/null; then
+if ! command -v "$GCOV" &>/dev/null; then
     echo "ERROR: The gcov binary '$GCOV' (GCOV=$GCOV) could not be found"
     echo
     echo "HOW TO FIX"
@@ -84,12 +84,12 @@ if ! command -v "$GCOV" &> /dev/null; then
     echo "    * macOS: brew install gcc"
     echo "    * Debian/Ubuntu: sudo apt-get install -y build-essential"
     echo
-    echo "2. Set the \`GCOV\` env variable accordingly, e.g. \`GCOV=gcov-13\`"
+    echo "2. Set the \`GCOV\` env variable accordingly, e.g. \`GCOV=gcov-14\`"
     echo "   and run this script again."
     exit 3
 fi
 
-if ! command -v "$LCOV" &> /dev/null; then
+if ! command -v "$LCOV" &>/dev/null; then
     echo "ERROR: The lcov binary '$LCOV' (LCOV=$LCOV) could not be found"
     echo
     echo "HOW TO FIX"
@@ -105,7 +105,7 @@ if ! command -v "$LCOV" &> /dev/null; then
 fi
 
 rm -rf "$BUILD_DIR"
-cmake --preset coverage # configure
+cmake --preset coverage         # configure
 cmake --build --preset coverage # build
 cd "$BUILD_DIR"
 # Clean-up counters from any previous run
