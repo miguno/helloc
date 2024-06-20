@@ -1,8 +1,9 @@
 /* =========================================================================
-    Unity Project - A Test Framework for C
-    Copyright (c) 2007-21 Mike Karlesky, Mark VanderVoord, Greg Williams
-    [Released under MIT License. Please refer to license.txt for details]
-============================================================================ */
+    Unity - A Test Framework for C
+    ThrowTheSwitch.org
+    Copyright (c) 2007-24 Mike Karlesky, Mark VanderVoord, & Greg Williams
+    SPDX-License-Identifier: MIT
+========================================================================= */
 
 #include "unity.h"
 
@@ -2270,6 +2271,7 @@ int UnityEnd(void)
 char* UnityOptionIncludeNamed = NULL;
 char* UnityOptionExcludeNamed = NULL;
 int UnityVerbosity            = 1;
+int UnityStrictMatch          = 0;
 
 /*-----------------------------------------------*/
 int UnityParseOptions(int argc, char** argv)
@@ -2277,6 +2279,7 @@ int UnityParseOptions(int argc, char** argv)
     int i;
     UnityOptionIncludeNamed = NULL;
     UnityOptionExcludeNamed = NULL;
+    UnityStrictMatch = 0;
 
     for (i = 1; i < argc; i++)
     {
@@ -2288,6 +2291,7 @@ int UnityParseOptions(int argc, char** argv)
                     return -1;
                 case 'n': /* include tests with name including this string */
                 case 'f': /* an alias for -n */
+                    UnityStrictMatch = (argv[i][1] == 'n'); /* strictly match this string if -n */
                     if (argv[i][2] == '=')
                     {
                         UnityOptionIncludeNamed = &argv[i][3];
@@ -2329,6 +2333,18 @@ int UnityParseOptions(int argc, char** argv)
                     UnityPrint("ERROR: Unknown Option ");
                     UNITY_OUTPUT_CHAR(argv[i][1]);
                     UNITY_PRINT_EOL();
+                    /* Now display help */
+                    /* FALLTHRU */
+                case 'h':
+                    UnityPrint("Options: "); UNITY_PRINT_EOL();
+                    UnityPrint("-l        List all tests and exit"); UNITY_PRINT_EOL();
+                    UnityPrint("-f NAME   Filter to run only tests whose name includes NAME"); UNITY_PRINT_EOL();
+                    UnityPrint("-n NAME   Run only the test named NAME"); UNITY_PRINT_EOL();
+                    UnityPrint("-h        show this Help menu"); UNITY_PRINT_EOL();
+                    UnityPrint("-q        Quiet/decrease verbosity"); UNITY_PRINT_EOL();
+                    UnityPrint("-v        increase Verbosity"); UNITY_PRINT_EOL();
+                    UnityPrint("-x NAME   eXclude tests whose name includes NAME"); UNITY_PRINT_EOL();
+                    UNITY_OUTPUT_FLUSH();
                     return 1;
             }
         }
@@ -2338,7 +2354,7 @@ int UnityParseOptions(int argc, char** argv)
 }
 
 /*-----------------------------------------------*/
-int IsStringInBiggerString(const char* longstring, const char* shortstring)
+static int IsStringInBiggerString(const char* longstring, const char* shortstring)
 {
     const char* lptr = longstring;
     const char* sptr = shortstring;
@@ -2346,7 +2362,7 @@ int IsStringInBiggerString(const char* longstring, const char* shortstring)
 
     if (*sptr == '*')
     {
-        return 1;
+        return UnityStrictMatch ? 0 : 1;
     }
 
     while (*lptr)
@@ -2359,19 +2375,29 @@ int IsStringInBiggerString(const char* longstring, const char* shortstring)
             lptr++;
             sptr++;
 
-            /* We're done if we match the entire string or up to a wildcard */
-            if (*sptr == '*')
-                return 1;
-            if (*sptr == ',')
-                return 1;
-            if (*sptr == '"')
-                return 1;
-            if (*sptr == '\'')
-                return 1;
-            if (*sptr == ':')
-                return 2;
-            if (*sptr == 0)
-                return 1;
+            switch (*sptr)
+            {
+                case '*': /* we encountered a wild-card */
+                    return UnityStrictMatch ? 0 : 1;
+
+                case ',': /* we encountered the end of match string */
+                case '"':
+                case '\'':
+                case 0:
+                    return (!UnityStrictMatch || (*lptr == 0)) ? 1 : 0;
+
+                case ':': /* we encountered the end of a partial match */
+                    return 2;
+
+                default:
+                    break;
+            }
+        }
+
+        // If we didn't match and we're on strict matching, we already know we failed
+        if (UnityStrictMatch)
+        {
+            return 0;
         }
 
         /* Otherwise we start in the long pointer 1 character further and try again */
@@ -2383,7 +2409,7 @@ int IsStringInBiggerString(const char* longstring, const char* shortstring)
 }
 
 /*-----------------------------------------------*/
-int UnityStringArgumentMatches(const char* str)
+static int UnityStringArgumentMatches(const char* str)
 {
     int retval;
     const char* ptr1;
