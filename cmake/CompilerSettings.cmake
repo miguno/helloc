@@ -54,11 +54,11 @@ if ((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_C_COMPILER_ID MATCHES "GNU")
     add_if_flag_compiles(-Werror COMPILE_OPTIONS)
     add_if_flag_compiles(-Wconversion COMPILE_OPTIONS)
     add_if_flag_compiles(-Warray-bounds COMPILE_OPTIONS)
-    add_if_flag_compiles(-Wimplicit-fallthrough COMPILE_OPTIONS)
-    add_if_flag_compiles(-Wswitch-enum COMPILE_OPTIONS)
     add_if_flag_compiles(-Wbad-function-cast COMPILE_OPTIONS)
     add_if_flag_compiles(-Wfloat-equal COMPILE_OPTIONS)
+    add_if_flag_compiles(-Wimplicit-fallthrough COMPILE_OPTIONS)
     add_if_flag_compiles(-Wpointer-arith COMPILE_OPTIONS)
+    add_if_flag_compiles(-Wswitch-enum COMPILE_OPTIONS)
     add_if_flag_compiles(-fPIE COMPILE_OPTIONS)
 
     # Clang-only compile options
