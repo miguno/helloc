@@ -8,11 +8,5 @@
       <option name="SPACE_BEFORE_REFERENCE_IN_DECLARATION" value="false" />
       <option name="SPACE_AFTER_REFERENCE_IN_DECLARATION" value="true" />
     </Objective-C>
-    <clangFormatSettings>
-      <option name="ENABLED" value="true" />
-    </clangFormatSettings>
-    <codeStyleSettings language="ObjectiveC">
-      <option name="RIGHT_MARGIN" value="80" />
-    </codeStyleSettings>
   </code_scheme>
 </component>
