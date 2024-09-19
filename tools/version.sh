@@ -3,7 +3,7 @@
 
 # Prints the version of this project to STDOUT.
 
-declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 declare -r PROJECT_DIR=$(readlink -f "$SCRIPT_DIR/..")
 
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
@@ -17,5 +17,7 @@ set -o allexport && source "$PROJECT_DIR/.env" && set +o allexport
 declare -r CMAKELISTS="${PROJECT_DIR}/CMakeLists.txt"
 
 # IMPORTANT: Versioning logic here must match the logic in CMakeLists.txt!
+#
+# shellcheck disable=SC2086
 declare -r PROJECT_VERSION=$(grep -m1 "^project(" ${CMAKELISTS} | sed -n 's/.*VERSION "\([0-9.]*\)".*/\1/p')
 echo "${PROJECT_VERSION}"
