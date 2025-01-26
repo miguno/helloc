@@ -171,7 +171,7 @@ release:
     CMAKE_BUILD_PARALLEL_LEVEL={{num_build_workers}} \
     cmake --build {{build_dir}} --config Release --target all
 
-# run a Debug binary
+# run a Debug binary (e.g. 'run main')
 run binary *args: build
     #!/usr/bin/env bash
     #
