@@ -239,15 +239,7 @@ if ((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_C_COMPILER_ID MATCHES "GNU")
                 RESULT_VARIABLE EXTERNAL_COMMAND_RETURN_CODE
                 OUTPUT_STRIP_TRAILING_WHITESPACE
         )
-        if ((EXTERNAL_COMMAND_RETURN_CODE EQUAL 0) AND (EXTERNAL_COMMAND_OUTPUT VERSION_GREATER_EQUAL "15.0"))
-            # * `-ld_classic`: Requires XCode 15.0+. Prevents the following
-            #                  (harmless) warning on macOS when using gcc:
-            #                       ld: warning: ignoring duplicate libraries: '-lgcc'
-            #                  Details at https://stackoverflow.com/questions/77164140/
-            add_link_options(-Wl,-pie,-ld_classic)
-        else ()
-            add_link_options(-Wl,-pie)
-        endif ()
+        add_link_options(-Wl,-pie)
     elseif (WIN32)
         add_link_options(-Wl)
     else ()
