@@ -1,6 +1,6 @@
 include(AddIfFlagCompiles)
 
-# For shared libraries or PIE executables (cf `-fPIC`)
+# For shared libraries or PIE executables (cf. `-fPIC`)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Compiler options for different builds, e.g. Debug vs. Release
@@ -38,9 +38,6 @@ if ((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_C_COMPILER_ID MATCHES "GNU")
     # * `-pedantic`          : Issue warnings demanded by strict conformance to the
     #                          standard
     # * `-Werror`            : Turn warnings into errors
-    # * `-fPIE -Wl,-pie`     : Needed to enable full ASLR for executables.
-    #                          When `-fPIE` is used for the compiler, you must also
-    #                          set `-Wl,-pie` for the linker.
     #
     # When building a shared library:
     # * `-shared -fPIC`      : Disable text relocations for shared libraries
@@ -61,7 +58,6 @@ if ((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_C_COMPILER_ID MATCHES "GNU")
     add_if_flag_compiles(-Wpointer-arith COMPILE_OPTIONS)
     add_if_flag_compiles(-Wshadow COMPILE_OPTIONS)
     add_if_flag_compiles(-Wswitch-enum COMPILE_OPTIONS)
-    add_if_flag_compiles(-fPIE COMPILE_OPTIONS)
 
     # Clang-only compile options
     if (CMAKE_C_COMPILER_ID MATCHES "Clang")
@@ -226,9 +222,6 @@ elseif (ENABLE_UBSAN AND CMAKE_C_COMPILER_ID MATCHES "GNU")
 endif ()
 
 # Linker options used across Debug/Release/... builds are defined here.
-#
-# * `-Wl,-pie`: Passes the `-pie` option to the linker. Required when using
-#               the compile option `-fPIE`.
 if ((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_C_COMPILER_ID MATCHES "GNU"))
     if (APPLE)
         set(EXTERNAL_COMMAND_RETURN_CODE 1)
@@ -239,11 +232,11 @@ if ((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_C_COMPILER_ID MATCHES "GNU")
                 RESULT_VARIABLE EXTERNAL_COMMAND_RETURN_CODE
                 OUTPUT_STRIP_TRAILING_WHITESPACE
         )
-        add_link_options(-Wl,-pie)
+        add_link_options()
     elseif (WIN32)
-        add_link_options(-Wl)
+        add_link_options()
     else ()
-        add_link_options(-Wl,-pie)
+        add_link_options()
     endif ()
 elseif (CMAKE_C_COMPILER_ID MATCHES "MSVC")
     if (ENABLE_ASAN)
