@@ -21,6 +21,22 @@
 #
 cmake_minimum_required(VERSION 3.22)
 
+# When using a non-Apple compiler (e.g., Homebrew LLVM) on macOS, CMake may
+# not set CMAKE_OSX_SYSROOT automatically.  Without it the compiler (and
+# clang-tidy) cannot find system headers such as <stdio.h>.
+if (APPLE AND NOT CMAKE_OSX_SYSROOT)
+    execute_process(
+        COMMAND xcrun --show-sdk-path
+        OUTPUT_VARIABLE _OSX_SYSROOT
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE _XCRUN_RESULT
+    )
+    if (_XCRUN_RESULT EQUAL 0 AND _OSX_SYSROOT)
+        set(CMAKE_OSX_SYSROOT "${_OSX_SYSROOT}" CACHE PATH "macOS SDK path")
+        message(STATUS "CMAKE_OSX_SYSROOT was not set, using: ${CMAKE_OSX_SYSROOT}")
+    endif ()
+endif ()
+
 # Example setups for CMakeLists.txt to get inspired by:
 # - https://github.com/duckdb/duckdb/blob/master/CMakeLists.txt
 
@@ -76,6 +92,23 @@ MESSAGE(STATUS "Host operating system: ${OS_NAME}")
 
 # CMake
 MESSAGE(STATUS "cmake version: ${CMAKE_VERSION}")
+
+# When using a non-Apple clang (e.g., Homebrew LLVM) on macOS, it doesn't
+# know the SDK location. Set CMAKE_OSX_SYSROOT so that system headers like
+# <math.h> and frameworks like SDL2 are found by the compiler, clangd, and
+# clang-tidy.
+if (APPLE AND NOT CMAKE_OSX_SYSROOT)
+    execute_process(
+        COMMAND xcrun --show-sdk-path
+        OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE _XCRUN_RESULT
+    )
+    if (_XCRUN_RESULT EQUAL 0 AND CMAKE_OSX_SYSROOT)
+        set(CMAKE_OSX_SYSROOT "${CMAKE_OSX_SYSROOT}" CACHE PATH "macOS SDK path")
+        message(STATUS "CMAKE_OSX_SYSROOT (macOS SDK) was not set, using: ${CMAKE_OSX_SYSROOT}")
+    endif ()
+endif ()
 
 # Use ccache to speed up builds, if available.
 if (NOT DEFINED USE_CCACHE)
