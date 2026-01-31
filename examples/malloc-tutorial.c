@@ -49,11 +49,11 @@ void *g_global_base = nullptr;
 // NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 
 void block_to_string(struct block_meta *block, char **s) {
-    int result = asprintf(
+    int result = asprintf( // NOLINT(misc-include-cleaner)
         s, "address=%p { size=%zu, free=%d, magic=%d, next=%p }", (void *)block,
         block->size, block->free, block->magic, (void *)(block->next));
     if (result == -1) {
-        errno = ENOMEM;
+        errno = ENOMEM; // NOLINT(misc-include-cleaner)
     }
 }
 
