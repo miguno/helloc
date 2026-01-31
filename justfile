@@ -47,6 +47,7 @@ clean:
     rm -rf {{coverage_build_dir}}
     rm -rf {{coverage_report_dir}}
     rm -rf {{docs_dir}}
+    find . -type d -name "CMakeFiles" -exec rm -rf {} \;
 
 # configure a build
 configure *args:
