@@ -37,9 +37,9 @@
  * @brief Metadata for a block of allocated memory.
  */
 struct BlockMeta {          // 24 bytes total
-    size_t size;             // 8 bytes
+    size_t size;            // 8 bytes
     struct BlockMeta *next; // 8 bytes (pointer)
-    int free;                // 4 bytes
+    int free;               // 4 bytes
     int magic; // For debugging only. TODO: remove this in non-debug mode.
 };
 #define META_BLOCK_SIZE sizeof(struct BlockMeta)
