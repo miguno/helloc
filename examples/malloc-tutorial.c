@@ -36,19 +36,19 @@
 /**
  * @brief Metadata for a block of allocated memory.
  */
-struct block_meta {          // 24 bytes total
+struct BlockMeta {          // 24 bytes total
     size_t size;             // 8 bytes
-    struct block_meta *next; // 8 bytes (pointer)
+    struct BlockMeta *next; // 8 bytes (pointer)
     int free;                // 4 bytes
     int magic; // For debugging only. TODO: remove this in non-debug mode.
 };
-#define META_BLOCK_SIZE sizeof(struct block_meta)
+#define META_BLOCK_SIZE sizeof(struct BlockMeta)
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 void *g_global_base = nullptr;
 // NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 
-void block_to_string(struct block_meta *block, char **s) {
+void block_to_string(struct BlockMeta *block, char **s) {
     int result = asprintf( // NOLINT(misc-include-cleaner)
         s, "address=%p { size=%zu, free=%d, magic=%d, next=%p }", (void *)block,
         block->size, block->free, block->magic, (void *)(block->next));
@@ -57,8 +57,8 @@ void block_to_string(struct block_meta *block, char **s) {
     }
 }
 
-struct block_meta *find_free_block(struct block_meta **last, size_t size) {
-    struct block_meta *current = g_global_base;
+struct BlockMeta *find_free_block(struct BlockMeta **last, size_t size) {
+    struct BlockMeta *current = g_global_base;
     while (current && !(current->free && current->size >= size)) {
         *last = current;
         current = current->next;
@@ -72,8 +72,8 @@ enum {
     MAGIC_BLOCK_FREED = 0x55555555
 };
 
-struct block_meta *request_space(struct block_meta *last, size_t size) {
-    struct block_meta *block = sbrk(0);
+struct BlockMeta *request_space(struct BlockMeta *last, size_t size) {
+    struct BlockMeta *block = sbrk(0);
     void *request = sbrk((int)(size + META_BLOCK_SIZE));
     assert((void *)block == request); // not thread-safe
     if (request == (void *)-1) {      // NOLINT(performance-no-int-to-ptr)
@@ -115,7 +115,7 @@ void *my_malloc(size_t size) {
     // Memory must be aligned, e.g. to 8-byte boundaries on most 64-bit systems
     size_t aligned_size = get_aligned_size(size);
 
-    struct block_meta *block = nullptr;
+    struct BlockMeta *block = nullptr;
     if (!g_global_base) { // first call
         block = request_space(nullptr, aligned_size);
         if (!block) {
@@ -123,7 +123,7 @@ void *my_malloc(size_t size) {
         }
         g_global_base = block;
     } else {
-        struct block_meta *last = g_global_base;
+        struct BlockMeta *last = g_global_base;
         block = find_free_block(&last, aligned_size);
         if (!block) { // failed to find free block
             block = request_space(last, aligned_size);
@@ -139,8 +139,8 @@ void *my_malloc(size_t size) {
     return (block + 1);
 }
 
-struct block_meta *get_block_ptr(void *ptr) {
-    return (struct block_meta *)ptr - 1;
+struct BlockMeta *get_block_ptr(void *ptr) {
+    return (struct BlockMeta *)ptr - 1;
 }
 
 void my_free(void *ptr) {
@@ -150,7 +150,7 @@ void my_free(void *ptr) {
 
     // TODO(miguno): consider merging blocks once splitting blocks is
     // implemented.
-    struct block_meta *block_ptr = get_block_ptr(ptr);
+    struct BlockMeta *block_ptr = get_block_ptr(ptr);
     assert(block_ptr->free == 0);
     assert(block_ptr->magic == MAGIC_BLOCK_REUSED ||
            block_ptr->magic == MAGIC_BLOCK_CREATED);
@@ -175,7 +175,7 @@ int main(void) {
     int *ptr2 = my_malloc(sizeof(*ptr1) * n2);
 
     printf("sizeof(*ptr): %zu bytes\n", sizeof(*ptr1));
-    printf("sizeof(struct block_meta): %zu bytes\n", sizeof(struct block_meta));
+    printf("sizeof(struct BlockMeta): %zu bytes\n", sizeof(struct BlockMeta));
 
     if (ptr1 && ptr2) {
         // Play around and modify a few values!
@@ -225,7 +225,7 @@ int main(void) {
         printf("---------------------------------------------------------------"
                "\n");
         size_t i = 0;
-        struct block_meta *current = g_global_base;
+        struct BlockMeta *current = g_global_base;
         while (current) {
             char *s = nullptr;
             block_to_string(current, &s);
