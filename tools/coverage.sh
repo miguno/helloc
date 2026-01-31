@@ -14,8 +14,8 @@ declare -r PROJECT_DIR=$(readlink -f "$SCRIPT_DIR/..")
 set -Eeuo pipefail
 
 # Set up defaults for CC and GCOV_PATH
-export CC="${CC:-gcc-14}"
-declare -r GCOV="${GCOV:-gcov-14}"
+export CC="${CC:-gcc-15}"
+declare -r GCOV="${GCOV:-gcov-15}"
 declare -r LCOV="${LCOV:-lcov}"
 
 declare -r SAVED_DIR=$(pwd)
@@ -40,7 +40,7 @@ if ! command -v "$CC" &>/dev/null; then
     echo "    * macOS: brew install gcc"
     echo "    * Debian/Ubuntu: sudo apt-get install -y build-essential"
     echo
-    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-14\`"
+    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-15\`"
     echo "   and run this script again."
     exit 1
 fi
@@ -69,7 +69,7 @@ if [ -z "$DETECT_GCC" ]; then
     echo "    * macOS: brew install gcc"
     echo "    * Debian/Ubuntu: sudo apt-get install -y build-essential"
     echo
-    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-14\`"
+    echo "2. Set the \`CC\` env variable accordingly, e.g. \`CC=gcc-15\`"
     echo "   and run this script again."
     exit 2
 fi
@@ -84,7 +84,7 @@ if ! command -v "$GCOV" &>/dev/null; then
     echo "    * macOS: brew install gcc"
     echo "    * Debian/Ubuntu: sudo apt-get install -y build-essential"
     echo
-    echo "2. Set the \`GCOV\` env variable accordingly, e.g. \`GCOV=gcov-14\`"
+    echo "2. Set the \`GCOV\` env variable accordingly, e.g. \`GCOV=gcov-15\`"
     echo "   and run this script again."
     exit 3
 fi

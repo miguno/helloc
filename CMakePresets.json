@@ -57,7 +57,7 @@
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "cacheVariables": {
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
-        "CMAKE_C_COMPILER": "gcc-14"
+        "CMAKE_C_COMPILER": "gcc-15"
       }
     },
     {
