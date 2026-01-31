@@ -45,7 +45,7 @@ struct block_meta {          // 24 bytes total
 #define META_BLOCK_SIZE sizeof(struct block_meta)
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
-void *g_global_base = NULL;
+void *g_global_base = nullptr;
 // NOLINTEND(cppcoreguidelines-avoid-non-const-global-variables,cppcoreguidelines-avoid-non-const-global-variables)
 
 void block_to_string(struct block_meta *block, char **s) {
@@ -77,14 +77,14 @@ struct block_meta *request_space(struct block_meta *last, size_t size) {
     void *request = sbrk((int)(size + META_BLOCK_SIZE));
     assert((void *)block == request); // not thread-safe
     if (request == (void *)-1) {      // NOLINT(performance-no-int-to-ptr)
-        return NULL;                  // sbrk failed
+        return nullptr;               // sbrk failed
     }
 
-    if (last) { // NULL on first request
+    if (last) { // null on first request
         last->next = block;
     }
     block->size = size;
-    block->next = NULL;
+    block->next = nullptr;
     block->free = 0;
     block->magic = MAGIC_BLOCK_CREATED;
     return block;
@@ -115,11 +115,11 @@ void *my_malloc(size_t size) {
     // Memory must be aligned, e.g. to 8-byte boundaries on most 64-bit systems
     size_t aligned_size = get_aligned_size(size);
 
-    struct block_meta *block = NULL;
+    struct block_meta *block = nullptr;
     if (!g_global_base) { // first call
-        block = request_space(NULL, aligned_size);
+        block = request_space(nullptr, aligned_size);
         if (!block) {
-            return NULL;
+            return nullptr;
         }
         g_global_base = block;
     } else {
@@ -128,7 +128,7 @@ void *my_malloc(size_t size) {
         if (!block) { // failed to find free block
             block = request_space(last, aligned_size);
             if (!block) {
-                return NULL;
+                return nullptr;
             }
         } else { // found free block
             // TODO(miguno): consider splitting block here.
@@ -227,21 +227,21 @@ int main(void) {
         size_t i = 0;
         struct block_meta *current = g_global_base;
         while (current) {
-            char *s = NULL;
+            char *s = nullptr;
             block_to_string(current, &s);
             if (s) {
                 printf("%zu: %s\n", i, s);
                 free(s);
-                s = NULL;
+                s = nullptr;
             }
             current = current->next;
             ++i;
         }
 
         my_free(ptr1);
-        ptr1 = NULL;
+        ptr1 = nullptr;
         my_free(ptr2);
-        ptr2 = NULL;
+        ptr2 = nullptr;
     }
     return EXIT_SUCCESS;
 }

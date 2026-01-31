@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
         printf("Original:   %s\n", original);
         printf("Uppercased: %s\n", uppercased);
         free(uppercased);
-        uppercased = NULL;
+        uppercased = nullptr;
         return EXIT_SUCCESS;
     }
     return EXIT_FAILURE;

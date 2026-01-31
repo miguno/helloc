@@ -68,8 +68,8 @@ void verify_helloc_str_split_once(void) {
     char *s = "foo:bar";
     char *expected_left = "foo";
     char *expected_right = "bar";
-    char *actual_left = NULL;
-    char *actual_right = NULL;
+    char *actual_left = nullptr;
+    char *actual_right = nullptr;
     Result res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
     TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
     TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
@@ -80,8 +80,8 @@ void verify_helloc_str_split_once(void) {
     s = ":";
     expected_left = "";
     expected_right = "";
-    actual_left = NULL;
-    actual_right = NULL;
+    actual_left = nullptr;
+    actual_right = nullptr;
     res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
     TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
     TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
@@ -92,8 +92,8 @@ void verify_helloc_str_split_once(void) {
     s = "::";
     expected_left = "";
     expected_right = ":";
-    actual_left = NULL;
-    actual_right = NULL;
+    actual_left = nullptr;
+    actual_right = nullptr;
     res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
     TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
     TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
@@ -103,9 +103,9 @@ void verify_helloc_str_split_once(void) {
 
     s = "";
     expected_left = "";
-    expected_right = NULL;
-    actual_left = NULL;
-    actual_right = NULL;
+    expected_right = nullptr;
+    actual_left = nullptr;
+    actual_right = nullptr;
     res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
     TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
     TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
@@ -113,11 +113,11 @@ void verify_helloc_str_split_once(void) {
     free(actual_left);
     free(actual_right);
 
-    s = NULL;
-    expected_left = NULL;
-    expected_right = NULL;
-    actual_left = NULL;
-    actual_right = NULL;
+    s = nullptr;
+    expected_left = nullptr;
+    expected_right = nullptr;
+    actual_left = nullptr;
+    actual_right = nullptr;
     res = helloc_str_split_once(s, ':', &actual_left, &actual_right);
     TEST_ASSERT_EQUAL_STRING(expected_left, actual_left);
     TEST_ASSERT_EQUAL_STRING(expected_right, actual_right);
@@ -157,9 +157,9 @@ void verify_helloc_str_trim(void) {
     TEST_ASSERT_EQUAL_size_t(strlen(expected), actual_len);
     free(actual);
 
-    s = "case: NULL output buffer";
-    expected = NULL;
-    actual = NULL;
+    s = "case: null output buffer";
+    expected = nullptr;
+    actual = nullptr;
     actual_len = helloc_str_trim(s, actual, 12345);
     TEST_ASSERT_EQUAL_STRING(expected, actual);
     TEST_ASSERT_EQUAL_size_t(0, actual_len);

@@ -14,7 +14,7 @@ const char *helloc_library_version(void) { return PROJECT_VERSION; }
 char *helloc_str_dup(const char *s) {
     size_t size = strlen(s) + 1;
     char *p = malloc(size);
-    if (p != NULL) {
+    if (p != nullptr) {
         memcpy(p, s, size);
     }
     return p;
@@ -22,17 +22,17 @@ char *helloc_str_dup(const char *s) {
 
 Result helloc_str_split_once(const char *s, const char delim, char **lout,
                              char **rout) {
-    if (s == NULL) {
+    if (s == nullptr) {
         return E_INVALID_INPUT;
     }
     const char *colon_pos = strchr(s, delim);
-    if (colon_pos != NULL) {
+    if (colon_pos != nullptr) {
         // Calculate the length of the left part.
         size_t lout_len = colon_pos - s;
 
         // Allocate memory for the left part and copy the characters.
         *lout = malloc(lout_len + 1);
-        if (*lout == NULL) {
+        if (*lout == nullptr) {
             return E_MEMORY_ALLOCATION_FAILED;
         }
         strncpy(*lout, s, lout_len);
@@ -40,19 +40,19 @@ Result helloc_str_split_once(const char *s, const char delim, char **lout,
 
         // Allocate memory for the right part and copy the characters.
         *rout = helloc_str_dup(colon_pos + 1);
-        if (*rout == NULL) {
+        if (*rout == nullptr) {
             return E_MEMORY_ALLOCATION_FAILED;
         }
     } else {
         // No delimiter found.
         *lout = helloc_str_dup(s);
-        *rout = NULL;
+        *rout = nullptr;
     }
     return E_SUCCESS;
 }
 
 size_t helloc_str_trim(const char *s, char *out, size_t out_len) {
-    if (out == NULL || out_len == 0) {
+    if (out == nullptr || out_len == 0) {
         return 0;
     }
 

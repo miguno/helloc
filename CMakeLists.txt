@@ -48,7 +48,7 @@ add_definitions(-DPROJECT_VERSION="${PROJECT_VERSION}")
 
 # https://cmake.org/cmake/help/latest/prop_tgt/C_STANDARD.html
 if (NOT CMAKE_C_STANDARD)
-    set(CMAKE_C_STANDARD 17)
+    set(CMAKE_C_STANDARD 23)
     set(CMAKE_C_STANDARD_REQUIRED ON)
     message(STATUS "Setting C standard to C${CMAKE_C_STANDARD}")
 endif ()

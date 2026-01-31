@@ -24,8 +24,8 @@ int main(void) {
     // Showcase the use of zpl's list data structure, which is a doubly-linked
     // list. Adapted from
     // https://github.com/zpl-c/zpl/blob/7b27bd98a91722284cd1b75b3f4435cafd0dbd9e/code/apps/examples/list.c
-    zpl_list *head = NULL;
-    zpl_list *cursor = NULL;
+    zpl_list *head = nullptr;
+    zpl_list *cursor = nullptr;
 
     // Initialize the list
     zpl_list a;
