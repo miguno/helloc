@@ -66,20 +66,20 @@ Maybe you find this useful, too. Enjoy!
     configured in [.clang-tidy](.clang-tidy).
 - Documenting the project:
   - Uses [Doxygen](https://www.doxygen.nl/) for code documentation, see
-    [Doxyfile](Doxyfile).
+    [Doxyfile](./Doxyfile).
 - Docker support:
   - Create and run Docker images for your C app.
-    The [Docker build](Dockerfile) uses a
+    The [Docker build](./Dockerfile) uses a
     [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
     to minimize the size of the generated Docker image, which is only 9MB.
 - Tooling:
   - Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
-    for running common commands conveniently, see [justfile](justfile). Think:
+    for running common commands conveniently, see [justfile](./justfile). Think:
     a modern version of `make`, written in Rust.
 
 ## Usage
 
-See [justfile](justfile) if you want to run the commands manually, without
+See [justfile](./justfile) if you want to run the commands manually, without
 `just`.
 
 ```shell
@@ -203,7 +203,7 @@ The script also generates a report in HTML format.
 
 ## Code Documentation with Doxygen
 
-Generate the documentation as per [Doxyfile](Doxyfile):
+Generate the documentation as per [Doxyfile](./Doxyfile):
 
 ```shell
 $ just docs
@@ -219,7 +219,7 @@ $ man generated-docs/man/man3/helloc.h.3
 
 ## Docker
 
-See [Dockerfile](Dockerfile) for details.
+See [Dockerfile](./Dockerfile) for details.
 Requires [Docker](https://www.docker.com/) to be installed locally.
 
 **Step 1:** Create the Docker image.
