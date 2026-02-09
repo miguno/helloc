@@ -60,9 +60,9 @@ FROM ubuntu:24.04
 
 # Create a dedicated non-root user to run the application
 ARG USER_NAME="appuser"
-ARG USER_ID="1000"
+ARG USER_ID="2000"
 ARG GROUP_NAME="$USER_NAME"
-ARG GROUP_ID="1000"
+ARG GROUP_ID="2000"
 RUN groupadd --gid $GROUP_ID $GROUP_NAME && \
     useradd --no-create-home --uid $USER_ID --gid $GROUP_ID $USER_NAME
 
