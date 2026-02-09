@@ -75,7 +75,7 @@ Maybe you find this useful, too. Enjoy!
 - Tooling:
   - Uses [just](https://github.com/casey/just) ![](https://img.shields.io/github/stars/casey/just)
     for running common commands conveniently, see [justfile](./justfile). Think:
-    a modern version of `make`, written in Rust.
+    a modern version of `make`.
 
 ## Usage
 
