@@ -5,7 +5,7 @@
 
 # Stage 1 (to create a "build" image)
 # ===================================
-FROM ubuntu:22.04 AS builder
+FROM ubuntu:24.04 AS builder
 WORKDIR /app
 COPY . .
 
@@ -56,7 +56,7 @@ RUN CMAKE_BUILD_PARALLEL_LEVEL="$NUM_BUILD_WORKERS" \
 #
 # NOTE: Originally, stage 2 used Alpine Linux, but it doesn't support ASan
 # (AddressSanitizer, https://clang.llvm.org/docs/AddressSanitizer.html).
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Create a dedicated non-root user to run the application
 ARG USER_NAME="appuser"
