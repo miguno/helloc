@@ -63,9 +63,8 @@ ARG USER_NAME="appuser"
 ARG USER_ID="1000"
 ARG GROUP_NAME="$USER_NAME"
 ARG GROUP_ID="1000"
-# TIP: To get `useradd` and `groupadd`, install the `shadow` package via apk.
-RUN addgroup --gid $GROUP_ID $GROUP_NAME && \
-    adduser --disabled-password --ingroup $GROUP_NAME --uid $USER_ID $USER_NAME
+RUN groupadd --gid $GROUP_ID $GROUP_NAME && \
+    useradd --no-create-home --uid $USER_ID --gid $GROUP_ID $USER_NAME
 
 WORKDIR /home/$USER_NAME
 USER $USER_NAME
