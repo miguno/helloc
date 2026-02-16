@@ -47,6 +47,9 @@ endif ()
 # https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
+# Restrict the available build configurations to only "Debug" and "Release" for
+# multi-configuration generators (like Visual Studio, Xcode, or Ninja
+# Multi-Config).
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
 # https://cmake.org/cmake/help/latest/generator/Ninja%20Multi-Config.html
 # https://ninja-build.org/manual.html
